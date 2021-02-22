@@ -32,9 +32,7 @@ Our target audience will be individuals looking to buy or rent a home/apartment.
 
 **Dataset Links**
 
->Realtor API
->ATTOM Property API
->Zillow API
+Realtor API, ATTOM Property API, Zillow API
 
 
 
