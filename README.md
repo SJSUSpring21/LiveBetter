@@ -2,7 +2,7 @@
 Project Ideas:
 -------------
 
-House Scoring Project
+House Scoring Project - Approved
 ---------------------
 
 **Introduction**
