@@ -1,6 +1,5 @@
-# Team12 (cmpe 272)
-Project Ideas:
--------------
+# LiveBetter
+
 
 House Scoring Project - Approved
 ---------------------
