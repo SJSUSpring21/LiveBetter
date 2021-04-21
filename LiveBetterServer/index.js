@@ -7,7 +7,7 @@ const port = 3001;
 // npm install ibm_db
 
 // The command below runs server
-// node server.js
+// node index.js
 
 var ibmdb = require('ibm_db');
 var connStr = "DATABASE=BLUDB;HOSTNAME=dashdb-txn-sbox-yp-dal09-08.services.dal.bluemix.net;PORT=50000;PROTOCOL=TCPIP;UID=tnd75634;PWD=mc2xp68xqn9+dbx0;PROTOCOL=TCPIP"
