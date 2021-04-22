@@ -2,6 +2,10 @@ const express = require('express');
 const app = express();
 const port = 3001;
 
+var cors = require('cors')
+app.use(cors()) // Use this after the variable declaration
+
+
 // npm install --save body-parser
 // npm install --save cors
 // npm install ibm_db
@@ -80,8 +84,6 @@ app.get('/schools', (req, res) => {
     ibmdb.open(connStr, function (err, conn) {
         if (err) return console.log(err);
         query_string = get_query_string(input_lat, input_lng, table, radius_miles,limit);
-           
-        console.log(query_string)
 
         conn.query(query_string, function (err, data) {
             if (err) {
@@ -91,7 +93,7 @@ app.get('/schools', (req, res) => {
             }
 
             conn.close(function () {
-                console.log('Query is complete.');
+                console.log('Query is complete for schools.');
             });
         });
     });
@@ -128,7 +130,7 @@ app.get('/schools/count', (req, res) => {
             }
 
             conn.close(function () {
-                console.log('Query is complete.');
+                console.log('Query is complete for schools count.');
             });
         });
     });
@@ -160,11 +162,11 @@ app.get('/chicago', (req, res) => {
             if (err) {
                 res.send(err)
             } else {
-                res.send(data);
+                res.send(data[0]);
             }
 
             conn.close(function () {
-                console.log('Query is complete.');
+                console.log('Query is complete for chicago data.');
             });
         });
     });
@@ -199,7 +201,7 @@ app.get('/query', (req, res) => {
             }
 
             conn.close(function () {
-                console.log('Query is complete.');
+                console.log(`Query is complete for ${table}.`);
             });
 
         });
@@ -246,7 +248,7 @@ app.get('/queries', (req, res) => {
                 });
             }
             conn.close(function () {
-                console.log('Query is complete.');
+                console.log('Query is complete for Parks and Schools.');
             });
         });
     });
