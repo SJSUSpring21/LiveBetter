@@ -1,0 +1,76 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.main-section{
+  height: 100vh;
+}
+
+.about-section{
+  height: 100vh;
+}
+
+.row1{
+  height: 20vh;
+}
+
+.row2{
+  height: 30vh;
+}
+
+.row3{
+  height: 20vh;
+}
+
+.heading{
+  font-size:70px;
+}
+
+.line{
+  font-size:28px;
+  color:#707070;
+  font-weight: 100;
+  margin: 0px 0 20px
+}
+
+.newImage{
+  width: 50%;
+  transform:translateX(200px);
+}
+
+.aboutImage{
+  width: 90%;
+}
+
+.signup-button{
+  background-color: rgb(255, 128, 179);
+}
+
+.portal-main{
+height: 100vh;
+}
+
+.prow1{
+  height: 15vh;
+}
+
+.pheading{
+  text-align: center;
+}
+
+.globeImage{
+  width: 50%;
+  height: 50%;
+
+}
+
