@@ -7,7 +7,7 @@ import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-au
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
 import { makeStyles } from '@material-ui/core/styles';
-import { useHistory } from 'react-router-dom';
+import { withRouter, useHistory } from 'react-router-dom';
 
 
 
@@ -98,22 +98,39 @@ function PortalPage() {
     }
 
     const getResults = () => {
-        history.push('/result');
+        history.push({
+            pathname: '/result',
+            state: {
+                lat: coordinates.lat,
+                lng: coordinates.lng,
+                safetyScore: safetyScore,
+                restaurantScore: restaurantScore,
+                schoolScore: schoolScore,
+                busstationScore: busstationScore,
+                atmScore: atmScore,
+                supermarketScore: supermarketScore,
+                parkScore: parkScore,
+                gymScore: gymScore,
+                hospitalScore: hospitalScore,
+                hikeTrailScore: hikeTrailScore,
+                bikeTrailScore: bikeTrailScore
+            }
+        });
     }
-    
+
     const marks = [
-        {
-            value: 0,
-            label: '0'
-        },
-        {
-            value: 5,
-            label: '5'
-        },
-        {
-            value: 10,
-            label: '10'
-        }
+        { value: 0, label: '0' },
+        { value: 1, label: '' },
+        { value: 2, label: '' },
+        { value: 3, label: '' },
+        { value: 4, label: '' },
+        { value: 5, label: '5' },
+        { value: 6, label: '' },
+        { value: 7, label: '' },
+        { value: 8, label: '' },
+        { value: 9, label: '' },
+        { value: 10, label: '10' },
+
     ]
 
     return (
@@ -351,7 +368,6 @@ function PortalPage() {
                                                     max={10}
                                                     valueLabelDisplay="auto"
                                                 />
-
                                             </div>
 
                                             <div>
