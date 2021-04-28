@@ -66,12 +66,17 @@ app.get('/chicago', (req, res) => {
     var table = 'Data'
 
     console.log(`Lat: ${input_lat}\tLong: ${input_lng}`)
+
+    /*
     query_string = `SELECT *, 
         SQRT((("lat" - ${input_lat})*("lat" - ${input_lat}) 
         + ("lng" - ${input_lng})* ("lng" - ${input_lng}))) as "DISTANCE" 
         FROM ${table} 
         ORDER BY DISTANCE ASC 
         LIMIT 1`
+    */
+
+    query_string =  get_query_string(input_lat, input_lng, table, 5, 1)
 
     ibmdb.open(connStr).then(
         conn => {
@@ -94,6 +99,7 @@ app.get('/chicago', (req, res) => {
     )
 });
 
+// ** Query for Park and School Count ** 
 // Input is lat, lng, radius
 // radius is in miles
 // Returns count of parks and schools within radius of lat,lng
@@ -157,7 +163,7 @@ app.get('/queries', (req, res) => {
     );
 });
 
-// Functions to Query IBM Database
+// Functions to Create Query String for IBM Database
 function get_query_string(input_lat, input_lng, table, radius_miles, limit) {
     var distance_unit = (69.0).toFixed(2)
     query_string = `SELECT * 
