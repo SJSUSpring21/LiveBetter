@@ -19,7 +19,7 @@ function LandingPage() {
                     <Route exact path="/">
                     <div className="main-section">
                         <Navbar bg="light" variant="light">
-                            <Navbar.Brand className="logo">LiveBetter</Navbar.Brand>
+                            <Navbar.Brand className="logo" href="/">LiveBetter</Navbar.Brand>
                             <Nav className="mr-auto"></Nav>
 
                             <Nav className="ml-auto">
