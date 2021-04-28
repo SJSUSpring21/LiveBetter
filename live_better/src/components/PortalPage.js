@@ -30,8 +30,8 @@ function PortalPage() {
         handleShow();
 
     }
+    
     // Slider
-
     const useStyles = makeStyles({
         root: {
             width: 400,
@@ -97,6 +97,7 @@ function PortalPage() {
         changeBikeTrailScore(newValue);
     }
 
+    // state sends all user input values to result page
     const getResults = () => {
         history.push({
             pathname: '/result',

@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import { Form, Button, Navbar, Nav } from 'react-bootstrap';
 import axios from 'axios';
-import { useHistory, Link} from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 
 function SignupPage() {
 
@@ -19,7 +19,7 @@ function SignupPage() {
         }
         console.log(data);
         event.preventDefault();
-        axios.post('http://localhost:3001/signup', data)
+        axios.post('/signup', data)
             .then((response) => {
                 console.log(response.status);
                 console.log(response.data);
@@ -30,6 +30,8 @@ function SignupPage() {
 
             })
     }
+
+
     return (
         <div>
             <Navbar bg="light" variant="light">
@@ -40,46 +42,59 @@ function SignupPage() {
                     <Nav.Link><Link to="/login">Login</Link></Nav.Link>
                 </Nav>
             </Navbar>
-            <h1>Signup Page</h1>
-            <Form>
-                <Form.Group controlId="formName">
-                    <Form.Label>Name</Form.Label>
-                    <Form.Control type="text"
-                        placeholder="Enter Name"
-                        onChange={(event) => {
-                            handleNameChange(event.target.value);
-                        }} />
-                </Form.Group>
+            <div class='container'>
+                <div class='row'>
+                    <h1>Signup Page</h1>
+                </div>
+                <div class='row'>
+                    <div class='col-3'>
+                        <Form>
+                            <Form.Group controlId="formName">
+                                <Form.Label>Name</Form.Label>
+                                <Form.Control type="text"
+                                    placeholder="Enter Name"
+                                    onChange={(event) => {
+                                        handleNameChange(event.target.value);
+                                    }} />
+                            </Form.Group>
 
-                <Form.Group controlId="formBasicEmail">
-                    <Form.Label>Email address</Form.Label>
-                    <Form.Control type="email"
-                        placeholder="Enter email"
-                        onChange={(event) => {
-                            handleEmailChange(event.target.value);
-                        }}
-                    />
-                </Form.Group>
+                            <Form.Group controlId="formBasicEmail">
+                                <Form.Label>Email address</Form.Label>
+                                <Form.Control type="email"
+                                    placeholder="Enter email"
+                                    onChange={(event) => {
+                                        handleEmailChange(event.target.value);
+                                    }}
+                                />
+                            </Form.Group>
 
 
-                <Form.Group controlId="formBasicPassword">
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control type="password"
-                        placeholder="Password"
-                        onChange={(event) => {
-                            handlePasswordChange(event.target.value)
-                        }}
-                    />
-                </Form.Group>
+                            <Form.Group controlId="formBasicPassword">
+                                <Form.Label>Password</Form.Label>
+                                <Form.Control type="password"
+                                    placeholder="Password"
+                                    onChange={(event) => {
+                                        handlePasswordChange(event.target.value)
+                                    }}
+                                />
+                            </Form.Group>
 
-                <Button variant="primary"
-                    type="submit"
-                    onClick={(event) => {
-                        signupUser(event)
-                    }}>
-                    Submit
-                </Button>
-            </Form>
+                            <Button variant="primary"
+                                type="submit"
+                                onClick={(event) => {
+                                    signupUser(event)
+                                }}>
+                                Submit
+                            </Button>
+                        </Form>
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
         </div>
     )
 }

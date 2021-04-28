@@ -25,44 +25,60 @@ function ResultPage() {
     var hikeTrailScore = history.location.state.hikeTrailScore;
     var bikeTrailScore = history.location.state.bikeTrailScore;
 
+    var safetyCount = "None";
+    var safetyCount = "None";
+    var atmCount = "None";
+    var bikeCount = "None";
+    var busCount = "None";
+    var gymCount = "None";
+    var hikeCount = "None";
+    var hospitalCount = "None";
+    var restaurantCount = "None";
+    var supermarketCount = "None";
+    var schoolCount = "None";
+    var parkCount = "None";
+
     const [query_results, setQueryResults] = useState();
     const [parks_schools, setParkSchoolQuery] = useState();
     const [isLoading, setLoading] = useState(true);
-
-
-    /*
-    const [safetyCount, setSafetyCount] = useState();
-    const [safetyCount, setSafetyCount] = useState();
-    const [safetyCount, setSafetyCount] = useState();
-    const [safetyCount, setSafetyCount] = useState();
-    const [safetyCount, setSafetyCount] = useState();
-    const [safetyCount, setSafetyCount] = useState();
-    const [safetyCount, setSafetyCount] = useState();
-    const [safetyCount, setSafetyCount] = useState();
-    const [safetyCount, setSafetyCount] = useState();
-    const [safetyCount, setSafetyCount] = useState();
-*/
-
     useEffect(() => {
-        axios.get(`/chicago?lat=${lat}&lng=${lng}`)
+
+
+        // Query Database For Parks and Schools
+        axios.get(`/queries?lat=${lat}&lng=${lng}&radius=2`)
             .then(res => {
-                setQueryResults(res.data);
+                setParkSchoolQuery(res.data);
 
+
+                console.log("Park and Schools Data");
                 console.log(res.data);
-
-                axios.get(`/queries?lat=${lat}&lng=${lng}&radius=2`)
+                // Query Chicago Database
+                axios.get(`/chicago?lat=${lat}&lng=${lng}`)
                     .then(res => {
-                        setParkSchoolQuery(res.data);
 
-                        console.log(res.data);
+                        setQueryResults(res.data);
                         setLoading(false);
 
-                    })
-                    .catch(console.log);
-            })
-            .catch(console.log);
+                        if (res.data.length === 0) {
+                            console.log("Chicago Data Query came up empty...")
 
-    }, []);
+                            // Maybe we can use Google Places API here 
+                        }
+                        console.log("Chicago Data");
+                        console.log(res.data);
+
+                    })
+                    .catch(error => {
+                        console.log(error);
+                        setLoading(false);
+                    });
+            })
+            .catch(error => {
+                console.log(error);
+                console.log("Error While Querying Schools and Parks");
+            });
+
+    }, []); // <-- Empty array makes sure this block of code runs exactly once
 
     if (isLoading) {
         return (
@@ -78,30 +94,35 @@ function ResultPage() {
                     </Nav>
                 </Navbar>
                 <div class='container'>
-                    <h2>Your Results Are Coming Soon</h2>
+                    <div class='row'>
+                        <h2>Please wait while we calculate your address...</h2>
+                    </div>
+
+                    <div class="row">
+                        <Link to="/portal"><Button variant="success" >Try Another Address</Button></Link>
+                    </div>
                 </div>
             </div>
         )
     }
 
     // This Data is from chicago database
-    var safetyCount = query_results.Arrest_Count;
-    var safetyCount = query_results.Arrest_Count;
-    var atmCount = query_results.atm;
-    var bikeCount = query_results.bike_trail;
-    var busCount = query_results.bus_station;
-    var gymCount = query_results.gym;
-    var hikeCount = query_results.hike_trail;
-    var hospitalCount = query_results.hospital;
-    var restaurantCount = query_results.restaurant;
-    var supermarketCount = query_results.supermarket;
-
+    if (query_results.length !== 0) {
+        safetyCount = query_results.Arrest_Count;
+        safetyCount = query_results.Arrest_Count;
+        atmCount = query_results.atm;
+        bikeCount = query_results.bike_trail;
+        busCount = query_results.bus_station;
+        gymCount = query_results.gym;
+        hikeCount = query_results.hike_trail;
+        hospitalCount = query_results.hospital;
+        restaurantCount = query_results.restaurant;
+        supermarketCount = query_results.supermarket;
+    }
+    
     // Uses Park and School Count from data we found
-    var schoolCount = parks_schools[0].School_Count;
-    var parkCount = parks_schools[0].Park_Count;
-
-    // Euclidean Distance between lat long values
-    var distance = query_results.DISTANCE;
+    schoolCount = parks_schools[0].School_Count;
+    parkCount = parks_schools[0].Park_Count;
 
     return (
         <div>
@@ -163,7 +184,3 @@ function ResultPage() {
 }
 
 export default ResultPage
-
-/*
-
-                */
