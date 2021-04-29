@@ -13,6 +13,7 @@ const port = 3001;
 // node index.js
 
 const mongoose = require('mongoose');
+const axios = require('axios');
 
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -65,8 +66,8 @@ app.get('/chicago', (req, res) => {
     var table = 'Data'
 
     console.log(`Lat: ${input_lat}\tLong: ${input_lng}`)
-    
-    query_string =  get_query_string(input_lat, input_lng, table, 5, 1)
+
+    query_string = get_query_string(input_lat, input_lng, table, 5, 1)
 
     ibmdb.open(connStr).then(
         conn => {
@@ -142,7 +143,7 @@ app.get('/queries', (req, res) => {
                             res.send(err)
                             console.log(err)
                             console.log("Error on schools query.")
-                            
+
                         }
                     )
                 }
@@ -152,6 +153,77 @@ app.get('/queries', (req, res) => {
         }
     );
 });
+
+
+app.get('/google-search', (req, res) => {
+
+
+    var input_lat = req.query.lat; //user input for latitude
+    var input_lng = req.query.lng; //user input for longitude
+
+
+    var placeNames = ['restaurant', 'bus stop', 'atm', 'grocery store',
+        'gym', 'hospital', 'hike trail', 'bike trail'
+    ];
+
+    var queries = [
+        get_google_query(input_lat, input_lng, placeNames[0], 1),
+        get_google_query(input_lat, input_lng, placeNames[1], 1),
+        get_google_query(input_lat, input_lng, placeNames[2], 1),
+        get_google_query(input_lat, input_lng, placeNames[3], 1),
+        get_google_query(input_lat, input_lng, placeNames[4], 1),
+        get_google_query(input_lat, input_lng, placeNames[5], 1),
+        get_google_query(input_lat, input_lng, placeNames[6], 2),
+        get_google_query(input_lat, input_lng, placeNames[7], 2)
+    ]
+
+    axios.all([
+        axios.get(queries[0]),
+        axios.get(queries[1]),
+        axios.get(queries[2]),
+        axios.get(queries[3]),
+        axios.get(queries[4]),
+        axios.get(queries[5]),
+        axios.get(queries[6]),
+        axios.get(queries[7])
+    ]).then(axios.spread((r1, r2, r3, r4, r5, r6, r7, r8) => {
+        to_send = {
+            'restaurant': r1.data.results.length,
+            'bus_station': r2.data.results.length,
+            'atm': r3.data.results.length,
+            'supermarket': r4.data.results.length,
+            'gym': r5.data.results.length,
+            'hospital': r6.data.results.length,
+            'hike_trail': r7.data.results.length,
+            'bike_trail': r8.data.results.length
+        }
+        console.log("All queries complete for google search");
+        console.log(to_send);
+        res.send(to_send);
+
+    })).catch(error => {
+        console.log(error);
+        res.send(error);
+    });
+
+
+});
+
+function get_google_query(input_lat, input_lng, placeName, radius) {
+    var API_KEY = ''
+    var url = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?';
+
+    var meter_in_miles = 1609;
+    var miles = radius;
+    var radius_m = miles * meter_in_miles;
+
+    var query = `${url}key=${API_KEY}\
+    &keyword=${placeName}\
+    &location=${input_lat.toString()},${input_lng.toString()}\
+    &radius=${radius_m.toString()}`;
+
+    return query;
+}
 
 // Functions to Create Query String for IBM Database
 function get_query_string(input_lat, input_lng, table, radius_miles, limit) {

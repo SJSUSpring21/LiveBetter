@@ -42,6 +42,7 @@ function ResultPage() {
     const [query_results, setQueryResults] = useState();
     const [parks_schools, setParkSchoolQuery] = useState();
     const [isLoading, setLoading] = useState(true);
+    const [isChicago, setChicago] = useState(false)
 
     useEffect(() => {
         // Query Database For Parks and Schools
@@ -56,16 +57,29 @@ function ResultPage() {
                 axios.get(`/chicago?lat=${lat}&lng=${lng}`)
                     .then(res => {
 
-                        setQueryResults(res.data);
-                        setLoading(false);
-
                         if (res.data.length === 0) {
+                            // Query Google
                             console.log("Chicago Data Query came up empty...")
+                            axios.get(`/google-search?lat=${lat}&lng=${lng}`)
+                                .then(res => {
+                                    console.log("Google Data")
+                                    console.log(res.data);
+                                    setQueryResults(res.data);
+                                    setLoading(false);
+                                })
+                                .catch(error => {
+                                    console.log(error);
+                                    setLoading(false);
+                                })
 
-                            // Maybe we can use Google Places API here 
                         }
-                        console.log("Chicago Data");
-                        console.log(res.data);
+                        else {
+                            setChicago(true);
+                            setQueryResults(res.data);
+                            setLoading(false);
+                            console.log("Chicago Data");
+                            console.log(res.data);
+                        }
 
                     })
                     .catch(error => {
@@ -114,18 +128,19 @@ function ResultPage() {
     }
 
     // This Data is from chicago database
-    if (query_results.length !== 0) {
+    if(isChicago){
         safetyCount = query_results.Arrest_Count;
-        safetyCount = query_results.Arrest_Count;
-        atmCount = query_results.atm;
-        bikeCount = query_results.bike_trail;
-        busCount = query_results.bus_station;
-        gymCount = query_results.gym;
-        hikeCount = query_results.hike_trail;
-        hospitalCount = query_results.hospital;
-        restaurantCount = query_results.restaurant;
-        supermarketCount = query_results.supermarket;
     }
+    
+    atmCount = query_results.atm;
+    bikeCount = query_results.bike_trail;
+    busCount = query_results.bus_station;
+    gymCount = query_results.gym;
+    hikeCount = query_results.hike_trail;
+    hospitalCount = query_results.hospital;
+    restaurantCount = query_results.restaurant;
+    supermarketCount = query_results.supermarket;
+
 
     // Uses Park and School Count from data we found
     schoolCount = parks_schools[0].School_Count;
