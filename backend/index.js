@@ -22,7 +22,7 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.use(cors({
-    origin: ["http://localhost:3000"],
+    origin: ["http://react-app:3000"],
     methods: ['GET', "POST"],
     credentials: true
 }));
@@ -45,7 +45,7 @@ mongoose.connect(
     })
 
 app.get('/', (req, res) => {
-    console.log("Backend Connected");
+    console.log("Backend Connected.");
     res.send("Backend connected!");
 });
 
