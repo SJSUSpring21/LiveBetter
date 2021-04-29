@@ -41,9 +41,8 @@ function ResultPage() {
     const [query_results, setQueryResults] = useState();
     const [parks_schools, setParkSchoolQuery] = useState();
     const [isLoading, setLoading] = useState(true);
+
     useEffect(() => {
-
-
         // Query Database For Parks and Schools
         axios.get(`/queries?lat=${lat}&lng=${lng}&radius=2`)
             .then(res => {

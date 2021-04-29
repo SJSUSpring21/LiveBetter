@@ -18,7 +18,7 @@ function LoginPage() {
         }
         console.log(data);
         event.preventDefault();
-        axios.post('http://localhost:3001/login', data)
+        axios.post('/login', data)
             .then((response) => {
                 console.log(response.status);
                 if (response.status === 200) {
@@ -39,20 +39,18 @@ function LoginPage() {
                 console.log(error);
                 changeWrongPassword(true);
             })
-
-
     }
 
     let displayWrongPassword = null;
     if (wrongPassword) {
         displayWrongPassword = <span class="badge badge-pill badge-danger">Wrong Email or Password</span>
     }
+
     return (
         <div>
             <Navbar bg="light" variant="light">
                 <Navbar.Brand className="logo" href="/">LiveBetter</Navbar.Brand>
             </Navbar>
-
 
             <div class="container">
                 <h1>Login Page</h1>
@@ -66,7 +64,6 @@ function LoginPage() {
                             }}
                         />
                     </Form.Group>
-
 
                     <Form.Group controlId="formBasicPassword">
                         <Form.Label>Password</Form.Label>

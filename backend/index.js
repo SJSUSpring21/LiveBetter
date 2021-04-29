@@ -20,6 +20,7 @@ const cors = require('cors');
 app.use(bodyParser.urlencoded({
     extended: false
 }));
+
 app.use(cors({
     origin: ["http://localhost:3000"],
     methods: ['GET', "POST"],
@@ -43,11 +44,9 @@ mongoose.connect(
         console.log("connected to db");
     })
 
-
-
 app.get('/', (req, res) => {
     console.log("Backend Connected");
-    res.send("Backend connected");
+    res.send("Backend connected!");
 });
 
 //import routes
@@ -66,16 +65,7 @@ app.get('/chicago', (req, res) => {
     var table = 'Data'
 
     console.log(`Lat: ${input_lat}\tLong: ${input_lng}`)
-
-    /*
-    query_string = `SELECT *, 
-        SQRT((("lat" - ${input_lat})*("lat" - ${input_lat}) 
-        + ("lng" - ${input_lng})* ("lng" - ${input_lng}))) as "DISTANCE" 
-        FROM ${table} 
-        ORDER BY DISTANCE ASC 
-        LIMIT 1`
-    */
-
+    
     query_string =  get_query_string(input_lat, input_lng, table, 5, 1)
 
     ibmdb.open(connStr).then(
