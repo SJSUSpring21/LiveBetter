@@ -58,10 +58,10 @@ function LoginPage() {
 
             <div class="container-fluid">
                 <div class="row m-3 justify-content-center">
-                    <h1>Login</h1>
+                    <h1 className="heading">Login to Live<span class='text-success'>B</span>etter</h1>
                 </div>
 
-                <div class="row m-3 justify-content-center">
+                <div class="row m-5 justify-content-center">
                     <div class="col-5">
                         <Form>
                             <Form.Group controlId="formBasicEmail">
@@ -84,20 +84,20 @@ function LoginPage() {
                                 />
                             </Form.Group>
 
-                            <Button variant="success"
+                            <Button variant="success btn-block"
                                 type="submit"
                                 onClick={(event) => {
                                     loginUser(event)
                                 }}>
                                 Login
                                 </Button>
-
-                            <Link to="/signup">
-                                <Button variant="primary ml-3">Signup</Button>
-                            </Link>
                         </Form>
                         <div class='row mt-3 ml-1'>
                             {displayWrongPassword}
+                        </div>
+
+                        <div class='row mt-3 justify-content-center'>
+                            <p>Don't have an account? <Link to="/signup">Signup Here</Link></p>
                         </div>
                     </div>
                 </div>

@@ -5,6 +5,7 @@ import axios from 'axios';
 import { render } from '@testing-library/react';
 import { useState, useEffect } from 'react';
 import skyline from '../components/images/skyline.png';
+import globephoto from './images/third.svg'
 
 //class ResultPage extends React.Component{
 function ResultPage() {
@@ -94,7 +95,11 @@ function ResultPage() {
 
     }, []); // <-- Empty array makes sure this block of code runs exactly once
 
+
+    //This page will show while accessing the database
+
     if (isLoading) {
+
         return (
             <div class='main-section'>
                 <Navbar bg="light" variant="light sticky-top">
@@ -110,28 +115,41 @@ function ResultPage() {
                     </Nav>
                 </Navbar>
                 <div class='container'>
-                    <div class='row mt-3'>
-                        <h2>Please wait while we calculate your address...</h2>
+                    <div class="row m-3 justify-content-center">
+                        <h1 className="heading">Live<span class='text-success'>B</span>etter</h1>
                     </div>
 
-                    <div class="row">
-                        <Link to="/portal"><Button variant="success" >Try Another Address</Button></Link>
+                    <div class='row mt-5 justify-content-center'>
+                        <div class="col-6 d-flex ">
+                            <Image class='img-responsive mx-auto'
+                                src={globephoto} />
+                        </div>
                     </div>
-                </div>
 
-                <div class="row fixed-bottom">
-                    <Image class='img-responsive mx-auto'
-                        src={skyline} />
+                    <div class='row mt-5 justify-content-center'>
+                        <h2>Please wait while we calculate your score...</h2>
+                    </div>
+
+                    <div class="row mt-5 justify-content-center ">
+                        <div class="col-4">
+                            <Link to="/portal"><Button variant="success btn-block" >Try Another Address</Button></Link>
+                        </div>
+                    </div>
+
+                    <div class="row fixed-bottom">
+                        <Image class='img-responsive mx-auto'
+                            src={skyline} />
+                    </div>
                 </div>
             </div>
         )
     }
 
     // This Data is from chicago database
-    if(isChicago){
+    if (isChicago) {
         safetyCount = query_results.Arrest_Count;
     }
-    
+
     atmCount = query_results.atm;
     bikeCount = query_results.bike_trail;
     busCount = query_results.bus_station;
@@ -162,8 +180,11 @@ function ResultPage() {
             </Navbar>
 
             <div class='container'>
+                <div class="row m-3 justify-content-center">
+                    <h1 className="heading">Live<span class='text-success'>B</span>etter</h1>
+                </div>
                 <div class='row mt-3 justify-content-center'>
-                    <h1>Your Livability Index</h1>
+                    <h1>Location Score</h1>
                 </div>
                 <div class='row mt-3'>
                     <div class='col'>

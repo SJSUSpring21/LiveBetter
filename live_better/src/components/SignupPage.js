@@ -48,7 +48,7 @@ function SignupPage() {
             </Navbar>
             <div class='container-fluid'>
                 <div class='row m-3 justify-content-center'>
-                    <h1>Signup Page</h1>
+                    <h1 className="heading">Signup to Live<span class='text-success'>B</span>etter</h1>
                 </div>
                 <div class='row m-3 justify-content-center'>
                     <div class='col-3'>
@@ -71,8 +71,6 @@ function SignupPage() {
                                     }}
                                 />
                             </Form.Group>
-
-
                             <Form.Group controlId="formBasicPassword">
                                 <Form.Label>Password</Form.Label>
                                 <Form.Control type="password"
@@ -83,15 +81,18 @@ function SignupPage() {
                                 />
                             </Form.Group>
 
-                            <Button variant="primary"
+                            <Button variant="success btn-block"
                                 type="submit"
                                 onClick={(event) => {
                                     signupUser(event)
                                 }}>
-                                Submit
+                                Signup
                             </Button>
                         </Form>
                     </div>
+                </div>
+                <div class='row justify-content-center'>
+                    <p>Already have an account? <Link to='/login'>Login Here</Link></p>
                 </div>
                 <div class='row mt-5 justify-content-center'>
                     <div class='col-6'>

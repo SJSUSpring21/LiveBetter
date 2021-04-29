@@ -149,7 +149,9 @@ function PortalPage() {
                 </Nav>
             </Navbar>
             <div className="portal-main">
-
+                <div class="row m-3 justify-content-center">
+                    <h1 className="heading">Live<span class='text-success'>B</span>etter</h1>
+                </div>
                 <Row className="prow1">
                     <Col></Col>
                 </Row>
@@ -190,7 +192,7 @@ function PortalPage() {
 
                                 <Modal show={show} onHide={handleClose}>
                                     <Modal.Header closeButton>
-                                        <Modal.Title>Filters</Modal.Title>
+                                        <Modal.Title>How Much do You Care About Each Topic?</Modal.Title>
                                     </Modal.Header>
                                     <Modal.Body>
                                         <div className={classes.root}>
