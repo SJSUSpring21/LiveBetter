@@ -8,6 +8,7 @@ import ResultPage from './ResultPage';
 import '../index.css';
 import livebetterlogo from '../components/images/new.svg';
 import aboutphoto from './images/second.svg';
+import skyline from '../components/images/skyline.png';
 
 function LandingPage() {
     //landing page function
@@ -19,58 +20,56 @@ function LandingPage() {
                     <Route exact path="/">
                         <div className="main-section">
 
-                            <div class='cointainer'>
-                                <Navbar bg="light" variant="light">
-                                    <Navbar.Brand className="logo" href="/">LiveBetter</Navbar.Brand>
-                                    <Nav className="mr-auto"></Nav>
 
-                                    <Nav className="ml-auto">
-                                        <Nav.Link><Link to="/login">Login</Link></Nav.Link>
-                                    </Nav>
-                                </Navbar>
-                                <Row className="row1">
-                                    <Col></Col>
-                                </Row>
-                                <Row>
-                                    <Col>
-                                        <Row>
-                                            <Col></Col>
-                                            <Col xs={8}>
-                                                <h1 className="heading">Live Better</h1>
-                                                <h3 className="line">Check the livability score for your location</h3>
-                                                <Row>
+                            <Navbar bg="light" variant="light sticky-top">
+                                <Navbar.Brand className="logo" href="/">
+                                    Live<span class='text-success'>B</span>etter
+                                        </Navbar.Brand>
+                                <Nav className="mr-auto"></Nav>
 
-                                                    <Col><Link to="/signup"><Button variant="success" className="signup-button">Signup</Button></Link></Col>
+                                <Nav className="ml-auto">
+                                    <Nav.Link><Link to="/login">Login</Link></Nav.Link>
+                                </Nav>
+                            </Navbar>
 
-                                                </Row>
-                                            </Col>
-                                        </Row>
-                                    </Col>
+                            <div class='cointainer-fluid'>
+                                <div class='row mt-3'>
+                                    <div class='col-4 my-auto offset-md-1'>
+                                        <h1 className="heading">Live <span class='text-success'>B</span>etter</h1>
+                                        <h3 className="line">Check the livability score for your location</h3>
+                                        <Link to="/signup"><Button variant="success" className="signup-button">Signup</Button></Link>
+                                    </div>
 
-                                    <Col>
-                                        <Row>
+                                    <div class='col-6'>
+                                        <Image className="newImage" class='img-responsive'
+                                            src={livebetterlogo} />
 
-                                            <Col>
-                                                <Image className="newImage"
-                                                    src={livebetterlogo} />
-                                            </Col>
-                                        </Row>
-                                    </Col>
-                                </Row>
+
+                                    </div>
+                                </div>
+
+                                <div class="row mt-5">
+
+                                    <div class="col-6 mx-auto my-auto offset-md-1">
+                                        <div class='p-5'>
+                                            <Image className="aboutImage" class='img-responsive'
+                                                src={aboutphoto} />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-4 my-auto">
+                                        <h2>Find the best places to live based on Crime Rate, Hospitals, Gyms and other facilities nearby.</h2>
+                                    </div>
+                                    <div class="col-1"></div>
+
+                                </div>
+
                             </div>
-                            <div className="about-section">
-                                <Row className="row2"></Row>
-                                <Row>
-                                    <Col><Image className="aboutImage"
-                                        src={aboutphoto} /></Col>
-                                    <Col>
-                                        <Row className="row3"></Row>
-                                        <Row>
-                                            <Col xs={8}><h2>Find the best places to live based on Crime Rate, Hospitals, Gyms and other facilities nearby.</h2></Col>
-                                            <Col></Col>
-                                        </Row>
-                                    </Col>
-                                </Row>
+
+
+                            <div class="row fixed-bottom">
+                                <Image class='img-responsive mx-auto'
+                                    src={skyline} />
                             </div>
                         </div>
                     </Route>

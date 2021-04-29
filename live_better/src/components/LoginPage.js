@@ -1,8 +1,10 @@
 import React from 'react';
-import { Form, Button, Navbar } from 'react-bootstrap';
+import { Form, Button, Navbar, Image } from 'react-bootstrap';
 import { useState } from 'react';
 import axios from 'axios';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
+import livebetterlogo from '../components/images/new.svg';
+import skyline from '../components/images/skyline.png';
 
 function LoginPage() {
 
@@ -47,44 +49,73 @@ function LoginPage() {
     }
 
     return (
-        <div>
-            <Navbar bg="light" variant="light">
-                <Navbar.Brand className="logo" href="/">LiveBetter</Navbar.Brand>
+        <div class='main-section'>
+            <Navbar bg="light" variant="light sticky-top">
+                <Navbar.Brand className="logo" href="/">
+                    Live<span class='text-success'>B</span>etter
+                </Navbar.Brand>
             </Navbar>
 
-            <div class="container">
-                <h1>Login Page</h1>
-                <Form>
-                    <Form.Group controlId="formBasicEmail">
-                        <Form.Label>Email address</Form.Label>
-                        <Form.Control type="email"
-                            placeholder="Enter email"
-                            onChange={(event) => {
-                                handleEmailChange(event.target.value);
-                            }}
-                        />
-                    </Form.Group>
+            <div class="container-fluid">
+                <div class="row m-3 justify-content-center">
+                    <h1>Login</h1>
+                </div>
 
-                    <Form.Group controlId="formBasicPassword">
-                        <Form.Label>Password</Form.Label>
-                        <Form.Control type="password"
-                            placeholder="Password"
-                            onChange={(event) => {
-                                handlePasswordChange(event.target.value)
-                            }}
-                        />
-                    </Form.Group>
+                <div class="row m-3 justify-content-center">
+                    <div class="col-5">
+                        <Form>
+                            <Form.Group controlId="formBasicEmail">
+                                <Form.Label>Email address</Form.Label>
+                                <Form.Control type="email"
+                                    placeholder="Enter email"
+                                    onChange={(event) => {
+                                        handleEmailChange(event.target.value);
+                                    }}
+                                />
+                            </Form.Group>
 
-                    <Button variant="primary"
-                        type="submit"
-                        onClick={(event) => {
-                            loginUser(event)
-                        }}>
-                        Submit
-                </Button>
-                </Form>
-                {displayWrongPassword}
+                            <Form.Group controlId="formBasicPassword">
+                                <Form.Label>Password</Form.Label>
+                                <Form.Control type="password"
+                                    placeholder="Password"
+                                    onChange={(event) => {
+                                        handlePasswordChange(event.target.value)
+                                    }}
+                                />
+                            </Form.Group>
+
+                            <Button variant="success"
+                                type="submit"
+                                onClick={(event) => {
+                                    loginUser(event)
+                                }}>
+                                Login
+                                </Button>
+
+                            <Link to="/signup">
+                                <Button variant="primary ml-3">Signup</Button>
+                            </Link>
+                        </Form>
+                        <div class='row mt-3 ml-1'>
+                            {displayWrongPassword}
+                        </div>
+                    </div>
+                </div>
+                <div class='row mt-5 justify-content-center'>
+                    <div class='col-6'>
+                        <Image class='img-responsive mx-auto'
+                            src={livebetterlogo} />
+                    </div>
+                </div>
+
             </div>
+
+
+            <div class="row fixed-bottom">
+                <Image class='img-responsive mx-auto'
+                    src={skyline} />
+            </div>
+
         </div>
     )
 }

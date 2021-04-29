@@ -8,7 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
 import { makeStyles } from '@material-ui/core/styles';
 import { withRouter, useHistory } from 'react-router-dom';
-
+import skyline from '../components/images/skyline.png';
 
 
 function PortalPage() {
@@ -30,7 +30,7 @@ function PortalPage() {
         handleShow();
 
     }
-    
+
     // Slider
     const useStyles = makeStyles({
         root: {
@@ -136,23 +136,26 @@ function PortalPage() {
 
     return (
         <div>
-            <div className="portal-main">
-                <Navbar bg="light" variant="light">
-                    <Navbar.Brand className="logo" href="/">LiveBetter</Navbar.Brand>
-                    <Nav className="mr-auto"></Nav>
+            <Navbar bg="light" variant="light sticky-top">
+                <Navbar.Brand className="logo" href="/">
+                    Live<span class='text-success'>B</span>etter
+                    </Navbar.Brand>
+                <Nav className="mr-auto"></Nav>
 
-                    <Nav className="ml-auto">
-                        <NavDropdown title={localStorage.getItem('Name')} id="nav-dropdown">
-                            <NavDropdown.Item href="/">Logout</NavDropdown.Item>
-                        </NavDropdown>
-                    </Nav>
-                </Navbar>
+                <Nav className="ml-auto">
+                    <NavDropdown title={localStorage.getItem('Name')} id="nav-dropdown">
+                        <NavDropdown.Item href="/">Logout</NavDropdown.Item>
+                    </NavDropdown>
+                </Nav>
+            </Navbar>
+            <div className="portal-main">
+
                 <Row className="prow1">
                     <Col></Col>
                 </Row>
                 <Row>
                     <Col className="pheading">
-                        <h1>Get your score</h1>
+                        <h1>Get Your Score</h1>
                         <br />
                         <Row>
                             <Col></Col>
@@ -207,7 +210,6 @@ function PortalPage() {
                                                     max={10}
                                                     valueLabelDisplay="auto"
                                                 />
-
                                             </div>
 
                                             <div>
@@ -402,10 +404,21 @@ function PortalPage() {
                             </Col>
                             <Col></Col>
                         </Row>
-                        <Image className="globeImage"
-                            src={globephoto} />
                     </Col>
                 </Row>
+
+                <div class='row mt-5'>
+                    <div class="col d-flex justify-content-center">
+                        <Image className="globeImage"
+                            src={globephoto} />
+                    </div>
+                </div>
+
+                <div class="row fixed-bottom">
+                    <Image class='img-responsive mx-auto'
+                        src={skyline} />
+                </div>
+
             </div>
         </div>
     )

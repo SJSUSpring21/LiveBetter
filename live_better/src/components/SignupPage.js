@@ -1,8 +1,10 @@
 import React from 'react';
 import { useState } from 'react';
-import { Form, Button, Navbar, Nav } from 'react-bootstrap';
+import { Form, Button, Navbar, Nav, Image } from 'react-bootstrap';
 import axios from 'axios';
 import { useHistory, Link } from 'react-router-dom';
+import skyline from '../components/images/skyline.png';
+import aboutphoto from './images/second.svg';
 
 function SignupPage() {
 
@@ -33,20 +35,22 @@ function SignupPage() {
 
 
     return (
-        <div>
-            <Navbar bg="light" variant="light">
-                <Navbar.Brand className="logo" href="/">LiveBetter</Navbar.Brand>
+        <div class='main-section'>
+            <Navbar bg="light" variant="light sticky-top">
+                <Navbar.Brand className="logo" href="/">
+                    Live<span class='text-success'>B</span>etter
+                </Navbar.Brand>
                 <Nav className="mr-auto"></Nav>
 
                 <Nav className="ml-auto">
                     <Nav.Link><Link to="/login">Login</Link></Nav.Link>
                 </Nav>
             </Navbar>
-            <div class='container'>
-                <div class='row'>
+            <div class='container-fluid'>
+                <div class='row m-3 justify-content-center'>
                     <h1>Signup Page</h1>
                 </div>
-                <div class='row'>
+                <div class='row m-3 justify-content-center'>
                     <div class='col-3'>
                         <Form>
                             <Form.Group controlId="formName">
@@ -88,11 +92,19 @@ function SignupPage() {
                             </Button>
                         </Form>
                     </div>
-
-
-
+                </div>
+                <div class='row mt-5 justify-content-center'>
+                    <div class='col-6'>
+                        <Image class='img-responsive mx-auto'
+                            src={aboutphoto} />
+                    </div>
                 </div>
 
+            </div>
+
+            <div class="row fixed-bottom">
+                <Image class='img-responsive mx-auto'
+                    src={skyline} />
             </div>
 
         </div>

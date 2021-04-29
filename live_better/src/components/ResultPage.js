@@ -1,9 +1,10 @@
 import React from 'react';
 import { useHistory, Link } from 'react-router-dom';
-import { Navbar, Nav, Button, NavDropdown } from 'react-bootstrap';
+import { Navbar, Nav, Button, NavDropdown, Image } from 'react-bootstrap';
 import axios from 'axios';
 import { render } from '@testing-library/react';
 import { useState, useEffect } from 'react';
+import skyline from '../components/images/skyline.png';
 
 //class ResultPage extends React.Component{
 function ResultPage() {
@@ -81,9 +82,11 @@ function ResultPage() {
 
     if (isLoading) {
         return (
-            <div>
-                <Navbar bg="light" variant="light">
-                    <Navbar.Brand className="logo" href="/">LiveBetter</Navbar.Brand>
+            <div class='main-section'>
+                <Navbar bg="light" variant="light sticky-top">
+                    <Navbar.Brand className="logo" href="/">
+                        Live<span class='text-success'>B</span>etter
+                    </Navbar.Brand>
                     <Nav className="mr-auto"></Nav>
 
                     <Nav className="ml-auto">
@@ -93,13 +96,18 @@ function ResultPage() {
                     </Nav>
                 </Navbar>
                 <div class='container'>
-                    <div class='row'>
+                    <div class='row mt-3'>
                         <h2>Please wait while we calculate your address...</h2>
                     </div>
 
                     <div class="row">
                         <Link to="/portal"><Button variant="success" >Try Another Address</Button></Link>
                     </div>
+                </div>
+
+                <div class="row fixed-bottom">
+                    <Image class='img-responsive mx-auto'
+                        src={skyline} />
                 </div>
             </div>
         )
@@ -118,15 +126,17 @@ function ResultPage() {
         restaurantCount = query_results.restaurant;
         supermarketCount = query_results.supermarket;
     }
-    
+
     // Uses Park and School Count from data we found
     schoolCount = parks_schools[0].School_Count;
     parkCount = parks_schools[0].Park_Count;
 
     return (
-        <div>
+        <div class='main-section'>
             <Navbar bg="light" variant="light">
-                <Navbar.Brand className="logo" href="/">LiveBetter</Navbar.Brand>
+                <Navbar.Brand className="logo" href="/">
+                    Live<span class='text-success'>B</span>etter
+                </Navbar.Brand>
                 <Nav className="mr-auto"></Nav>
 
                 <Nav className="ml-auto">
@@ -137,10 +147,10 @@ function ResultPage() {
             </Navbar>
 
             <div class='container'>
-                <div class='row'>
-                    <h1>Hello Result Page</h1>
+                <div class='row mt-3 justify-content-center'>
+                    <h1>Your Livability Index</h1>
                 </div>
-                <div class='row'>
+                <div class='row mt-3'>
                     <div class='col'>
                         <h2>Parameters Passed By User</h2>
                         <p>Lat: {lat}</p>
@@ -175,6 +185,12 @@ function ResultPage() {
                 <div class="row">
                     <Link to="/portal"><Button variant="success" >Try Another Address</Button></Link>
                 </div>
+            </div>
+
+
+            <div class="row fixed-bottom">
+                <Image class='img-responsive mx-auto'
+                    src={skyline} />
             </div>
 
         </div>
