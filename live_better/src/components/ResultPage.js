@@ -224,7 +224,7 @@ function ResultPage() {
             </div>
 
 
-            <div class="row fixed-bottom">
+            <div class="row">
                 <Image class='img-responsive mx-auto'
                     src={skyline} />
             </div>
