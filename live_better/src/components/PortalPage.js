@@ -7,9 +7,15 @@ import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-au
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
 import { makeStyles } from '@material-ui/core/styles';
-import { withRouter, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import skyline from '../components/images/skyline.png';
-import axios from 'axios';
+
+
+import { createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles';
+
+
+
 
 function PortalPage() {
     const history = useHistory();
@@ -136,6 +142,35 @@ function PortalPage() {
 
     ]
 
+    const muiTheme = createMuiTheme({
+        overrides: {
+            MuiSlider: {
+                thumb: {
+                    height: 24,
+                    width: 24,
+                    marginTop: -8,
+                    marginLeft: -12,
+                    backgroundColor: '#fff',
+                    border: '2px solid green',
+                },
+                track: {
+                    color: '#32CD32',
+                    height: 8,
+                    borderRadius: 4,
+                },
+                rail: {
+                    color: 'grey',
+                    height: 8,
+                    borderRadius: 4,
+                },
+                valueLabel: {
+                    color: 'green',
+                    left: 'calc(-50% + 4px)',
+                },
+            }
+        }
+    });
+
     return (
         <div>
             <Navbar bg="light" variant="light sticky-top">
@@ -171,8 +206,6 @@ function PortalPage() {
                                     {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => {
                                         return (
                                             <div>
-                                                <p>Latitude:{coordinates.lat}</p>
-                                                <p>Longitude:{coordinates.lng}</p>
                                                 <Form.Control
                                                     {...getInputProps({ placeholder: "Type Address" })}
                                                 />
@@ -194,7 +227,7 @@ function PortalPage() {
 
                                 <Modal show={show} onHide={handleClose}>
                                     <Modal.Header closeButton>
-                                        <Modal.Title>How Much do You Care About Each Topic?</Modal.Title>
+                                        <Modal.Title>Rate Each Topic from 1-10</Modal.Title>
                                     </Modal.Header>
                                     <Modal.Body>
                                         <div className={classes.root}>
@@ -203,17 +236,18 @@ function PortalPage() {
                                                 <Typography id="discrete-slider-small-steps" gutterBottom>
                                                     Safety
                                             </Typography>
-                                                <Slider
-                                                    defaultValue={0}
-                                                    value={safetyScore}
-                                                    onChange={safetyScoreFunction}
-                                                    aria-labelledby="discrete-slider-small-steps"
-                                                    step={1}
-                                                    marks={marks}
-                                                    min={0}
-                                                    max={10}
-                                                    valueLabelDisplay="auto"
-                                                />
+                                                <ThemeProvider theme={muiTheme}>
+                                                    <Slider
+                                                        defaultValue={0}
+                                                        value={safetyScore}
+                                                        onChange={safetyScoreFunction}
+                                                        aria-labelledby="discrete-slider-small-steps"
+                                                        marks={marks}
+                                                        min={0}
+                                                        max={10}
+                                                        valueLabelDisplay="auto"
+                                                    />
+                                                </ThemeProvider>
                                             </div>
 
                                             <div>
@@ -400,7 +434,7 @@ function PortalPage() {
                                         <Button variant="secondary" onClick={handleClose}>
                                             Close
                                 </Button>
-                                        <Button variant="primary" onClick={getResults}>
+                                        <Button variant="success" onClick={getResults}>
                                             Get Score
                                 </Button>
                                     </Modal.Footer>

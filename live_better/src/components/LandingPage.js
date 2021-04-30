@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navbar, Nav, Button, Row, Col, Image } from 'react-bootstrap/esm';
+import { Navbar, Nav, Button, Image } from 'react-bootstrap/esm';
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import LoginPage from './LoginPage';
 import PortalPage from './PortalPage';

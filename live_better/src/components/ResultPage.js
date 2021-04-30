@@ -7,9 +7,14 @@ import { useState, useEffect } from 'react';
 import skyline from '../components/images/skyline.png';
 import globephoto from './images/third.svg'
 
+import {
+    FaVoicemail, FaGraduationCap, FaBiking, FaShoppingCart,
+    FaBus, FaDollarSign, FaHiking, FaHospital, FaDumbbell,
+    FaUtensils, FaCloudSun
+} from 'react-icons/fa';
+
 //class ResultPage extends React.Component{
 function ResultPage() {
-
 
     var history = useHistory();
 
@@ -34,14 +39,24 @@ function ResultPage() {
     var gymCount = history.location.state.query.gym;
     var hikeCount = history.location.state.query.hike_trail;
     var hospitalCount = history.location.state.query.hospital;
-    var restaurantCount =history.location.state.query.restaurant;
+    var restaurantCount = history.location.state.query.restaurant;
     var supermarketCount = history.location.state.query.supermarket;
     var schoolCount = history.location.state.park_school[0].School_Count;
     var parkCount = history.location.state.park_school[0].Park_Count;
 
+    var arrestHTML = <div></div>
+
+    // Only shows Arrest count for Chicago Database
+    if (safetyCount) {
+        arrestHTML = <div class='col-2'>
+            <div class='row mt-2 justify-content-center'>
+                <p><FaVoicemail class='result-icon' /> {safetyCount} Arrests</p>
+            </div>
+        </div>
+    }
 
     return (
-        <div class='main-section'>
+        <div class='main-section full-screen-div'>
             <Navbar bg="light" variant="light">
                 <Navbar.Brand className="logo" href="/">
                     Live<span class='text-success'>B</span>etter
@@ -56,46 +71,61 @@ function ResultPage() {
             </Navbar>
 
             <div class='container'>
-                <div class="row m-3 justify-content-center">
-                    <h1 className="heading">Live<span class='text-success'>B</span>etter</h1>
-                </div>
-                <div class='row mt-3 justify-content-center'>
+                <div class='row mt-5 justify-content-center'>
                     <h1>Location Score</h1>
                 </div>
-                <div class='row mt-3'>
-                    <div class='col'>
-                        <h2>Parameters Passed By User</h2>
-                        <p>Lat: {lat}</p>
-                        <p>Lng: {lng}</p>
-                        <p>Safety Score: {safetyScore}</p>
-                        <p>Restaurants: {restaurantScore}</p>
-                        <p>Schools: {schoolScore}</p>
-                        <p>Bus: {busstationScore}</p>
-                        <p>ATMs: {atmScore}</p>
-                        <p>Supermarkets: {supermarketScore}</p>
-                        <p>Parks: {parkScore}</p>
-                        <p>Gyms: {gymScore}</p>
-                        <p>Hospitals: {hospitalScore}</p>
-                        <p>Hike Trails: {hikeTrailScore}</p>
-                        <p>Bike Trails: {bikeTrailScore}</p>
+                <div class='row justify-content-center'><h1 className="heading">100</h1></div>
+
+                <div class='row mt-5 justify-content-center'>
+                    <div class="col-2">
+                        <div class='row mt-2 justify-content-center'>
+                            <p><FaBiking class='result-icon' /> {bikeCount} Bike Trails</p>
+                        </div>
+                        <div class='row mt-2 justify-content-center'>
+                            <p><FaUtensils class='result-icon' /> {restaurantCount} Restaurants</p>
+                        </div>
+                        <div class='row mt-2 justify-content-center'>
+                            <p><FaGraduationCap class='result-icon' /> {schoolCount} Schools</p>
+                        </div>
                     </div>
-                    <div class='col'>
-                        <h2>Data From Database</h2>
-                        <p>Arrest Count: {safetyCount}</p>
-                        <p>Restaurants: {restaurantCount}</p>
-                        <p>Schools: {schoolCount}</p>
-                        <p>Bus: {busCount}</p>
-                        <p>ATMs: {atmCount}</p>
-                        <p>Supermarkets: {supermarketCount}</p>
-                        <p>Parks: {parkCount}</p>
-                        <p>Gyms: {gymCount}</p>
-                        <p>Hospitals: {hospitalCount}</p>
-                        <p>Hike Trails: {hikeCount}</p>
-                        <p>Bike Trails: {bikeCount}</p>
+
+                    <div class="col-2">
+                        <div class='row mt-2 justify-content-center'>
+                            <p><FaBus class='result-icon' /> {busCount} Bus Stops</p>
+                        </div>
+                        <div class='row mt-2 justify-content-center'>
+                            <p><FaDollarSign class='result-icon' /> {atmCount} ATMs</p>
+                        </div>
+                        <div class='row mt-2 justify-content-center'>
+                            <p><FaShoppingCart class='result-icon' /> {supermarketCount} Supermarkets</p>
+                        </div>
+                    </div>
+
+                    <div class="col-2">
+                        <div class='row mt-2 justify-content-center'>
+                            <p><FaCloudSun class='result-icon' /> {parkCount} Parks</p>
+                        </div>
+                        <div class='row mt-2 justify-content-center'>
+                            <p><FaDumbbell class='result-icon' /> {gymCount} Gyms</p>
+                        </div>
+                        <div class='row mt-2 justify-content-center'>
+                            <p><FaHospital class='result-icon' /> {hospitalCount} Hospitals</p>
+                        </div>
                     </div>
                 </div>
-                <div class="row">
-                    <Link to="/portal"><Button variant="success" >Try Another Address</Button></Link>
+                <div class='row justify-content-center'>
+                    <div class='col-2'>
+                        <div class='row mt-2 justify-content-center'>
+                            <p><FaHiking class='result-icon' /> {hikeCount} Hike Trails</p>
+                        </div>
+                    </div>
+                    {arrestHTML}
+                </div>
+
+                <div class="row m-5 justify-content-center">
+                    <Link to="/portal">
+                        <Button variant="success btn-lg rounded-pill" >Check Another Location</Button>
+                    </Link>
                 </div>
             </div>
 

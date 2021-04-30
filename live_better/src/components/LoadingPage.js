@@ -2,8 +2,7 @@ import React from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import { Navbar, Nav, Button, NavDropdown, Image } from 'react-bootstrap';
 import axios from 'axios';
-import { render } from '@testing-library/react';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import skyline from '../components/images/skyline.png';
 import globephoto from './images/third.svg'
 
@@ -137,9 +136,7 @@ function LoadingPage() {
                 </div>
 
                 <div class="row mt-5 justify-content-center ">
-                    <div class="col-4">
-                        <Link to="/portal"><Button variant="success btn-block" >Try Another Address</Button></Link>
-                    </div>
+                        <Link to="/portal"><Button variant="success btn-lg rounded-pill" >Check Another Location</Button></Link>
                 </div>
 
                 <div class="row fixed-bottom">
