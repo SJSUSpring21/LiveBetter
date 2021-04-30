@@ -9,7 +9,7 @@ import Slider from '@material-ui/core/Slider';
 import { makeStyles } from '@material-ui/core/styles';
 import { withRouter, useHistory } from 'react-router-dom';
 import skyline from '../components/images/skyline.png';
-
+import axios from 'axios';
 
 function PortalPage() {
     const history = useHistory();
@@ -99,8 +99,9 @@ function PortalPage() {
 
     // state sends all user input values to result page
     const getResults = () => {
+
         history.push({
-            pathname: '/result',
+            pathname: '/loading',
             state: {
                 lat: coordinates.lat,
                 lng: coordinates.lng,
@@ -117,6 +118,7 @@ function PortalPage() {
                 bikeTrailScore: bikeTrailScore
             }
         });
+
     }
 
     const marks = [

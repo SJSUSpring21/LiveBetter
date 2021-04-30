@@ -27,142 +27,18 @@ function ResultPage() {
     var hikeTrailScore = history.location.state.hikeTrailScore;
     var bikeTrailScore = history.location.state.bikeTrailScore;
 
-    var safetyCount = "None";
-    var safetyCount = "None";
-    var atmCount = "None";
-    var bikeCount = "None";
-    var busCount = "None";
-    var gymCount = "None";
-    var hikeCount = "None";
-    var hospitalCount = "None";
-    var restaurantCount = "None";
-    var supermarketCount = "None";
-    var schoolCount = "None";
-    var parkCount = "None";
+    var safetyCount = history.location.state.query.Arrest_Count;
+    var atmCount = history.location.state.query.atm;
+    var bikeCount = history.location.state.query.bike_trail;
+    var busCount = history.location.state.query.bus_station;
+    var gymCount = history.location.state.query.gym;
+    var hikeCount = history.location.state.query.hike_trail;
+    var hospitalCount = history.location.state.query.hospital;
+    var restaurantCount =history.location.state.query.restaurant;
+    var supermarketCount = history.location.state.query.supermarket;
+    var schoolCount = history.location.state.park_school[0].School_Count;
+    var parkCount = history.location.state.park_school[0].Park_Count;
 
-    const [query_results, setQueryResults] = useState();
-    const [parks_schools, setParkSchoolQuery] = useState();
-    const [isLoading, setLoading] = useState(true);
-    const [isChicago, setChicago] = useState(false)
-
-    useEffect(() => {
-        // Query Database For Parks and Schools
-        axios.get(`/queries?lat=${lat}&lng=${lng}&radius=2`)
-            .then(res => {
-                setParkSchoolQuery(res.data);
-
-
-                console.log("Park and Schools Data");
-                console.log(res.data);
-                // Query Chicago Database
-                axios.get(`/chicago?lat=${lat}&lng=${lng}`)
-                    .then(res => {
-
-                        if (res.data.length === 0) {
-                            // Query Google
-                            console.log("Chicago Data Query came up empty...")
-                            axios.get(`/google-search?lat=${lat}&lng=${lng}`)
-                                .then(res => {
-                                    console.log("Google Data")
-                                    console.log(res.data);
-                                    setQueryResults(res.data);
-                                    setLoading(false);
-                                })
-                                .catch(error => {
-                                    console.log(error);
-                                    setLoading(false);
-                                })
-
-                        }
-                        else {
-                            setChicago(true);
-                            setQueryResults(res.data);
-                            setLoading(false);
-                            console.log("Chicago Data");
-                            console.log(res.data);
-                        }
-
-                    })
-                    .catch(error => {
-                        console.log(error);
-                        setLoading(false);
-                    });
-            })
-            .catch(error => {
-                console.log(error);
-                console.log("Error While Querying Schools and Parks");
-            });
-
-    }, []); // <-- Empty array makes sure this block of code runs exactly once
-
-
-    //This page will show while accessing the database
-
-    if (isLoading) {
-
-        return (
-            <div class='main-section'>
-                <Navbar bg="light" variant="light sticky-top">
-                    <Navbar.Brand className="logo" href="/">
-                        Live<span class='text-success'>B</span>etter
-                    </Navbar.Brand>
-                    <Nav className="mr-auto"></Nav>
-
-                    <Nav className="ml-auto">
-                        <NavDropdown title={localStorage.getItem('Name')} id="nav-dropdown">
-                            <NavDropdown.Item href="/">Logout</NavDropdown.Item>
-                        </NavDropdown>
-                    </Nav>
-                </Navbar>
-                <div class='container'>
-                    <div class="row m-3 justify-content-center">
-                        <h1 className="heading">Live<span class='text-success'>B</span>etter</h1>
-                    </div>
-
-                    <div class='row mt-5 justify-content-center'>
-                        <div class="col-6 d-flex ">
-                            <Image class='img-responsive mx-auto'
-                                src={globephoto} />
-                        </div>
-                    </div>
-
-                    <div class='row mt-5 justify-content-center'>
-                        <h2>Please wait while we calculate your score...</h2>
-                    </div>
-
-                    <div class="row mt-5 justify-content-center ">
-                        <div class="col-4">
-                            <Link to="/portal"><Button variant="success btn-block" >Try Another Address</Button></Link>
-                        </div>
-                    </div>
-
-                    <div class="row fixed-bottom">
-                        <Image class='img-responsive mx-auto'
-                            src={skyline} />
-                    </div>
-                </div>
-            </div>
-        )
-    }
-
-    // This Data is from chicago database
-    if (isChicago) {
-        safetyCount = query_results.Arrest_Count;
-    }
-
-    atmCount = query_results.atm;
-    bikeCount = query_results.bike_trail;
-    busCount = query_results.bus_station;
-    gymCount = query_results.gym;
-    hikeCount = query_results.hike_trail;
-    hospitalCount = query_results.hospital;
-    restaurantCount = query_results.restaurant;
-    supermarketCount = query_results.supermarket;
-
-
-    // Uses Park and School Count from data we found
-    schoolCount = parks_schools[0].School_Count;
-    parkCount = parks_schools[0].Park_Count;
 
     return (
         <div class='main-section'>

@@ -5,11 +5,13 @@ import LoginPage from './LoginPage';
 import PortalPage from './PortalPage';
 import SignupPage from './SignupPage';
 import ResultPage from './ResultPage';
+import LoadingPage from './LoadingPage';
 import '../index.css';
 import livebetterlogo from '../components/images/new.svg';
 import aboutphoto from './images/second.svg';
 import skyline from '../components/images/skyline.png';
 import globephoto from './images/third.svg'
+
 
 function LandingPage() {
     //landing page function
@@ -94,6 +96,10 @@ function LandingPage() {
 
                     <Route exact path="/result">
                         <ResultPage />
+                    </Route>
+
+                    <Route exact path="/loading">
+                        <LoadingPage />
                     </Route>
 
                 </Switch>
