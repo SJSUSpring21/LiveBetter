@@ -210,7 +210,7 @@ app.get('/google-search', (req, res) => {
 });
 
 function get_google_query(input_lat, input_lng, placeName, radius) {
-    var API_KEY = 'AIzaSyAFDQoRpzeUovqv6yAOqAkiigLEIVgzbxY'
+    var API_KEY = ''
     var url = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?';
 
     var meter_in_miles = 1609;
