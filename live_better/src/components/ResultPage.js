@@ -16,8 +16,11 @@ function ResultPage() {
 
     var history = useHistory();
 
+    // Input latitude and longitude
     var lat = history.location.state.lat;
     var lng = history.location.state.lng;
+
+    // User weights
     var safetyScore = history.location.state.safetyScore;
     var restaurantScore = history.location.state.restaurantScore;
     var schoolScore = history.location.state.schoolScore;
@@ -30,6 +33,7 @@ function ResultPage() {
     var hikeTrailScore = history.location.state.hikeTrailScore;
     var bikeTrailScore = history.location.state.bikeTrailScore;
 
+    // Counts from Database or Google
     var safetyCount = history.location.state.query.Arrest_Count;
     var atmCount = history.location.state.query.atm;
     var bikeCount = history.location.state.query.bike_trail;
@@ -42,11 +46,16 @@ function ResultPage() {
     var schoolCount = history.location.state.park_school[0].School_Count;
     var parkCount = history.location.state.park_school[0].Park_Count;
 
+    // Changed if arrest data is available
     var arrestHTML = <div></div>
+
+    // Changed if arrest data not available
     var safetyNote = <div></div>
 
+    // change to false at the end of useEffect()
     const [isLoading, setLoading] = useState(true);
 
+    // point values for each individual feature
     const [safety, setSafety] = useState(0);
     const [atm, setAtm] = useState(0);
     const [bike, setBike] = useState(0);
@@ -59,7 +68,11 @@ function ResultPage() {
     const [school, setSchool] = useState(0);
     const [park, setPark] = useState(0);
 
+    // Color of progress bar
     const [barColor, setColor] = useState("success");
+
+    // Final Score
+    const [livabilityScore, setScore] = useState(0);
 
     // Only shows Arrest count for Chicago Database
     if (safetyCount) {
@@ -77,13 +90,12 @@ function ResultPage() {
         </div>
     }
 
-    const [livabilityScore, setScore] = useState(0);
     useEffect(() => {
-        // Calculate Score - doesn't include arrest counts
+        // Calculate Total Weights User Inputs
         var totalScore = restaurantScore + schoolScore + busstationScore + atmScore + safetyScore +
             supermarketScore + parkScore + gymScore + hospitalScore + hikeTrailScore + bikeTrailScore;
 
-        // All Weights set to, make all weights equal as default
+        // If User Doesn't Input Weights, set them all to 10
         if (totalScore === 0) {
             safetyScore = 10;
             restaurantScore = 10;
@@ -101,6 +113,7 @@ function ResultPage() {
         }
 
         var arrestCount = safetyCount;
+
         // Don't take into consideration the safety score
         if (!arrestCount) {
             totalScore -= safetyScore;
@@ -118,7 +131,7 @@ function ResultPage() {
         // for the particular feature
         // e.g bikeWeight = bikeCount / 5.0
         // The above means 5 or more bike trails will give a max score
-        // for that features
+        // for that feature
         var safeWeight = arrestCount / 100.0;
         if (safeWeight >= 1) { safeWeight = 1.0; }
 
@@ -126,6 +139,7 @@ function ResultPage() {
         safeWeight = (1 - safeWeight);
 
         var atmWeight = atmCount / 20.0;
+        if (atmWeight >= 1) { atmWeight = 1; }
 
         var bikeWeight = bikeCount / 5.0;
         if (bikeWeight >= 1) { bikeWeight = 1; }
@@ -143,15 +157,19 @@ function ResultPage() {
         if (hospitalWeight >= 1) { hospitalWeight = 1; }
 
         var restaurantWeight = restaurantCount / 20.0;
+        if (restaurantWeight >= 1) { restaurantWeight = 1; }
 
         var supermarketWeight = supermarketCount / 10.0;
         if (supermarketWeight >= 1) { supermarketWeight = 1; }
 
         var schoolWeight = schoolCount / 20.0;
+        if (schoolWeight >= 1) { schoolWeight = 1; }
 
         var parkWeight = parkCount / 5.0;
         if (parkWeight >= 1) { parkWeight = 1; }
 
+
+        // ******************** Calculate Score ******************
         // Take Weighted average of all scores
         var score = restaurantScore / totalScore * restaurantWeight +
             schoolScore / totalScore * schoolWeight +
@@ -166,13 +184,17 @@ function ResultPage() {
             safetyScore / totalScore * safeWeight;
 
         score = Math.round(score * 100);
+        setScore(score);
 
+
+        // Changes color of progress bar
         if(score <= 50){
             setColor("danger");
         } else if(score <= 75){
             setColor("warning");
         }
 
+        // ************** Individual Scores for each Feautre
         // Sets the point value for each individual variable
         // Might be able to do a breakdown of score?
         setSafety(Math.round(safetyScore / totalScore * safeWeight * 100));
@@ -187,7 +209,7 @@ function ResultPage() {
         setSchool(Math.round(schoolScore / totalScore * schoolWeight * 100));
         setPark(Math.round(parkScore / totalScore * parkWeight * 100));
 
-        setScore(score);
+        
         setLoading(false);
     }, []);
 

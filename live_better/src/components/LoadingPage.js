@@ -9,9 +9,9 @@ import globephoto from './images/third.svg'
 //class ResultPage extends React.Component{
 function LoadingPage() {
 
-
     var history = useHistory();
 
+    // Below Variables are defined by user
     var lat = history.location.state.lat;
     var lng = history.location.state.lng;
     var safetyScore = history.location.state.safetyScore;
@@ -33,16 +33,19 @@ function LoadingPage() {
 
                 console.log("Park and Schools Data");
                 console.log(res.data);
+
                 // Query Chicago Database
                 axios.get(`/chicago?lat=${lat}&lng=${lng}`)
                     .then(res2 => {
                         if (res2.data.length === 0) {
-                            // Query Google
+                            // Query Google if there is not result for Chicago Data
                             console.log("Chicago Data Query came up empty...")
                             axios.get(`/google-search?lat=${lat}&lng=${lng}`)
                                 .then(res3 => {
                                     console.log("Google Data")
                                     console.log(res3.data);
+
+                                    // Go to Result Page
                                     history.push({
                                         pathname: '/result',
                                         state: {
@@ -66,9 +69,15 @@ function LoadingPage() {
                                 })
                                 .catch(error => {
                                     console.log(error);
+                                    console.log("Error with Google Query")
+                                    // Error go back to home page
+                                    history.push({
+                                        pathname: '/'
+                                    });
                                 })
                         }
                         else {
+                            // Go to Result Page
                             history.push({
                                 pathname: '/result',
                                 state: {
@@ -95,11 +104,21 @@ function LoadingPage() {
                     })
                     .catch(error => {
                         console.log(error);
+                        console.log("Error While Querying Chicago DB");
+                        // Error go back to home page
+                        history.push({
+                            pathname: '/'
+                        });
                     });
             })
             .catch(error => {
                 console.log(error);
                 console.log("Error While Querying Schools and Parks");
+
+                // Error go back to home page
+                history.push({
+                    pathname: '/'
+                });
             });
 
 
@@ -138,7 +157,6 @@ function LoadingPage() {
                 <div class="row mt-5 justify-content-center ">
                     <Link to="/portal"><Button variant="success btn-lg rounded-pill" >Check Another Location</Button></Link>
                 </div>
-
 
             </div>
             <div class="row mt-5">
