@@ -9,8 +9,6 @@ import Slider from '@material-ui/core/Slider';
 import { makeStyles } from '@material-ui/core/styles';
 import { useHistory } from 'react-router-dom';
 import skyline from '../components/images/skyline.png';
-
-
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 
@@ -452,8 +450,8 @@ function PortalPage() {
                     </div>
                 </div>
 
-                <div class="row">
-                    <Image class='img-responsive mx-auto'
+                <div class="row  mt-5">
+                    <Image class='mt-auto mx-auto'
                         src={skyline} />
                 </div>
 

@@ -101,20 +101,23 @@ function LoginPage() {
                         </div>
                     </div>
                 </div>
-                <div class='row mt-5 justify-content-center'>
-                    <div class='col-6'>
-                        <Image class='img-responsive mx-auto'
-                            src={livebetterlogo} />
-                    </div>
-                </div>
+
 
             </div>
 
+            <div class='row mt-5 mb-5 justify-content-center'>
+                <div class='col-6'>
+                    <Image class='img-responsive mx-auto'
+                        src={livebetterlogo} />
+                </div>
+            </div>
 
-            <div class="row">
-                <Image class='img-responsive mx-auto'
+
+            <div class="row mt-5">
+                <Image class='mt-auto mx-auto'
                     src={skyline} />
             </div>
+
 
         </div>
     )

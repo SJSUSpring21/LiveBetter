@@ -125,7 +125,7 @@ function LoadingPage() {
                 </div>
 
                 <div class='row mt-5 justify-content-center'>
-                    <div class="col-6 d-flex ">
+                    <div class="col-6">
                         <Image class='img-responsive mx-auto'
                             src={globephoto} />
                     </div>
@@ -136,13 +136,14 @@ function LoadingPage() {
                 </div>
 
                 <div class="row mt-5 justify-content-center ">
-                        <Link to="/portal"><Button variant="success btn-lg rounded-pill" >Check Another Location</Button></Link>
+                    <Link to="/portal"><Button variant="success btn-lg rounded-pill" >Check Another Location</Button></Link>
                 </div>
 
-                <div class="row fixed-bottom">
-                    <Image class='img-responsive mx-auto'
-                        src={skyline} />
-                </div>
+
+            </div>
+            <div class="row mt-5">
+                <Image class='mt-auto mx-auto'
+                    src={skyline} />
             </div>
         </div>
     )

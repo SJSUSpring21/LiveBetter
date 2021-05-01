@@ -1,12 +1,10 @@
 import React from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import { Navbar, Nav, Button, NavDropdown, Image } from 'react-bootstrap';
-import axios from 'axios';
 import { render } from '@testing-library/react';
 import { useState, useEffect } from 'react';
 import skyline from '../components/images/skyline.png';
-import globephoto from './images/third.svg'
-
+import globephoto from './images/third.svg';
 import {
     FaVoicemail, FaGraduationCap, FaBiking, FaShoppingCart,
     FaBus, FaDollarSign, FaHiking, FaHospital, FaDumbbell,
@@ -45,14 +43,109 @@ function ResultPage() {
     var parkCount = history.location.state.park_school[0].Park_Count;
 
     var arrestHTML = <div></div>
+    var safetyNote = <div></div>
+
+    const [isLoading, setLoading] = useState(true);
 
     // Only shows Arrest count for Chicago Database
     if (safetyCount) {
-        arrestHTML = <div class='col-2'>
-            <div class='row mt-2 justify-content-center'>
-                <p><FaVoicemail class='result-icon' /> {safetyCount} Arrests</p>
+        arrestHTML = <div class='col-3'>
+            <div class='row mt-3 justify-content-center'>
+                <p><FaVoicemail class='result-icon' />  {safetyCount} Arrests</p>
             </div>
         </div>
+    } else {
+        safetyNote = <div class='row mt-5 justify-content-center'>
+            <div class='col-6  alert alert-danger' role='alert'>
+                Unfortunately, we only have safety data for locations in Chicago.
+                Your location score was calculated without considering crime statistics.
+            </div>
+        </div>
+    }
+
+    const [livabilityScore, setScore] = useState(0);
+    useEffect(() => {
+        // Calculate Score - doesn't include arrest counts
+        var totalScore = restaurantScore + schoolScore + busstationScore + atmScore + safetyScore +
+            supermarketScore + parkScore + gymScore + hospitalScore + hikeTrailScore + bikeTrailScore;
+
+        // All Weights set to, make all weights equal as default
+        if (totalScore == 0) {
+            safetyScore = 10;
+            restaurantScore = 10;
+            schoolScore = 10;
+            busstationScore = 10;
+            atmScore = 10;
+            supermarketScore = 10;
+            parkScore = 10;
+            gymScore = 10;
+            hospitalScore = 10;
+            hikeTrailScore = 10;
+            bikeTrailScore = 10;
+
+            totalScore = 110;
+        }
+
+        var arrestCount = safetyCount;
+        // Don't take into consideration the safety score
+        if (!arrestCount) {
+            totalScore -= safetyScore;
+            safetyScore = 0;
+            arrestCount = 0
+        }
+
+        var safeWeight = arrestCount / 100.0;
+        if (safeWeight >= 1) { safeWeight = 1.0; }
+        //invert arrest count since more arrest is negative
+        safeWeight = (1 - safeWeight); 
+
+        var atmWeight = atmCount / 20.0;
+
+        var bikeWeight = bikeCount / 5.0;
+        if (bikeWeight >= 1) { bikeWeight = 1; }
+
+        var busWeight = busCount / 10.0;
+        if (busWeight >= 1) { busWeight = 1; }
+
+        var gymWeight = gymCount / 10.0;
+        if (gymWeight >= 1) { gymWeight = 1; }
+
+        var hikeWeight = hikeCount / 5.0;
+        if (hikeWeight >= 1) { hikeWeight = 1; }
+
+        var hospitalWeight = hospitalCount / 3.0;
+        if (hospitalWeight >= 1) { hospitalWeight = 1; }
+
+        var restaurantWeight = restaurantCount / 20.0;
+
+        var supermarketWeight = supermarketCount / 10.0;
+        if (supermarketWeight >= 1) { supermarketWeight = 1; }
+
+        var schoolWeight = schoolCount / 20.0;
+
+        var parkWeight = parkCount / 5.0;
+        if (parkWeight >= 1) { parkWeight = 1; }
+
+        // Take Weighted average of all scores
+        var score = restaurantScore / totalScore * restaurantWeight +
+            schoolScore / totalScore * schoolWeight +
+            busstationScore / totalScore * busWeight +
+            atmScore / totalScore * atmWeight +
+            supermarketScore / totalScore * supermarketWeight +
+            parkScore / totalScore * parkWeight +
+            gymScore / totalScore * gymWeight +
+            hospitalScore / totalScore * hospitalWeight +
+            hikeTrailScore / totalScore * hikeWeight +
+            bikeTrailScore / totalScore * bikeWeight +
+            safetyScore / totalScore * safeWeight;
+
+        score = Math.round(score * 100);
+        setScore(score);
+        setLoading(false);
+    }, []);
+
+    if (isLoading) {
+        return (<div>Loading...</div>)
     }
 
     return (
@@ -74,49 +167,50 @@ function ResultPage() {
                 <div class='row mt-5 justify-content-center'>
                     <h1>Location Score</h1>
                 </div>
-                <div class='row justify-content-center'><h1 className="heading">100</h1></div>
-
+                <div class='row justify-content-center'><h1 className="heading">{livabilityScore}</h1></div>
                 <div class='row mt-5 justify-content-center'>
-                    <div class="col-2">
-                        <div class='row mt-2 justify-content-center'>
-                            <p><FaBiking class='result-icon' /> {bikeCount} Bike Trails</p>
+                </div>
+                <div class='row mt-5 justify-content-center'>
+                    <div class="col-3">
+                        <div class='row mt-3 justify-content-center'>
+                            <p><FaBiking class='result-icon' />  {bikeCount} Bike Trails</p>
                         </div>
-                        <div class='row mt-2 justify-content-center'>
-                            <p><FaUtensils class='result-icon' /> {restaurantCount} Restaurants</p>
+                        <div class='row mt-3 justify-content-center'>
+                            <p><FaUtensils class='result-icon' />  {restaurantCount} Restaurants</p>
                         </div>
-                        <div class='row mt-2 justify-content-center'>
-                            <p><FaGraduationCap class='result-icon' /> {schoolCount} Schools</p>
-                        </div>
-                    </div>
-
-                    <div class="col-2">
-                        <div class='row mt-2 justify-content-center'>
-                            <p><FaBus class='result-icon' /> {busCount} Bus Stops</p>
-                        </div>
-                        <div class='row mt-2 justify-content-center'>
-                            <p><FaDollarSign class='result-icon' /> {atmCount} ATMs</p>
-                        </div>
-                        <div class='row mt-2 justify-content-center'>
-                            <p><FaShoppingCart class='result-icon' /> {supermarketCount} Supermarkets</p>
+                        <div class='row mt-3 justify-content-center'>
+                            <p><FaGraduationCap class='result-icon' />  {schoolCount} Schools</p>
                         </div>
                     </div>
 
-                    <div class="col-2">
-                        <div class='row mt-2 justify-content-center'>
-                            <p><FaCloudSun class='result-icon' /> {parkCount} Parks</p>
+                    <div class="col-3">
+                        <div class='row mt-3 justify-content-center'>
+                            <p><FaBus class='result-icon' />  {busCount} Bus Stops</p>
                         </div>
-                        <div class='row mt-2 justify-content-center'>
-                            <p><FaDumbbell class='result-icon' /> {gymCount} Gyms</p>
+                        <div class='row mt-3 justify-content-center'>
+                            <p><FaDollarSign class='result-icon' />  {atmCount} ATMs</p>
                         </div>
-                        <div class='row mt-2 justify-content-center'>
-                            <p><FaHospital class='result-icon' /> {hospitalCount} Hospitals</p>
+                        <div class='row mt-3 justify-content-center'>
+                            <p><FaShoppingCart class='result-icon' />  {supermarketCount} Supermarkets</p>
+                        </div>
+                    </div>
+
+                    <div class="col-3">
+                        <div class='row mt-3 justify-content-center'>
+                            <p><FaCloudSun class='result-icon' />  {parkCount} Parks</p>
+                        </div>
+                        <div class='row mt-3 justify-content-center'>
+                            <p><FaDumbbell class='result-icon' />  {gymCount} Gyms</p>
+                        </div>
+                        <div class='row mt-3 justify-content-center'>
+                            <p><FaHospital class='result-icon' />  {hospitalCount} Hospitals</p>
                         </div>
                     </div>
                 </div>
                 <div class='row justify-content-center'>
-                    <div class='col-2'>
-                        <div class='row mt-2 justify-content-center'>
-                            <p><FaHiking class='result-icon' /> {hikeCount} Hike Trails</p>
+                    <div class='col-3'>
+                        <div class='row mt-3 justify-content-center'>
+                            <p><FaHiking class='result-icon' />  {hikeCount} Hike Trails</p>
                         </div>
                     </div>
                     {arrestHTML}
@@ -127,11 +221,13 @@ function ResultPage() {
                         <Button variant="success btn-lg rounded-pill" >Check Another Location</Button>
                     </Link>
                 </div>
+
+                {safetyNote}
             </div>
 
 
-            <div class="row">
-                <Image class='img-responsive mx-auto'
+            <div class="row  mt-5">
+                <Image class='mt-auto mx-auto'
                     src={skyline} />
             </div>
 

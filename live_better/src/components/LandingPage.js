@@ -38,13 +38,22 @@ function LandingPage() {
                             <div class='cointainer-fluid'>
                                 <div class='row mt-3 justify-content-center'>
                                     <div class='col-4 my-auto'>
-                                        <h1 className="heading">Live <span class='text-success'>B</span>etter</h1>
-                                        <h3 className="line">Check the livability score for your location</h3>
-                                        <Link to="/login"><Button variant="success mr-3" >Login</Button></Link>
-                                        <Link to="/signup"><Button variant="success" className="signup-button">Signup</Button></Link>
-
+                                        <div class="row m-2">
+                                            <h1 className="heading">Live <span class='text-success'>B</span>etter</h1>
+                                        </div>
+                                        <div class="row m-2">
+                                            <h3 className="line">Check the livability score for your location</h3>
+                                        </div>
+                                        <div class="row m-2">
+                                            <div class='col'>
+                                                <Link to="/login"><Button variant="success btn-block" >Login</Button></Link>
+                                            </div>
+                                            <div class='col'>
+                                                <Link to="/signup"><Button variant="success btn-block" className="signup-button">Signup</Button></Link>
+                                            </div>
+                                        </div>
                                     </div>
-                                    
+
                                     <div class='col-4'>
                                         <Image class='img-responsive'
                                             src={livebetterlogo} />
@@ -67,7 +76,7 @@ function LandingPage() {
                                 </div>
 
                             </div>
-                            
+
                             <div class='row mt-5 justify-content-center'>
                                 <div class="col-6 d-flex ">
                                     <Image class='img-responsive mx-auto'
@@ -75,8 +84,8 @@ function LandingPage() {
                                 </div>
                             </div>
 
-                            <div class="row">
-                                <Image class='img-responsive mx-auto'
+                            <div class="row mt-5">
+                                <Image class='mt-auto mx-auto'
                                     src={skyline} />
                             </div>
                         </div>

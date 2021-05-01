@@ -103,8 +103,8 @@ function SignupPage() {
 
             </div>
 
-            <div class="row">
-                <Image class='img-responsive mx-auto'
+            <div class="row  mt-5">
+                <Image class='mt-auto mx-auto'
                     src={skyline} />
             </div>
 
