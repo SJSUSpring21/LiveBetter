@@ -1,6 +1,6 @@
 import React from 'react';
 import { useHistory, Link } from 'react-router-dom';
-import { Navbar, Nav, Button, NavDropdown, Image } from 'react-bootstrap';
+import { Navbar, Nav, Button, NavDropdown, Image, ProgressBar } from 'react-bootstrap';
 import { render } from '@testing-library/react';
 import { useState, useEffect } from 'react';
 import skyline from '../components/images/skyline.png';
@@ -47,6 +47,20 @@ function ResultPage() {
 
     const [isLoading, setLoading] = useState(true);
 
+    const [safety, setSafety] = useState(0);
+    const [atm, setAtm] = useState(0);
+    const [bike, setBike] = useState(0);
+    const [bus, setBus] = useState(0);
+    const [gym, setGym] = useState(0);
+    const [hike, setHike] = useState(0);
+    const [hospital, setHospital] = useState(0);
+    const [restaurant, setRestaurant] = useState(0);
+    const [supermarket, setSupermarket] = useState(0);
+    const [school, setSchool] = useState(0);
+    const [park, setPark] = useState(0);
+
+    const [barColor, setColor] = useState("success");
+
     // Only shows Arrest count for Chicago Database
     if (safetyCount) {
         arrestHTML = <div class='col-3'>
@@ -70,7 +84,7 @@ function ResultPage() {
             supermarketScore + parkScore + gymScore + hospitalScore + hikeTrailScore + bikeTrailScore;
 
         // All Weights set to, make all weights equal as default
-        if (totalScore == 0) {
+        if (totalScore === 0) {
             safetyScore = 10;
             restaurantScore = 10;
             schoolScore = 10;
@@ -84,7 +98,7 @@ function ResultPage() {
             bikeTrailScore = 10;
 
             totalScore = 110;
-        } 
+        }
 
         var arrestCount = safetyCount;
         // Don't take into consideration the safety score
@@ -94,15 +108,22 @@ function ResultPage() {
             arrestCount = 0;
 
             // This line prevents a division by 0
-            if(totalScore == 0){
+            if (totalScore === 0) {
                 totalScore = 1;
             }
         }
 
+        // ******* Set Weights ******************
+        // Changing the number you divide by changes the max value
+        // for the particular feature
+        // e.g bikeWeight = bikeCount / 5.0
+        // The above means 5 or more bike trails will give a max score
+        // for that features
         var safeWeight = arrestCount / 100.0;
         if (safeWeight >= 1) { safeWeight = 1.0; }
+
         //invert arrest count since more arrest is negative
-        safeWeight = (1 - safeWeight); 
+        safeWeight = (1 - safeWeight);
 
         var atmWeight = atmCount / 20.0;
 
@@ -145,6 +166,27 @@ function ResultPage() {
             safetyScore / totalScore * safeWeight;
 
         score = Math.round(score * 100);
+
+        if(score <= 50){
+            setColor("danger");
+        } else if(score <= 75){
+            setColor("warning");
+        }
+
+        // Sets the point value for each individual variable
+        // Might be able to do a breakdown of score?
+        setSafety(Math.round(safetyScore / totalScore * safeWeight * 100));
+        setAtm(Math.round(atmScore / totalScore * atmWeight * 100));
+        setBike(Math.round(bikeTrailScore / totalScore * bikeWeight * 100));
+        setBus(Math.round(busstationScore / totalScore * busWeight * 100));
+        setGym(Math.round(gymScore / totalScore * gymWeight * 100));
+        setHike(Math.round(hikeTrailScore / totalScore * hikeWeight * 100));
+        setHospital(Math.round(hospitalScore / totalScore * hospitalWeight * 100));
+        setRestaurant(Math.round(restaurantScore / totalScore * restaurantWeight * 100));
+        setSupermarket(Math.round(supermarketScore / totalScore * supermarketWeight * 100));
+        setSchool(Math.round(schoolScore / totalScore * schoolWeight * 100));
+        setPark(Math.round(parkScore / totalScore * parkWeight * 100));
+
         setScore(score);
         setLoading(false);
     }, []);
@@ -173,6 +215,12 @@ function ResultPage() {
                     <h1>Location Score</h1>
                 </div>
                 <div class='row justify-content-center'><h1 className="heading">{livabilityScore}</h1></div>
+                <div class='row justify-content-center'>
+                    <div class='col-8'>
+                        <ProgressBar variant={barColor} now={livabilityScore} />
+                    </div>
+
+                </div>
                 <div class='row mt-5 justify-content-center'>
                 </div>
                 <div class='row mt-5 justify-content-center'>
@@ -230,6 +278,10 @@ function ResultPage() {
                 {safetyNote}
             </div>
 
+            <div class="row  m-5">
+                <Image class='img-responsive mx-auto'
+                    src={globephoto} />
+            </div>
 
             <div class="row  mt-5">
                 <Image class='mt-auto mx-auto'
