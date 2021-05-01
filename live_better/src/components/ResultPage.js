@@ -84,14 +84,19 @@ function ResultPage() {
             bikeTrailScore = 10;
 
             totalScore = 110;
-        }
+        } 
 
         var arrestCount = safetyCount;
         // Don't take into consideration the safety score
         if (!arrestCount) {
             totalScore -= safetyScore;
             safetyScore = 0;
-            arrestCount = 0
+            arrestCount = 0;
+
+            // This line prevents a division by 0
+            if(totalScore == 0){
+                totalScore = 1;
+            }
         }
 
         var safeWeight = arrestCount / 100.0;

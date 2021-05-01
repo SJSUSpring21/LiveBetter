@@ -96,3 +96,9 @@ body, html {
 .result-icon {
   font-size: x-large;
 }
+
+.img-footer {
+  position: relative;
+  left: 0;
+  bottom: 0;
+}
