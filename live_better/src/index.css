@@ -74,3 +74,18 @@ height: 100vh;
 
 }
 
+.rrow1{
+  height: 0vh;
+}
+
+.loading-row1{
+  height: 40vh;
+}
+
+.history-page{
+  height: 100vh;
+}
+
+.history-row{
+  height: 10vh;
+}

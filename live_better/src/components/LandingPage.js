@@ -5,12 +5,13 @@ import LoginPage from './LoginPage';
 import PortalPage from './PortalPage';
 import SignupPage from './SignupPage';
 import ResultPage from './ResultPage';
+import HistoryPage from './HistoryPage';
 import '../index.css';
 import livebetterlogo from '../components/images/new.svg';
 import aboutphoto from './images/second.svg';
 
 function LandingPage() {
-    //landing page function
+
 
     return (
         <div>
@@ -19,7 +20,9 @@ function LandingPage() {
                     <Route exact path="/">
                     <div className="main-section">
                         <Navbar bg="light" variant="light">
-                            <Navbar.Brand className="logo">LiveBetter</Navbar.Brand>
+                            <Navbar.Brand className="logo" href="/">
+                                Live<span class='text-success'>B</span>etter
+                            </Navbar.Brand>
                             <Nav className="mr-auto"></Nav>
 
                             <Nav className="ml-auto">
@@ -86,6 +89,10 @@ function LandingPage() {
 
                     <Route exact path="/result">
                         <ResultPage />
+                    </Route>
+
+                    <Route  path="/history">
+                        <HistoryPage />
                     </Route>
                     
                 </Switch>

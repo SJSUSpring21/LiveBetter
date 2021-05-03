@@ -1,5 +1,6 @@
 import React from 'react';
 import {Navbar,Nav,Button, Row, Col, Image, NavDropdown, Form, Modal} from 'react-bootstrap/esm';
+import {Link} from 'react-router-dom';
 import globephoto from './images/third.svg'
 import '../index.css';
 import {useState} from 'react';
@@ -11,12 +12,15 @@ import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
 import { makeStyles } from '@material-ui/core/styles';
 import {useHistory} from 'react-router-dom';
+import { createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles';
 
   
 
 function PortalPage() {
     const history = useHistory();
     const [address, setAdderess] = useState("");
+    const[formattedAddress, setFormattedAddress] = useState("");
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -26,6 +30,8 @@ function PortalPage() {
     const handleSelect= async (value)=>{
         const results = await geocodeByAddress(value);
         console.log(results);
+        console.log(results[0].formatted_address);
+        setFormattedAddress(results[0].formatted_address);
         const latLng = await getLatLng(results[0]);
         console.log(latLng);
         setAdderess(value);
@@ -101,19 +107,85 @@ function PortalPage() {
     }
 
     const getResults = ()=>{
-        history.push('/result');
+        history.push({
+            pathname:'/result',
+            state:{
+                safetyScore:safetyScore,
+                restaurantScore: restaurantScore,
+                schoolScore: schoolScore,
+                busstationScore: busstationScore,
+                atmScore: atmScore,
+                supermarketScore: supermarketScore,
+                parkScore:parkScore,
+                gymScore:gymScore,
+                hospitalScore: hospitalScore,
+                hikeTrailScore: hikeTrailScore,
+                bikeTrailScore: bikeTrailScore,
+                lat:coordinates.lat,
+                lng:coordinates.lng,
+                formattedAddress: formattedAddress
+            }
+        });
     }
+    // Slider changes
+    const marks = [
+        { value: 0, label: '0' },
+        { value: 1, label: '' },
+        { value: 2, label: '' },
+        { value: 3, label: '' },
+        { value: 4, label: '' },
+        { value: 5, label: '5' },
+        { value: 6, label: '' },
+        { value: 7, label: '' },
+        { value: 8, label: '' },
+        { value: 9, label: '' },
+        { value: 10, label: '10' },
+
+    ]
+
+    const muiTheme = createMuiTheme({
+        overrides: {
+            MuiSlider: {
+                thumb: {
+                    height: 24,
+                    width: 24,
+                    marginTop: -8,
+                    marginLeft: -12,
+                    backgroundColor: '#fff',
+                    border: '2px solid green',
+                },
+                track: {
+                    color: '#32CD32',
+                    height: 8,
+                    borderRadius: 4,
+                },
+                rail: {
+                    color: 'grey',
+                    height: 8,
+                    borderRadius: 4,
+                },
+                valueLabel: {
+                    color: 'green',
+                    left: 'calc(-50% + 4px)',
+                },
+            }
+        }
+    });
 
     return (
         <div>
             <div className="portal-main">
             <Navbar bg="light" variant="light">
-                <Navbar.Brand className="logo">LiveBetter</Navbar.Brand>
+                <Navbar.Brand className="logo" href="/">
+                    Live<span class='text-success'>B</span>etter
+                </Navbar.Brand>
                 <Nav className="mr-auto"></Nav>
 
-                <Nav className="ml-auto">
+                <Nav className="ml-auto" variant="pills" >
+                    <Nav.Link active>Get Score</Nav.Link>
+                    <Nav.Link><Link to = "/history">My Search</Link></Nav.Link>
                     <NavDropdown title={localStorage.getItem('Name')} id="nav-dropdown">
-                        <NavDropdown.Item href="/">Logout</NavDropdown.Item>
+                        <NavDropdown.Item><Link to="/">Logout</Link></NavDropdown.Item>
                     </NavDropdown>
                 </Nav>
             </Navbar>
@@ -134,8 +206,7 @@ function PortalPage() {
                             {({ getInputProps, suggestions, getSuggestionItemProps, loading })=>{
                                 return(
                                 <div>
-                                    <p>Latitude:{coordinates.lat}</p>
-                                    <p>Longitude:{coordinates.lng}</p>
+                                    
                                     <Form.Control 
                                     {...getInputProps({placeholder:"Type Address"})}
                                     />
@@ -170,7 +241,7 @@ function PortalPage() {
                                                     onChange={safetyScoreFunction}
                                                     aria-labelledby="discrete-slider-small-steps"
                                                     step={1}
-                                                    marks
+                                                    marks = {marks}
                                                     min={0}
                                                     max={10}
                                                     valueLabelDisplay="auto"
@@ -182,18 +253,19 @@ function PortalPage() {
                                             <Typography id="discrete-slider-small-steps" gutterBottom>
                                                 Restaurant
                                             </Typography>
-                                                <Slider 
-                                                    defaultValue={0}
-                                                    value={restaurantScore}
-                                                    onChange={restaurantScoreFunction}
-                                                    aria-labelledby="discrete-slider-small-steps"
-                                                    step={1}
-                                                    marks
-                                                    min={0}
-                                                    max={10}
-                                                    valueLabelDisplay="auto"
-                                                />
-                                                
+                                                <ThemeProvider theme={muiTheme}>
+                                                    <Slider 
+                                                        defaultValue={0}
+                                                        value={restaurantScore}
+                                                        onChange={restaurantScoreFunction}
+                                                        aria-labelledby="discrete-slider-small-steps"
+                                                        step={1}
+                                                        marks = {marks}
+                                                        min={0}
+                                                        max={10}
+                                                        valueLabelDisplay="auto"
+                                                    />
+                                                </ThemeProvider>
                                         </div>
 
                                         <div>
@@ -206,7 +278,7 @@ function PortalPage() {
                                                 onChange={schoolScoreFunction}
                                                 aria-labelledby="discrete-slider-small-steps"
                                                 step={1}
-                                                marks
+                                                marks = {marks}
                                                 min={0}
                                                 max={10}
                                                 valueLabelDisplay="auto"
@@ -224,7 +296,7 @@ function PortalPage() {
                                                     onChange={busStationScoreFunction}
                                                     aria-labelledby="discrete-slider-small-steps"
                                                     step={1}
-                                                    marks
+                                                    marks = {marks}
                                                     min={0}
                                                     max={10}
                                                     valueLabelDisplay="auto"
@@ -242,7 +314,7 @@ function PortalPage() {
                                                     onChange={atmScoreFunction}
                                                     aria-labelledby="discrete-slider-small-steps"
                                                     step={1}
-                                                    marks
+                                                    marks = {marks}
                                                     min={0}
                                                     max={10}
                                                     valueLabelDisplay="auto"
@@ -260,7 +332,7 @@ function PortalPage() {
                                                     onChange={supermarketScoreFunction}
                                                     aria-labelledby="discrete-slider-small-steps"
                                                     step={1}
-                                                    marks
+                                                    marks = {marks}
                                                     min={0}
                                                     max={10}
                                                     valueLabelDisplay="auto"
@@ -278,7 +350,7 @@ function PortalPage() {
                                                     onChange={parkScoreFunction}
                                                     aria-labelledby="discrete-slider-small-steps"
                                                     step={1}
-                                                    marks
+                                                    marks = {marks}
                                                     min={0}
                                                     max={10}
                                                     valueLabelDisplay="auto"
@@ -296,7 +368,7 @@ function PortalPage() {
                                                     onChange={gymScoreFunction}
                                                     aria-labelledby="discrete-slider-small-steps"
                                                     step={1}
-                                                    marks
+                                                    marks = {marks}
                                                     min={0}
                                                     max={10}
                                                     valueLabelDisplay="auto"
@@ -314,7 +386,7 @@ function PortalPage() {
                                                     onChange={hospitalScoreFunction}
                                                     aria-labelledby="discrete-slider-small-steps"
                                                     step={1}
-                                                    marks
+                                                    marks = {marks}
                                                     min={0}
                                                     max={10}
                                                     valueLabelDisplay="auto"
@@ -332,7 +404,7 @@ function PortalPage() {
                                                     onChange={hikeTrailScoreFunction}
                                                     aria-labelledby="discrete-slider-small-steps"
                                                     step={1}
-                                                    marks
+                                                    marks = {marks}
                                                     min={0}
                                                     max={10}
                                                     valueLabelDisplay="auto"
@@ -350,7 +422,7 @@ function PortalPage() {
                                                     onChange={bikeTrailScoreFunction}
                                                     aria-labelledby="discrete-slider-small-steps"
                                                     step={1}
-                                                    marks
+                                                    marks = {marks}
                                                     min={0}
                                                     max={10}
                                                     valueLabelDisplay="auto"
