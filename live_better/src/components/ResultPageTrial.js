@@ -231,16 +231,16 @@ function ResultPageTrial() {
             safetyScore = 10;
             restaurantScore = 10;
             schoolScore = 10;
-            busstationScore = 10;
-            atmScore = 10;
-            supermarketScore = 10;
-            parkScore = 10;
-            gymScore = 10;
-            hospitalScore = 10;
-            hikeTrailScore = 10;
-            bikeTrailScore = 10;
+            busstationScore = 0;
+            atmScore = 0;
+            supermarketScore = 0;
+            parkScore = 0;
+            gymScore = 0;
+            hospitalScore = 0;
+            hikeTrailScore = 0;
+            bikeTrailScore = 0;
 
-            totalScore = 110;
+            totalScore = 30;
         }
 
         var arrestCount = safetyCount;

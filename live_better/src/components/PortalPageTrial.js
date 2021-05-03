@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navbar, Nav, Button, Row, Col, Image, NavDropdown, Form, Modal } from 'react-bootstrap/esm';
+import { Navbar, Nav, Button, Row, Col, Image, Form, Modal } from 'react-bootstrap/esm';
 import globephoto from './images/third.svg'
 import '../index.css';
 import { useState } from 'react';

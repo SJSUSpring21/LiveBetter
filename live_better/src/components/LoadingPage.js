@@ -1,6 +1,6 @@
 import React from 'react';
-import { useHistory, Link } from 'react-router-dom';
-import { Navbar, Nav, Button, NavDropdown, Image } from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
+import { Navbar, Nav,  NavDropdown } from 'react-bootstrap';
 import axios from 'axios';
 import { useEffect } from 'react';
 import Spinner from 'react-bootstrap/Spinner';

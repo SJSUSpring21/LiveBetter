@@ -31,7 +31,6 @@ function SignupPage() {
             })
     }
 
-
     return (
         <div class='main-section'>
             <Navbar bg="light" variant="light sticky-top">

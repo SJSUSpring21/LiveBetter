@@ -1,6 +1,6 @@
 import React from 'react';
-import { useHistory, Link } from 'react-router-dom';
-import { Navbar, Nav, Button, NavDropdown, Image } from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
+import { Navbar, Nav } from 'react-bootstrap';
 import axios from 'axios';
 import { useEffect } from 'react';
 import Spinner from 'react-bootstrap/Spinner';
@@ -146,7 +146,7 @@ function LoadingPageTrial() {
             <footer id="footer" class='py-3 bg-dark text-white text-center'>
                 <div>
                     Group 12 - Live<span class='text-success'>B</span>etter
-                                </div>
+                </div>
             </footer>
         </div>
     )
