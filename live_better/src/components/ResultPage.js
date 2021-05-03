@@ -1,14 +1,17 @@
 import React from 'react';
 import { useHistory, Link } from 'react-router-dom';
-import { Navbar, Nav, Button, NavDropdown, Image, ProgressBar } from 'react-bootstrap';
+import { Navbar, Nav, Button, NavDropdown, ProgressBar } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import {
     FaVoicemail, FaGraduationCap, FaBiking, FaShoppingCart,
     FaBus, FaDollarSign, FaHiking, FaHospital, FaDumbbell,
     FaUtensils, FaCloudSun
 } from 'react-icons/fa';
+import { createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles';
+import Slider from '@material-ui/core/Slider';
+import Typography from '@material-ui/core/Typography';
 
-//class ResultPage extends React.Component{
 function ResultPage() {
 
     var history = useHistory();
@@ -17,18 +20,64 @@ function ResultPage() {
     var lat = history.location.state.lat;
     var lng = history.location.state.lng;
 
-    // User weights
-    var safetyScore = history.location.state.safetyScore;
-    var restaurantScore = history.location.state.restaurantScore;
-    var schoolScore = history.location.state.schoolScore;
-    var busstationScore = history.location.state.busstationScore;
-    var atmScore = history.location.state.atmScore;
-    var supermarketScore = history.location.state.supermarketScore;
-    var parkScore = history.location.state.parkScore;
-    var gymScore = history.location.state.gymScore;
-    var hospitalScore = history.location.state.hospitalScore;
-    var hikeTrailScore = history.location.state.hikeTrailScore;
-    var bikeTrailScore = history.location.state.bikeTrailScore;
+    //******************* User weights *******************
+    const [userSafety, setUserSafety] = useState(history.location.state.safetyScore);
+    const [userRestaurant, setUserRestaurant] = useState(history.location.state.restaurantScore);
+    const [userSchool, setUserSchool] = useState(history.location.state.schoolScore);
+    const [userBus, setUserBus] = useState(history.location.state.busstationScore);
+    const [userAtm, setUserAtm] = useState(history.location.state.atmScore);
+    const [userSupermarket, setUserSupermarket] = useState(history.location.state.supermarketScore);
+    const [userPark, setUserPark] = useState(history.location.state.parkScore);
+    const [userGym, setUserGym] = useState(history.location.state.gymScore);
+    const [userHospital, setUserHospital] = useState(history.location.state.hospitalScore);
+    const [userHike, setUserHike] = useState(history.location.state.hikeTrailScore);
+    const [userBike, setUserBike] = useState(history.location.state.bikeTrailScore);
+
+    const safetyScoreFunction = (event, newValue) => {
+        console.log("Setting score to", newValue);
+        setUserSafety(newValue);
+    }
+
+    const restaurantScoreFunction = (event, newValue) => {
+        setUserRestaurant(newValue);
+    }
+    const schoolScoreFunction = (event, newValue) => {
+        setUserSchool(newValue);
+    }
+
+    const busStationScoreFunction = (event, newValue) => {
+        setUserBus(newValue);
+    }
+
+    const atmScoreFunction = (event, newValue) => {
+        setUserAtm(newValue);
+    }
+
+    const supermarketScoreFunction = (event, newValue) => {
+        setUserSupermarket(newValue);
+    }
+
+    const parkScoreFunction = (event, newValue) => {
+        setUserPark(newValue);
+    }
+
+    const gymScoreFunction = (event, newValue) => {
+        setUserGym(newValue);
+    }
+
+    const hospitalScoreFunction = (event, newValue) => {
+        setUserHospital(newValue);
+    }
+
+    const hikeTrailScoreFunction = (event, newValue) => {
+        setUserHike(newValue);
+    }
+
+    const bikeTrailScoreFunction = (event, newValue) => {
+        setUserBike(newValue);
+    }
+
+    // **************** End ofUser Weights *****************************
 
     // Counts from Database or Google
     var safetyCount = history.location.state.query.Arrest_Count;
@@ -48,6 +97,7 @@ function ResultPage() {
 
     // Changed if arrest data not available
     var safetyNote = <div></div>
+    var arrestSliderHTML = <div></div>
 
     // change to false at the end of useEffect()
     const [isLoading, setLoading] = useState(true);
@@ -71,6 +121,53 @@ function ResultPage() {
     // Final Score
     const [livabilityScore, setScore] = useState(0);
 
+    // **** Theme For Slider *****
+    const marks = [
+        { value: 0, label: '0' },
+        { value: 1, label: '' },
+        { value: 2, label: '' },
+        { value: 3, label: '' },
+        { value: 4, label: '' },
+        { value: 5, label: '5' },
+        { value: 6, label: '' },
+        { value: 7, label: '' },
+        { value: 8, label: '' },
+        { value: 9, label: '' },
+        { value: 10, label: '10' },
+
+    ]
+
+    const muiTheme = createMuiTheme({
+        overrides: {
+            MuiSlider: {
+                thumb: {
+                    height: 24,
+                    width: 24,
+                    marginTop: -8,
+                    marginLeft: -12,
+                    backgroundColor: '#fff',
+                    border: '2px solid green',
+                },
+                track: {
+                    color: '#32CD32',
+                    height: 8,
+                    borderRadius: 4,
+                },
+                rail: {
+                    color: 'grey',
+                    height: 8,
+                    borderRadius: 4,
+                },
+                valueLabel: {
+                    color: 'green',
+                    left: 'calc(-50% + 4px)',
+                },
+            }
+        }
+    });
+
+    // **** End Theme For Slider *****
+
     // Only shows Arrest count for Chicago Database
     if (safetyCount) {
         arrestHTML = <div class='col-3'>
@@ -78,6 +175,27 @@ function ResultPage() {
                 <p><FaVoicemail class='result-icon' />  {safetyCount} Arrests</p>
             </div>
         </div>
+
+        // Only Show Arest Slider if data is available
+        arrestSliderHTML = <div class='row justify-content-center'>
+            <div class='col-4'>
+                <ThemeProvider theme={muiTheme}>
+                    <Typography id="discrete-slider">
+                        Safety
+        </Typography>
+                    <Slider
+                        defaultValue={userSafety}
+                        aria-labelledby="discrete-slider-small-steps"
+                        marks={marks}
+                        min={0}
+                        max={10}
+                        valueLabelDisplay="auto"
+                        onChange={safetyScoreFunction}
+                    />
+                </ThemeProvider>
+            </div>
+        </div>
+
     } else {
         safetyNote = <div class='row mt-5 justify-content-center'>
             <div class='col-6  alert alert-danger' role='alert'>
@@ -85,9 +203,24 @@ function ResultPage() {
                 Your location score was calculated without considering crime statistics.
             </div>
         </div>
+
     }
 
     useEffect(() => {
+
+        // User weights
+        var safetyScore = userSafety;
+        var restaurantScore = userRestaurant
+        var schoolScore = userSchool;
+        var busstationScore = userBus;
+        var atmScore = userAtm;
+        var supermarketScore = userSupermarket;
+        var parkScore = userPark;
+        var gymScore = userGym;
+        var hospitalScore = userHospital;
+        var hikeTrailScore = userHike;
+        var bikeTrailScore = userBike;
+
         // Calculate Total Weights User Inputs
         var totalScore = restaurantScore + schoolScore + busstationScore + atmScore + safetyScore +
             supermarketScore + parkScore + gymScore + hospitalScore + hikeTrailScore + bikeTrailScore;
@@ -183,12 +316,13 @@ function ResultPage() {
         score = score * 10;
         setScore(score.toFixed(1));
 
-
         // Changes color of progress bar
         if (score <= 5) {
             setColor("danger");
         } else if (score <= 7.5) {
             setColor("warning");
+        } else {
+            setColor("success");
         }
 
         // ************** Individual Scores for each Feautre
@@ -205,10 +339,11 @@ function ResultPage() {
         setSupermarket(Math.round(supermarketScore / totalScore * supermarketWeight * 10));
         setSchool(Math.round(schoolScore / totalScore * schoolWeight * 10));
         setPark(Math.round(parkScore / totalScore * parkWeight * 10));
-
-
         setLoading(false);
-    }, []);
+        console.log('Recalculated Location Score.');
+    });
+
+
 
     if (isLoading) {
         return (<div>Loading...</div>)
@@ -295,6 +430,143 @@ function ResultPage() {
                 </div>
 
                 {safetyNote}
+                <div class='row mt-5 justify-content-center'>
+                    <h2>Try out different parameters!</h2>
+                </div>
+                <div class='row mt-1 justify-content-center'>
+                    <div class='col-4'>
+                        <ThemeProvider theme={muiTheme}>
+                            <Typography id="discrete-slider">
+                                Restaurants
+                            </Typography>
+                            <Slider
+                                defaultValue={userRestaurant}
+                                aria-labelledby="discrete-slider-small-steps"
+                                marks={marks}
+                                min={0}
+                                max={10}
+                                valueLabelDisplay="auto"
+                                onChange={restaurantScoreFunction}
+                            />
+                            <Typography id="discrete-slider">
+                                Schools
+                            </Typography>
+                            <Slider
+                                defaultValue={userSchool}
+                                aria-labelledby="discrete-slider-small-steps"
+                                marks={marks}
+                                min={0}
+                                max={10}
+                                valueLabelDisplay="auto"
+                                onChange={schoolScoreFunction}
+                            />
+                            <Typography id="discrete-slider">
+                                Bus Stations
+                            </Typography>
+                            <Slider
+                                defaultValue={userBus}
+                                aria-labelledby="discrete-slider-small-steps"
+                                marks={marks}
+                                min={0}
+                                max={10}
+                                valueLabelDisplay="auto"
+                                onChange={busStationScoreFunction}
+                            />
+                            <Typography id="discrete-slider">
+                                ATMs
+                            </Typography>
+                            <Slider
+                                defaultValue={userAtm}
+                                aria-labelledby="discrete-slider-small-steps"
+                                marks={marks}
+                                min={0}
+                                max={10}
+                                valueLabelDisplay="auto"
+                                onChange={atmScoreFunction}
+                            />
+                            <Typography id="discrete-slider">
+                                Bike Trails
+                            </Typography>
+                            <Slider
+                                defaultValue={userBike}
+                                aria-labelledby="discrete-slider-small-steps"
+                                marks={marks}
+                                min={0}
+                                max={10}
+                                valueLabelDisplay="auto"
+                                onChange={bikeTrailScoreFunction}
+                            />
+                        </ThemeProvider>
+                    </div>
+                    <div class='col-1'></div>
+                    <div class='col-4'>
+                        <ThemeProvider theme={muiTheme}>
+
+                            <Typography id="discrete-slider">
+                                Supermarkets
+                            </Typography>
+                            <Slider
+                                defaultValue={userSupermarket}
+                                aria-labelledby="discrete-slider-small-steps"
+                                marks={marks}
+                                min={0}
+                                max={10}
+                                valueLabelDisplay="auto"
+                                onChange={supermarketScoreFunction}
+                            />
+                            <Typography id="discrete-slider">
+                                Parks
+                            </Typography>
+                            <Slider
+                                defaultValue={userPark}
+                                aria-labelledby="discrete-slider-small-steps"
+                                marks={marks}
+                                min={0}
+                                max={10}
+                                valueLabelDisplay="auto"
+                                onChange={parkScoreFunction}
+                            />
+                            <Typography id="discrete-slider">
+                                Gyms
+                            </Typography>
+                            <Slider
+                                defaultValue={userGym}
+                                aria-labelledby="discrete-slider-small-steps"
+                                marks={marks}
+                                min={0}
+                                max={10}
+                                valueLabelDisplay="auto"
+                                onChange={gymScoreFunction}
+                            />
+                            <Typography id="discrete-slider">
+                                Hospitals
+                            </Typography>
+                            <Slider
+                                defaultValue={userHospital}
+                                aria-labelledby="discrete-slider-small-steps"
+                                marks={marks}
+                                min={0}
+                                max={10}
+                                valueLabelDisplay="auto"
+                                onChange={hospitalScoreFunction}
+                            />
+                            <Typography id="discrete-slider">
+                                Hike Trails
+                            </Typography>
+                            <Slider
+                                defaultValue={userHike}
+                                aria-labelledby="discrete-slider-small-steps"
+                                marks={marks}
+                                min={0}
+                                max={10}
+                                valueLabelDisplay="auto"
+                                onChange={hikeTrailScoreFunction}
+                            />
+
+                        </ThemeProvider>
+                    </div>
+                </div>
+                {arrestSliderHTML}
             </div>
 
             <footer id="footer" class='py-3 bg-dark text-white text-center'>
