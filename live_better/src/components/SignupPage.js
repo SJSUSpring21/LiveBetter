@@ -3,8 +3,6 @@ import { useState } from 'react';
 import { Form, Button, Navbar, Nav, Image } from 'react-bootstrap';
 import axios from 'axios';
 import { useHistory, Link } from 'react-router-dom';
-import skyline from '../components/images/skyline.png';
-import aboutphoto from './images/second.svg';
 
 function SignupPage() {
 
@@ -48,7 +46,7 @@ function SignupPage() {
             </Navbar>
             <div class='container-fluid'>
                 <div class='row m-3 justify-content-center'>
-                    <h1 className="heading">Signup to Live<span class='text-success'>B</span>etter</h1>
+                    <h1 className="heading">Live<span class='text-success'>B</span>etter</h1>
                 </div>
                 <div class='row m-3 justify-content-center'>
                     <div class='col-3'>
@@ -94,20 +92,7 @@ function SignupPage() {
                 <div class='row justify-content-center'>
                     <p>Already have an account? <Link to='/login'>Login Here</Link></p>
                 </div>
-                <div class='row mt-5 justify-content-center'>
-                    <div class='col-6'>
-                        <Image class='img-responsive mx-auto'
-                            src={aboutphoto} />
-                    </div>
-                </div>
-
             </div>
-
-            <div class="row  mt-5">
-                <Image class='mt-auto mx-auto'
-                    src={skyline} />
-            </div>
-
         </div>
     )
 }

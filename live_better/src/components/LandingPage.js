@@ -22,8 +22,6 @@ function LandingPage() {
                 <Switch>
                     <Route exact path="/">
                         <div className="main-section">
-
-
                             <Navbar bg="light" variant="light sticky-top">
                                 <Navbar.Brand className="logo" href="/">
                                     Live<span class='text-success'>B</span>etter
@@ -78,15 +76,10 @@ function LandingPage() {
                             </div>
 
                             <div class='row mt-5 justify-content-center'>
-                                <div class="col-6 d-flex ">
+                                <div class="col-6">
                                     <Image class='img-responsive mx-auto'
                                         src={globephoto} />
                                 </div>
-                            </div>
-
-                            <div class="row mt-5">
-                                <Image class='mt-auto mx-auto'
-                                    src={skyline} />
                             </div>
                         </div>
                     </Route>

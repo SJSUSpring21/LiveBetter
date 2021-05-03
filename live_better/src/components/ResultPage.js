@@ -1,10 +1,7 @@
 import React from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import { Navbar, Nav, Button, NavDropdown, Image, ProgressBar } from 'react-bootstrap';
-import { render } from '@testing-library/react';
 import { useState, useEffect } from 'react';
-import skyline from '../components/images/skyline.png';
-import globephoto from './images/third.svg';
 import {
     FaVoicemail, FaGraduationCap, FaBiking, FaShoppingCart,
     FaBus, FaDollarSign, FaHiking, FaHospital, FaDumbbell,
@@ -183,33 +180,33 @@ function ResultPage() {
             bikeTrailScore / totalScore * bikeWeight +
             safetyScore / totalScore * safeWeight;
 
-        score = Math.round(score * 100);
-        setScore(score);
+        score = score * 10;
+        setScore(score.toFixed(1));
 
 
         // Changes color of progress bar
-        if(score <= 50){
+        if (score <= 5) {
             setColor("danger");
-        } else if(score <= 75){
+        } else if (score <= 7.5) {
             setColor("warning");
         }
 
         // ************** Individual Scores for each Feautre
         // Sets the point value for each individual variable
         // Might be able to do a breakdown of score?
-        setSafety(Math.round(safetyScore / totalScore * safeWeight * 100));
-        setAtm(Math.round(atmScore / totalScore * atmWeight * 100));
-        setBike(Math.round(bikeTrailScore / totalScore * bikeWeight * 100));
-        setBus(Math.round(busstationScore / totalScore * busWeight * 100));
-        setGym(Math.round(gymScore / totalScore * gymWeight * 100));
-        setHike(Math.round(hikeTrailScore / totalScore * hikeWeight * 100));
-        setHospital(Math.round(hospitalScore / totalScore * hospitalWeight * 100));
-        setRestaurant(Math.round(restaurantScore / totalScore * restaurantWeight * 100));
-        setSupermarket(Math.round(supermarketScore / totalScore * supermarketWeight * 100));
-        setSchool(Math.round(schoolScore / totalScore * schoolWeight * 100));
-        setPark(Math.round(parkScore / totalScore * parkWeight * 100));
+        setSafety(Math.round(safetyScore / totalScore * safeWeight * 10));
+        setAtm(Math.round(atmScore / totalScore * atmWeight * 10));
+        setBike(Math.round(bikeTrailScore / totalScore * bikeWeight * 10));
+        setBus(Math.round(busstationScore / totalScore * busWeight * 10));
+        setGym(Math.round(gymScore / totalScore * gymWeight * 10));
+        setHike(Math.round(hikeTrailScore / totalScore * hikeWeight * 10));
+        setHospital(Math.round(hospitalScore / totalScore * hospitalWeight * 10));
+        setRestaurant(Math.round(restaurantScore / totalScore * restaurantWeight * 10));
+        setSupermarket(Math.round(supermarketScore / totalScore * supermarketWeight * 10));
+        setSchool(Math.round(schoolScore / totalScore * schoolWeight * 10));
+        setPark(Math.round(parkScore / totalScore * parkWeight * 10));
 
-        
+
         setLoading(false);
     }, []);
 
@@ -218,7 +215,7 @@ function ResultPage() {
     }
 
     return (
-        <div class='main-section full-screen-div'>
+        <div class='main-section'>
             <Navbar bg="light" variant="light">
                 <Navbar.Brand className="logo" href="/">
                     Live<span class='text-success'>B</span>etter
@@ -239,7 +236,7 @@ function ResultPage() {
                 <div class='row justify-content-center'><h1 className="heading">{livabilityScore}</h1></div>
                 <div class='row justify-content-center'>
                     <div class='col-8'>
-                        <ProgressBar variant={barColor} now={livabilityScore} />
+                        <ProgressBar variant={barColor} now={livabilityScore * 10} />
                     </div>
 
                 </div>
@@ -300,15 +297,6 @@ function ResultPage() {
                 {safetyNote}
             </div>
 
-            <div class="row  m-5">
-                <Image class='img-responsive mx-auto'
-                    src={globephoto} />
-            </div>
-
-            <div class="row  mt-5">
-                <Image class='mt-auto mx-auto'
-                    src={skyline} />
-            </div>
 
         </div>
     )

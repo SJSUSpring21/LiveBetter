@@ -159,10 +159,6 @@ function LoadingPage() {
                 </div>
 
             </div>
-            <div class="row mt-5">
-                <Image class='mt-auto mx-auto'
-                    src={skyline} />
-            </div>
         </div>
     )
 

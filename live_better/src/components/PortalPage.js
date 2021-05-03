@@ -22,7 +22,6 @@ function PortalPage() {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-
     const [coordinates, setCoordinates] = useState({ lat: null, lng: null });
     const handleSelect = async (value) => {
         const results = await geocodeByAddress(value);
@@ -169,6 +168,7 @@ function PortalPage() {
         }
     });
 
+
     return (
         <div>
             <Navbar bg="light" variant="light sticky-top">
@@ -252,179 +252,190 @@ function PortalPage() {
                                                 <Typography id="discrete-slider-small-steps" gutterBottom>
                                                     Restaurant
                                             </Typography>
-                                                <Slider
-                                                    defaultValue={0}
-                                                    value={restaurantScore}
-                                                    onChange={restaurantScoreFunction}
-                                                    aria-labelledby="discrete-slider-small-steps"
-                                                    step={1}
-                                                    marks={marks}
-                                                    min={0}
-                                                    max={10}
-                                                    valueLabelDisplay="auto"
-                                                />
-
+                                                <ThemeProvider theme={muiTheme}>
+                                                    <Slider
+                                                        defaultValue={0}
+                                                        value={restaurantScore}
+                                                        onChange={restaurantScoreFunction}
+                                                        aria-labelledby="discrete-slider-small-steps"
+                                                        step={1}
+                                                        marks={marks}
+                                                        min={0}
+                                                        max={10}
+                                                        valueLabelDisplay="auto"
+                                                    />
+                                                </ThemeProvider>
                                             </div>
 
                                             <div>
                                                 <Typography id="discrete-slider-small-steps" gutterBottom>
                                                     School
                                             </Typography>
-                                                <Slider
-                                                    defaultValue={0}
-                                                    value={schoolScore}
-                                                    onChange={schoolScoreFunction}
-                                                    aria-labelledby="discrete-slider-small-steps"
-                                                    step={1}
-                                                    marks={marks}
-                                                    min={0}
-                                                    max={10}
-                                                    valueLabelDisplay="auto"
-                                                />
-
+                                                <ThemeProvider theme={muiTheme}>
+                                                    <Slider
+                                                        defaultValue={0}
+                                                        value={schoolScore}
+                                                        onChange={schoolScoreFunction}
+                                                        aria-labelledby="discrete-slider-small-steps"
+                                                        step={1}
+                                                        marks={marks}
+                                                        min={0}
+                                                        max={10}
+                                                        valueLabelDisplay="auto"
+                                                    />
+                                                </ThemeProvider>
                                             </div>
 
                                             <div>
                                                 <Typography id="discrete-slider-small-steps" gutterBottom>
                                                     Bus Station
                                             </Typography>
-                                                <Slider
-                                                    defaultValue={0}
-                                                    value={busstationScore}
-                                                    onChange={busStationScoreFunction}
-                                                    aria-labelledby="discrete-slider-small-steps"
-                                                    step={1}
-                                                    marks={marks}
-                                                    min={0}
-                                                    max={10}
-                                                    valueLabelDisplay="auto"
-                                                />
-
+                                                <ThemeProvider theme={muiTheme}>
+                                                    <Slider
+                                                        defaultValue={0}
+                                                        value={busstationScore}
+                                                        onChange={busStationScoreFunction}
+                                                        aria-labelledby="discrete-slider-small-steps"
+                                                        step={1}
+                                                        marks={marks}
+                                                        min={0}
+                                                        max={10}
+                                                        valueLabelDisplay="auto"
+                                                    />
+                                                </ThemeProvider>
                                             </div>
 
                                             <div>
                                                 <Typography id="discrete-slider-small-steps" gutterBottom>
                                                     ATM
                                             </Typography>
-                                                <Slider
-                                                    defaultValue={0}
-                                                    value={atmScore}
-                                                    onChange={atmScoreFunction}
-                                                    aria-labelledby="discrete-slider-small-steps"
-                                                    step={1}
-                                                    marks={marks}
-                                                    min={0}
-                                                    max={10}
-                                                    valueLabelDisplay="auto"
-                                                />
-
+                                                <ThemeProvider theme={muiTheme}>
+                                                    <Slider
+                                                        defaultValue={0}
+                                                        value={atmScore}
+                                                        onChange={atmScoreFunction}
+                                                        aria-labelledby="discrete-slider-small-steps"
+                                                        step={1}
+                                                        marks={marks}
+                                                        min={0}
+                                                        max={10}
+                                                        valueLabelDisplay="auto"
+                                                    />
+                                                </ThemeProvider>
                                             </div>
 
                                             <div>
                                                 <Typography id="discrete-slider-small-steps" gutterBottom>
                                                     SuperMarket
                                             </Typography>
-                                                <Slider
-                                                    defaultValue={0}
-                                                    value={supermarketScore}
-                                                    onChange={supermarketScoreFunction}
-                                                    aria-labelledby="discrete-slider-small-steps"
-                                                    step={1}
-                                                    marks={marks}
-                                                    min={0}
-                                                    max={10}
-                                                    valueLabelDisplay="auto"
-                                                />
-
+                                                <ThemeProvider theme={muiTheme}>
+                                                    <Slider
+                                                        defaultValue={0}
+                                                        value={supermarketScore}
+                                                        onChange={supermarketScoreFunction}
+                                                        aria-labelledby="discrete-slider-small-steps"
+                                                        step={1}
+                                                        marks={marks}
+                                                        min={0}
+                                                        max={10}
+                                                        valueLabelDisplay="auto"
+                                                    />
+                                                </ThemeProvider>
                                             </div>
 
                                             <div>
                                                 <Typography id="discrete-slider-small-steps" gutterBottom>
                                                     Park
                                             </Typography>
-                                                <Slider
-                                                    defaultValue={0}
-                                                    value={parkScore}
-                                                    onChange={parkScoreFunction}
-                                                    aria-labelledby="discrete-slider-small-steps"
-                                                    step={1}
-                                                    marks={marks}
-                                                    min={0}
-                                                    max={10}
-                                                    valueLabelDisplay="auto"
-                                                />
-
+                                                <ThemeProvider theme={muiTheme}>
+                                                    <Slider
+                                                        defaultValue={0}
+                                                        value={parkScore}
+                                                        onChange={parkScoreFunction}
+                                                        aria-labelledby="discrete-slider-small-steps"
+                                                        step={1}
+                                                        marks={marks}
+                                                        min={0}
+                                                        max={10}
+                                                        valueLabelDisplay="auto"
+                                                    />
+                                                </ThemeProvider>
                                             </div>
 
                                             <div>
                                                 <Typography id="discrete-slider-small-steps" gutterBottom>
                                                     Gym
                                             </Typography>
-                                                <Slider
-                                                    defaultValue={0}
-                                                    value={gymScore}
-                                                    onChange={gymScoreFunction}
-                                                    aria-labelledby="discrete-slider-small-steps"
-                                                    step={1}
-                                                    marks={marks}
-                                                    min={0}
-                                                    max={10}
-                                                    valueLabelDisplay="auto"
-                                                />
-
+                                                <ThemeProvider theme={muiTheme}>
+                                                    <Slider
+                                                        defaultValue={0}
+                                                        value={gymScore}
+                                                        onChange={gymScoreFunction}
+                                                        aria-labelledby="discrete-slider-small-steps"
+                                                        step={1}
+                                                        marks={marks}
+                                                        min={0}
+                                                        max={10}
+                                                        valueLabelDisplay="auto"
+                                                    />
+                                                </ThemeProvider>
                                             </div>
 
                                             <div>
                                                 <Typography id="discrete-slider-small-steps" gutterBottom>
                                                     Hospital
                                             </Typography>
-                                                <Slider
-                                                    defaultValue={0}
-                                                    value={hospitalScore}
-                                                    onChange={hospitalScoreFunction}
-                                                    aria-labelledby="discrete-slider-small-steps"
-                                                    step={1}
-                                                    marks={marks}
-                                                    min={0}
-                                                    max={10}
-                                                    valueLabelDisplay="auto"
-                                                />
-
+                                                <ThemeProvider theme={muiTheme}>
+                                                    <Slider
+                                                        defaultValue={0}
+                                                        value={hospitalScore}
+                                                        onChange={hospitalScoreFunction}
+                                                        aria-labelledby="discrete-slider-small-steps"
+                                                        step={1}
+                                                        marks={marks}
+                                                        min={0}
+                                                        max={10}
+                                                        valueLabelDisplay="auto"
+                                                    />
+                                                </ThemeProvider>
                                             </div>
 
                                             <div>
                                                 <Typography id="discrete-slider-small-steps" gutterBottom>
                                                     Hike Trail
                                             </Typography>
-                                                <Slider
-                                                    defaultValue={0}
-                                                    value={hikeTrailScore}
-                                                    onChange={hikeTrailScoreFunction}
-                                                    aria-labelledby="discrete-slider-small-steps"
-                                                    step={1}
-                                                    marks={marks}
-                                                    min={0}
-                                                    max={10}
-                                                    valueLabelDisplay="auto"
-                                                />
+                                                <ThemeProvider theme={muiTheme}>
+                                                    <Slider
+                                                        defaultValue={0}
+                                                        value={hikeTrailScore}
+                                                        onChange={hikeTrailScoreFunction}
+                                                        aria-labelledby="discrete-slider-small-steps"
+                                                        step={1}
+                                                        marks={marks}
+                                                        min={0}
+                                                        max={10}
+                                                        valueLabelDisplay="auto"
+                                                    />
+                                                </ThemeProvider>
                                             </div>
 
                                             <div>
                                                 <Typography id="discrete-slider-small-steps" gutterBottom>
                                                     Bike Trail
                                             </Typography>
-                                                <Slider
-                                                    defaultValue={0}
-                                                    value={bikeTrailScore}
-                                                    onChange={bikeTrailScoreFunction}
-                                                    aria-labelledby="discrete-slider-small-steps"
-                                                    step={1}
-                                                    marks={marks}
-                                                    min={0}
-                                                    max={10}
-                                                    valueLabelDisplay="auto"
-                                                />
-
+                                                <ThemeProvider theme={muiTheme}>
+                                                    <Slider
+                                                        defaultValue={0}
+                                                        value={bikeTrailScore}
+                                                        onChange={bikeTrailScoreFunction}
+                                                        aria-labelledby="discrete-slider-small-steps"
+                                                        step={1}
+                                                        marks={marks}
+                                                        min={0}
+                                                        max={10}
+                                                        valueLabelDisplay="auto"
+                                                    />
+                                                </ThemeProvider>
                                             </div>
                                         </div>
                                     </Modal.Body>
@@ -442,18 +453,13 @@ function PortalPage() {
                         </Row>
                     </Col>
                 </Row>
-
-                <div class='row mt-5'>
-                    <div class="col d-flex justify-content-center">
-                        <Image className="globeImage"
+                <div class='row mt-5 justify-content-center'>
+                    <div class="col-6">
+                        <Image class='img-responsive mx-auto'
                             src={globephoto} />
                     </div>
                 </div>
 
-                <div class="row  mt-5">
-                    <Image class='mt-auto mx-auto'
-                        src={skyline} />
-                </div>
 
             </div>
         </div>

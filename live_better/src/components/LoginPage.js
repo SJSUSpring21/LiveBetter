@@ -3,8 +3,6 @@ import { Form, Button, Navbar, Image } from 'react-bootstrap';
 import { useState } from 'react';
 import axios from 'axios';
 import { useHistory, Link } from 'react-router-dom';
-import livebetterlogo from '../components/images/new.svg';
-import skyline from '../components/images/skyline.png';
 
 function LoginPage() {
 
@@ -58,7 +56,7 @@ function LoginPage() {
 
             <div class="container-fluid">
                 <div class="row m-3 justify-content-center">
-                    <h1 className="heading">Login to Live<span class='text-success'>B</span>etter</h1>
+                    <h1 className="heading">Live<span class='text-success'>B</span>etter</h1>
                 </div>
 
                 <div class="row m-5 justify-content-center">
@@ -105,18 +103,6 @@ function LoginPage() {
 
             </div>
 
-            <div class='row mt-5 mb-5 justify-content-center'>
-                <div class='col-6'>
-                    <Image class='img-responsive mx-auto'
-                        src={livebetterlogo} />
-                </div>
-            </div>
-
-
-            <div class="row mt-5">
-                <Image class='mt-auto mx-auto'
-                    src={skyline} />
-            </div>
 
 
         </div>
