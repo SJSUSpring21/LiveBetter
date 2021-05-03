@@ -3,6 +3,7 @@ import { Navbar, Nav, Button, Row, Col, Image, NavDropdown, Form, Modal } from '
 import globephoto from './images/third.svg'
 import '../index.css';
 import { useState } from 'react';
+import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
@@ -13,7 +14,7 @@ import { ThemeProvider } from '@material-ui/styles';
 
 
 
-function PortalPage() {
+function PortalPageTrial() {
     const history = useHistory();
     const [address, setAdderess] = useState("");
     const [show, setShow] = useState(false);
@@ -102,7 +103,7 @@ function PortalPage() {
     const getResults = () => {
 
         history.push({
-            pathname: '/loading',
+            pathname: '/loading-trial',
             state: {
                 lat: coordinates.lat,
                 lng: coordinates.lng,
@@ -176,9 +177,7 @@ function PortalPage() {
                 <Nav className="mr-auto"></Nav>
 
                 <Nav className="ml-auto">
-                    <NavDropdown title={localStorage.getItem('Name')} id="nav-dropdown">
-                        <NavDropdown.Item href="/">Logout</NavDropdown.Item>
-                    </NavDropdown>
+                    <Nav.Link><Link to="/login">Login</Link></Nav.Link>
                 </Nav>
             </Navbar>
             <div id="content-wrap" className="portal-main">
@@ -299,6 +298,7 @@ function PortalPage() {
                                                         min={0}
                                                         max={10}
                                                         valueLabelDisplay="auto"
+                                                        disabled={true}
                                                     />
                                                 </ThemeProvider>
                                             </div>
@@ -318,6 +318,7 @@ function PortalPage() {
                                                         min={0}
                                                         max={10}
                                                         valueLabelDisplay="auto"
+                                                        disabled={true}
                                                     />
                                                 </ThemeProvider>
                                             </div>
@@ -337,6 +338,7 @@ function PortalPage() {
                                                         min={0}
                                                         max={10}
                                                         valueLabelDisplay="auto"
+                                                        disabled={true}
                                                     />
                                                 </ThemeProvider>
                                             </div>
@@ -356,6 +358,7 @@ function PortalPage() {
                                                         min={0}
                                                         max={10}
                                                         valueLabelDisplay="auto"
+                                                        disabled={true}
                                                     />
                                                 </ThemeProvider>
                                             </div>
@@ -375,6 +378,7 @@ function PortalPage() {
                                                         min={0}
                                                         max={10}
                                                         valueLabelDisplay="auto"
+                                                        disabled={true}
                                                     />
                                                 </ThemeProvider>
                                             </div>
@@ -394,6 +398,7 @@ function PortalPage() {
                                                         min={0}
                                                         max={10}
                                                         valueLabelDisplay="auto"
+                                                        disabled={true}
                                                     />
                                                 </ThemeProvider>
                                             </div>
@@ -413,6 +418,7 @@ function PortalPage() {
                                                         min={0}
                                                         max={10}
                                                         valueLabelDisplay="auto"
+                                                        disabled={true}
                                                     />
                                                 </ThemeProvider>
                                             </div>
@@ -432,6 +438,7 @@ function PortalPage() {
                                                         min={0}
                                                         max={10}
                                                         valueLabelDisplay="auto"
+                                                        disabled={true}
                                                     />
                                                 </ThemeProvider>
                                             </div>
@@ -470,4 +477,4 @@ function PortalPage() {
     )
 }
 
-export default PortalPage
+export default PortalPageTrial

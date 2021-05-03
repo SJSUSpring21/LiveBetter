@@ -99,3 +99,8 @@ body, html {
 #content-wrap {
   padding-bottom: 4rem;    /* Footer height */
 }
+
+#blur {
+  color: transparent;
+  text-shadow: 0 0 8px #000;
+}

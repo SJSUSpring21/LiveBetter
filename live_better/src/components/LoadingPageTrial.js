@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 import Spinner from 'react-bootstrap/Spinner';
 
 //class ResultPage extends React.Component{
-function LoadingPage() {
+function LoadingPageTrial() {
 
     var history = useHistory();
 
@@ -46,7 +46,7 @@ function LoadingPage() {
 
                                     // Go to Result Page
                                     history.push({
-                                        pathname: '/result',
+                                        pathname: '/result-trial',
                                         state: {
                                             lat: lat,
                                             lng: lng,
@@ -78,7 +78,7 @@ function LoadingPage() {
                         else {
                             // Go to Result Page
                             history.push({
-                                pathname: '/result',
+                                pathname: '/result-trial',
                                 state: {
                                     lat: lat,
                                     lng: lng,
@@ -131,11 +131,6 @@ function LoadingPage() {
                     </Navbar.Brand>
                 <Nav className="mr-auto"></Nav>
 
-                <Nav className="ml-auto">
-                    <NavDropdown title={localStorage.getItem('Name')} id="nav-dropdown">
-                        <NavDropdown.Item href="/">Logout</NavDropdown.Item>
-                    </NavDropdown>
-                </Nav>
             </Navbar>
             <div class='container'>
                 <div>
@@ -159,4 +154,4 @@ function LoadingPage() {
 
 }
 
-export default LoadingPage
+export default LoadingPageTrial

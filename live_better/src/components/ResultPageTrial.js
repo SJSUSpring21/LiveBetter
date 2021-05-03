@@ -12,7 +12,7 @@ import { ThemeProvider } from '@material-ui/styles';
 import Slider from '@material-ui/core/Slider';
 import Typography from '@material-ui/core/Typography';
 
-function ResultPage() {
+function ResultPageTrial() {
 
     var history = useHistory();
 
@@ -191,6 +191,7 @@ function ResultPage() {
                         max={10}
                         valueLabelDisplay="auto"
                         onChange={safetyScoreFunction}
+                        disabled={true}
                     />
                 </ThemeProvider>
             </div>
@@ -342,9 +343,7 @@ function ResultPage() {
         setLoading(false);
         console.log('Recalculated Location Score.');
     }, [userSafety, userRestaurant, userSchool, userBus, userAtm, userSupermarket,
-        userPark, userGym, userHospital, userHike, userBike, atmCount, bikeCount, busCount, 
-        gymCount, hikeCount, hospitalCount, parkCount, 
-        restaurantCount, safetyCount, schoolCount, supermarketCount
+        userPark, userGym, userHospital, userHike, userBike,
     ]);
 
 
@@ -362,15 +361,16 @@ function ResultPage() {
                 <Nav className="mr-auto"></Nav>
 
                 <Nav className="ml-auto">
-                    <NavDropdown title={localStorage.getItem('Name')} id="nav-dropdown">
-                        <NavDropdown.Item href="/">Logout</NavDropdown.Item>
+                    <NavDropdown title={"Login"} id="nav-dropdown">
+                        <NavDropdown.Item href="/login">Login</NavDropdown.Item>
+                        <NavDropdown.Item href="/signup">Signup</NavDropdown.Item>
                     </NavDropdown>
                 </Nav>
             </Navbar>
 
             <div id="content-wrap" class='container'>
                 <div class='row mt-5 justify-content-center'>
-                    <h1>Location Score</h1>
+                    <h1>Location Score - Trial</h1>
                 </div>
                 <div class='row justify-content-center'><h1 className="heading">{livabilityScore}</h1></div>
                 <div class='row justify-content-center'>
@@ -384,7 +384,7 @@ function ResultPage() {
                 <div class='row mt-5 justify-content-center'>
                     <div class="col-3">
                         <div class='row mt-3 justify-content-center'>
-                            <p><FaBiking class='result-icon' />  {bikeCount} Bike Trails</p>
+                            <p><FaBiking class='result-icon' />  <span id='blur'>{bikeCount}</span> Bike Trails</p>
                         </div>
                         <div class='row mt-3 justify-content-center'>
                             <p><FaUtensils class='result-icon' />  {restaurantCount} Restaurants</p>
@@ -396,46 +396,46 @@ function ResultPage() {
 
                     <div class="col-3">
                         <div class='row mt-3 justify-content-center'>
-                            <p><FaBus class='result-icon' />  {busCount} Bus Stops</p>
+                            <p><FaBus class='result-icon' />  <span id='blur'>{busCount}</span> Bus Stops</p>
                         </div>
                         <div class='row mt-3 justify-content-center'>
-                            <p><FaDollarSign class='result-icon' />  {atmCount} ATMs</p>
+                            <p><FaDollarSign class='result-icon' />  <span id='blur'>{atmCount}</span> ATMs</p>
                         </div>
                         <div class='row mt-3 justify-content-center'>
-                            <p><FaShoppingCart class='result-icon' />  {supermarketCount} Supermarkets</p>
+                            <p><FaShoppingCart class='result-icon' />  <span id='blur'>{supermarketCount}</span> Supermarkets</p>
                         </div>
                     </div>
 
                     <div class="col-3">
                         <div class='row mt-3 justify-content-center'>
-                            <p><FaCloudSun class='result-icon' />  {parkCount} Parks</p>
+                            <p><FaCloudSun class='result-icon' />  <span id='blur'>{parkCount}</span> Parks</p>
                         </div>
                         <div class='row mt-3 justify-content-center'>
-                            <p><FaDumbbell class='result-icon' />  {gymCount} Gyms</p>
+                            <p><FaDumbbell class='result-icon' />  <span id='blur'>{gymCount}</span> Gyms</p>
                         </div>
                         <div class='row mt-3 justify-content-center'>
-                            <p><FaHospital class='result-icon' />  {hospitalCount} Hospitals</p>
+                            <p><FaHospital class='result-icon' />  <span id='blur'>{hospitalCount}</span> Hospitals</p>
                         </div>
                     </div>
                 </div>
                 <div class='row justify-content-center'>
                     <div class='col-3'>
                         <div class='row mt-3 justify-content-center'>
-                            <p><FaHiking class='result-icon' />  {hikeCount} Hike Trails</p>
+                            <p><FaHiking class='result-icon' />  <span id='blur'>{hikeCount}</span> Hike Trails</p>
                         </div>
                     </div>
                     {arrestHTML}
                 </div>
 
                 <div class="row m-5 justify-content-center">
-                    <Link to="/portal">
+                    <Link to="/portal-trial">
                         <Button variant="success btn-lg rounded-pill" >Check Another Location</Button>
                     </Link>
                 </div>
 
                 {safetyNote}
                 <div class='row mt-5 justify-content-center'>
-                    <h2>Try out different parameters!</h2>
+                    <h2>Login to try out different parameters!</h2>
                 </div>
                 <div class='row mt-1 justify-content-center'>
                     <div class='col-4'>
@@ -451,6 +451,7 @@ function ResultPage() {
                                 max={10}
                                 valueLabelDisplay="auto"
                                 onChange={restaurantScoreFunction}
+                                disabled={true}
                             />
                             <Typography id="discrete-slider">
                                 Schools
@@ -463,6 +464,7 @@ function ResultPage() {
                                 max={10}
                                 valueLabelDisplay="auto"
                                 onChange={schoolScoreFunction}
+                                disabled={true}
                             />
                             <Typography id="discrete-slider">
                                 Bus Stations
@@ -475,6 +477,7 @@ function ResultPage() {
                                 max={10}
                                 valueLabelDisplay="auto"
                                 onChange={busStationScoreFunction}
+                                disabled={true}
                             />
                             <Typography id="discrete-slider">
                                 ATMs
@@ -487,6 +490,7 @@ function ResultPage() {
                                 max={10}
                                 valueLabelDisplay="auto"
                                 onChange={atmScoreFunction}
+                                disabled={true}
                             />
                             <Typography id="discrete-slider">
                                 Bike Trails
@@ -499,6 +503,7 @@ function ResultPage() {
                                 max={10}
                                 valueLabelDisplay="auto"
                                 onChange={bikeTrailScoreFunction}
+                                disabled={true}
                             />
                         </ThemeProvider>
                     </div>
@@ -517,6 +522,7 @@ function ResultPage() {
                                 max={10}
                                 valueLabelDisplay="auto"
                                 onChange={supermarketScoreFunction}
+                                disabled={true}
                             />
                             <Typography id="discrete-slider">
                                 Parks
@@ -529,6 +535,7 @@ function ResultPage() {
                                 max={10}
                                 valueLabelDisplay="auto"
                                 onChange={parkScoreFunction}
+                                disabled={true}
                             />
                             <Typography id="discrete-slider">
                                 Gyms
@@ -541,6 +548,7 @@ function ResultPage() {
                                 max={10}
                                 valueLabelDisplay="auto"
                                 onChange={gymScoreFunction}
+                                disabled={true}
                             />
                             <Typography id="discrete-slider">
                                 Hospitals
@@ -553,6 +561,7 @@ function ResultPage() {
                                 max={10}
                                 valueLabelDisplay="auto"
                                 onChange={hospitalScoreFunction}
+                                disabled={true}
                             />
                             <Typography id="discrete-slider">
                                 Hike Trails
@@ -565,12 +574,30 @@ function ResultPage() {
                                 max={10}
                                 valueLabelDisplay="auto"
                                 onChange={hikeTrailScoreFunction}
+                                disabled={true}
                             />
 
                         </ThemeProvider>
                     </div>
                 </div>
                 {arrestSliderHTML}
+
+
+                <div class="row mt-5 justify-content-center">
+                    <div class='col-4 p-3'>
+                        <h3>Like what you see?</h3>
+                    </div>
+                </div>
+
+                <div class="row mt-2 mb-5 justify-content-center">
+                    <div class='col-2'>
+                        <Link to="/login"><Button variant="success btn-block" >Login</Button></Link>
+                    </div>
+                    <div class='col-2'>
+                        <Link to="/signup"><Button variant="success btn-block" className="signup-button">Signup</Button></Link>
+                    </div>
+                </div>
+
             </div>
 
             <footer id="footer" class='py-3 bg-dark text-white text-center'>
@@ -583,4 +610,4 @@ function ResultPage() {
 
 }
 
-export default ResultPage
+export default ResultPageTrial

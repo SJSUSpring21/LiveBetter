@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Button, Navbar, Image } from 'react-bootstrap';
+import { Form, Button, Navbar } from 'react-bootstrap';
 import { useState } from 'react';
 import axios from 'axios';
 import { useHistory, Link } from 'react-router-dom';

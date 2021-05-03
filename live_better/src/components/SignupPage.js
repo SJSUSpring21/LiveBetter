@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { Form, Button, Navbar, Nav, Image } from 'react-bootstrap';
+import { Form, Button, Navbar, Nav } from 'react-bootstrap';
 import axios from 'axios';
 import { useHistory, Link } from 'react-router-dom';
 
@@ -49,7 +49,7 @@ function SignupPage() {
                     <h1 className="heading">Live<span class='text-success'>B</span>etter</h1>
                 </div>
                 <div class='row m-3 justify-content-center'>
-                    <div class='col-3'>
+                    <div class='col-5'>
                         <Form>
                             <Form.Group controlId="formName">
                                 <Form.Label>Name</Form.Label>
