@@ -31,23 +31,24 @@ function SignupPage() {
             })
     }
 
-
     return (
-        <div>
-            <Navbar bg="light" variant="light">
-                <Navbar.Brand className="logo" href="/">LiveBetter</Navbar.Brand>
+        <div class='main-section'>
+            <Navbar bg="light" variant="light sticky-top">
+                <Navbar.Brand className="logo" href="/">
+                    Live<span class='text-success'>B</span>etter
+                </Navbar.Brand>
                 <Nav className="mr-auto"></Nav>
 
                 <Nav className="ml-auto">
                     <Nav.Link><Link to="/login">Login</Link></Nav.Link>
                 </Nav>
             </Navbar>
-            <div class='container'>
-                <div class='row'>
-                    <h1>Signup Page</h1>
+            <div id="content-wrap" class='container-fluid'>
+                <div class='row m-3 justify-content-center'>
+                    <h1 className="heading">Live<span class='text-success'>B</span>etter</h1>
                 </div>
-                <div class='row'>
-                    <div class='col-3'>
+                <div class='row m-3 justify-content-center'>
+                    <div class='col-5'>
                         <Form>
                             <Form.Group controlId="formName">
                                 <Form.Label>Name</Form.Label>
@@ -67,8 +68,6 @@ function SignupPage() {
                                     }}
                                 />
                             </Form.Group>
-
-
                             <Form.Group controlId="formBasicPassword">
                                 <Form.Label>Password</Form.Label>
                                 <Form.Control type="password"
@@ -79,22 +78,25 @@ function SignupPage() {
                                 />
                             </Form.Group>
 
-                            <Button variant="primary"
+                            <Button variant="success btn-block"
                                 type="submit"
                                 onClick={(event) => {
                                     signupUser(event)
                                 }}>
-                                Submit
+                                Signup
                             </Button>
                         </Form>
                     </div>
-
-
-
                 </div>
-
+                <div class='row justify-content-center'>
+                    <p>Already have an account? <Link to='/login'>Login Here</Link></p>
+                </div>
             </div>
-
+            <footer id="footer" class='py-3 bg-dark text-white text-center'>
+                <div>
+                    Group 12 - Live<span class='text-success'>B</span>etter
+                                </div>
+            </footer>
         </div>
     )
 }

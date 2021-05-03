@@ -1,77 +1,94 @@
 import React from 'react';
-import { Navbar, Nav, Button, Row, Col, Image } from 'react-bootstrap/esm';
+import { Navbar, Nav, Button, Image, NavDropdown } from 'react-bootstrap/esm';
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import LoginPage from './LoginPage';
 import PortalPage from './PortalPage';
 import SignupPage from './SignupPage';
 import ResultPage from './ResultPage';
+import LoadingPage from './LoadingPage';
+import PortalPageTrial from './PortalPageTrial';
+import ResultPageTrial from './ResultPageTrial';
+import LoadingPageTrial from './LoadingPageTrial';
 import '../index.css';
 import livebetterlogo from '../components/images/new.svg';
 import aboutphoto from './images/second.svg';
 
+
 function LandingPage() {
     //landing page function
-
     return (
         <div>
             <Router>
                 <Switch>
                     <Route exact path="/">
-                        <div className="main-section">
+                        <div class='main-section'>
+                            <Navbar bg="light" variant="light sticky-top">
+                                <Navbar.Brand className="logo" href="/">
+                                    Live<span class='text-success'>B</span>etter
+                                        </Navbar.Brand>
+                                <Nav className="mr-auto"></Nav>
 
-                            <div class='cointainer'>
-                                <Navbar bg="light" variant="light">
-                                    <Navbar.Brand className="logo" href="/">LiveBetter</Navbar.Brand>
-                                    <Nav className="mr-auto"></Nav>
+                                <Nav className="ml-auto">
+                                    <NavDropdown title={"Login"} id="nav-dropdown">
+                                        <NavDropdown.Item href="/login">Login</NavDropdown.Item>
+                                        <NavDropdown.Item href="/signup">Signup</NavDropdown.Item>
+                                    </NavDropdown>
+                                </Nav>
+                            </Navbar>
 
-                                    <Nav className="ml-auto">
-                                        <Nav.Link><Link to="/login">Login</Link></Nav.Link>
-                                    </Nav>
-                                </Navbar>
-                                <Row className="row1">
-                                    <Col></Col>
-                                </Row>
-                                <Row>
-                                    <Col>
-                                        <Row>
-                                            <Col></Col>
-                                            <Col xs={8}>
-                                                <h1 className="heading">Live Better</h1>
-                                                <h3 className="line">Check the livability score for your location</h3>
-                                                <Row>
+                            <div id='content-wrap' class='cointainer-fluid'>
+                                <div class='row mt-3 justify-content-center'>
+                                    <div class='col-4 my-auto'>
+                                        <div class="row m-2">
+                                            <h1 className="heading">Live<span class='text-success'>B</span>etter</h1>
+                                        </div>
+                                        <div class="row m-2">
+                                            <h3 className="line">Check the livability score for your location</h3>
+                                        </div>
+                                        <div class="row m-2">
 
-                                                    <Col><Link to="/signup"><Button variant="success" className="signup-button">Signup</Button></Link></Col>
+                                        </div>
+                                        <div class='row m-3 justify-content-center'>
+                                            <div class='col'>
+                                                <Link to="/portal-trial">
+                                                    <Button variant="success btn-block">
+                                                        Try Without Logging In
+                                                    </Button>
+                                                </Link>
+                                            </div>
 
-                                                </Row>
-                                            </Col>
-                                        </Row>
-                                    </Col>
+                                        </div>
+                                    </div>
 
-                                    <Col>
-                                        <Row>
+                                    <div class='col-4'>
+                                        <Image class='img-responsive'
+                                            src={livebetterlogo} />
+                                    </div>
+                                </div>
 
-                                            <Col>
-                                                <Image className="newImage"
-                                                    src={livebetterlogo} />
-                                            </Col>
-                                        </Row>
-                                    </Col>
-                                </Row>
+                                <div class="row mt-5 justify-content-center">
+
+                                    <div class="col-6">
+                                        <div class='p-5'>
+                                            <Image class='img-responsive mx-auto'
+                                                src={aboutphoto} />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-4 my-auto">
+                                        <h2>Find the best places to live based on Crime Rate, Hospitals, Gyms and other facilities nearby.</h2>
+                                    </div>
+
+                                </div>
+
+
                             </div>
-                            <div className="about-section">
-                                <Row className="row2"></Row>
-                                <Row>
-                                    <Col><Image className="aboutImage"
-                                        src={aboutphoto} /></Col>
-                                    <Col>
-                                        <Row className="row3"></Row>
-                                        <Row>
-                                            <Col xs={8}><h2>Find the best places to live based on Crime Rate, Hospitals, Gyms and other facilities nearby.</h2></Col>
-                                            <Col></Col>
-                                        </Row>
-                                    </Col>
-                                </Row>
-                            </div>
+
+                            <footer id="footer" class='py-3 bg-dark text-white text-center'>
+                                <div>
+                                    Group 12 - Live<span class='text-success'>B</span>etter
+                                </div>
+                            </footer>
                         </div>
                     </Route>
 
@@ -87,8 +104,24 @@ function LandingPage() {
                         <PortalPage />
                     </Route>
 
+                    <Route exact path="/portal-trial">
+                        <PortalPageTrial />
+                    </Route>
+
                     <Route exact path="/result">
                         <ResultPage />
+                    </Route>
+
+                    <Route exact path="/result-trial">
+                        <ResultPageTrial />
+                    </Route>
+
+                    <Route exact path="/loading">
+                        <LoadingPage />
+                    </Route>
+
+                    <Route exact path="/loading-trial">
+                        <LoadingPageTrial />
                     </Route>
 
                 </Switch>

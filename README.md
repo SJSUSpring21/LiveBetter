@@ -35,3 +35,7 @@ Realtor API, ATTOM Property API, Zillow API
 
 [Design Link](https://www.figma.com/file/60RDE2DISTm6t0wSn5nVCZ/LiveBetter?node-id=0%3A1)
 
+**Build Project**
+> docker-compose up --build
+
+Go to localhost:3000 to see project
