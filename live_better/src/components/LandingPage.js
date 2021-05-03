@@ -21,7 +21,7 @@ function LandingPage() {
             <Router>
                 <Switch>
                     <Route exact path="/">
-                        <div className="main-section">
+                        <div class='main-section'>
                             <Navbar bg="light" variant="light sticky-top">
                                 <Navbar.Brand className="logo" href="/">
                                     Live<span class='text-success'>B</span>etter
@@ -33,7 +33,7 @@ function LandingPage() {
                                 </Nav>
                             </Navbar>
 
-                            <div class='cointainer-fluid'>
+                            <div id='content-wrap' class='cointainer-fluid'>
                                 <div class='row mt-3 justify-content-center'>
                                     <div class='col-4 my-auto'>
                                         <div class="row m-2">
@@ -72,15 +72,19 @@ function LandingPage() {
                                     </div>
 
                                 </div>
-
-                            </div>
-
-                            <div class='row mt-5 justify-content-center'>
-                                <div class="col-6">
-                                    <Image class='img-responsive mx-auto'
-                                        src={globephoto} />
+                                <div class='row my-5 justify-content-center'>
+                                    <div class="col-6">
+                                        <Image class='img-responsive mx-auto'
+                                            src={globephoto} />
+                                    </div>
                                 </div>
                             </div>
+
+                            <footer id="footer" class='py-3 bg-dark text-white text-center'>
+                                <div>
+                                    Group 12 - Live<span class='text-success'>B</span>etter
+                                </div>
+                            </footer>
                         </div>
                     </Route>
 

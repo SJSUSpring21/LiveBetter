@@ -170,7 +170,7 @@ function PortalPage() {
 
 
     return (
-        <div>
+        <div class='main-section'>
             <Navbar bg="light" variant="light sticky-top">
                 <Navbar.Brand className="logo" href="/">
                     Live<span class='text-success'>B</span>etter
@@ -183,7 +183,7 @@ function PortalPage() {
                     </NavDropdown>
                 </Nav>
             </Navbar>
-            <div className="portal-main">
+            <div id="content-wrap" className="portal-main">
                 <div class="row m-3 justify-content-center">
                     <h1 className="heading">Live<span class='text-success'>B</span>etter</h1>
                 </div>
@@ -455,13 +455,19 @@ function PortalPage() {
                 </Row>
                 <div class='row mt-5 justify-content-center'>
                     <div class="col-6">
-                        <Image class='img-responsive mx-auto'
+                        <Image class='img-responsive'
                             src={globephoto} />
                     </div>
                 </div>
 
 
             </div>
+
+            <footer id="footer" class='py-3 bg-dark text-white text-center'>
+                <div>
+                    Group 12 - Live<span class='text-success'>B</span>etter
+                                </div>
+            </footer>
         </div>
     )
 }

@@ -159,6 +159,11 @@ function LoadingPage() {
                 </div>
 
             </div>
+            <footer id="footer" class='py-3 bg-dark text-white text-center'>
+                <div>
+                    Group 12 - Live<span class='text-success'>B</span>etter
+                                </div>
+            </footer>
         </div>
     )
 

@@ -54,7 +54,7 @@ function LoginPage() {
                 </Navbar.Brand>
             </Navbar>
 
-            <div class="container-fluid">
+            <div id="content-wrap" class="container-fluid">
                 <div class="row m-3 justify-content-center">
                     <h1 className="heading">Live<span class='text-success'>B</span>etter</h1>
                 </div>
@@ -103,6 +103,11 @@ function LoginPage() {
 
             </div>
 
+            <footer id="footer" class='py-3 bg-dark text-white text-center'>
+                <div>
+                    Group 12 - Live<span class='text-success'>B</span>etter
+                                </div>
+            </footer>
 
 
         </div>

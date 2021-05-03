@@ -229,7 +229,7 @@ function ResultPage() {
                 </Nav>
             </Navbar>
 
-            <div class='container'>
+            <div id="content-wrap" class='container'>
                 <div class='row mt-5 justify-content-center'>
                     <h1>Location Score</h1>
                 </div>
@@ -297,7 +297,11 @@ function ResultPage() {
                 {safetyNote}
             </div>
 
-
+            <footer id="footer" class='py-3 bg-dark text-white text-center'>
+                <div>
+                    Group 12 - Live<span class='text-success'>B</span>etter
+                                </div>
+            </footer>
         </div>
     )
 
