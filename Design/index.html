@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css" />
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places"></script>
+    <script src="app.js"></script>
+    <title>LiveBetter</title>
+</head>
+<body>
+    <div class="mainpage">
+        <header>
+            <nav>
+                <h3 class="logo">LiveBetter</h3> 
+                <h4 class="login">Login</h4>
+            </nav>
+            <main>
+                <div class= "first">
+                    <div class="details_1">
+                        <div class="col-1">
+                            <h1>Livability Score</h1>
+                            <h3>Check the livability score for your location</h3>
+                            <button type="button" onclick="scrolldiv()">Check Now</button>
+                        </div>
+                        <div class="col-2">
+                            <img class="location" src="img/new.svg" alt="model">
+                        </div>
+                    </div>
+                </div>
+                <div class= "second">
+                    <div class="details_2">
+                        <div class="col1_1">
+                            <img class="map" src="img/second.svg" alt="model">
+                        </div>
+                        <div class="col1_2">
+                            <h2>Find the best places to live based on Crime Rate, Hospitals, Gyms and other facilities nearby.</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class= "third" id=down>
+                    <div class="details_3">
+                        <div class="col3_1">
+                            <h1>Get your score</h1>
+                            <input type="text" placeholder="Enter a location" size=50 id="searchTextField" autocomplete="on" runat="server">
+                            <input type="hidden" id="city2" name="city2" />
+                            <input type="hidden" id="cityLat" name="cityLat" />
+                            <input type="hidden" id="cityLng" name="cityLng" />
+                            <input type="hidden" id="nearby" />
+                            <img class="globe" src="img/third.svg" alt="model">
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </header>
+
+    </div>
+    
+</body>
+</html>

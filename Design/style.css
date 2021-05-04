@@ -1,0 +1,171 @@
+*,*::before,*::after{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+@font-face{
+    font-family: PopThick;
+    src: url(Poppins/Poppins-Medium.ttf)
+}
+
+@font-face{
+    font-family: PopThin;
+    src: url(Poppins/Poppins-ExtraLight.ttf)
+}
+
+html{
+    scroll-behavior: smooth;
+}
+body{
+    font-family: PopThin;
+}
+
+nav{
+    min-height: 10vh;
+    width:90%;
+    margin: auto;
+    display:flex;
+    justify-content: space-between;
+    align-items:center;
+    padding: 20px 0px;
+}
+.first{
+    width: 100%;
+    min-height: 80vh;
+    padding-left: 6%;
+    padding-right: 6%;
+    box-sizing: border-box;
+    overflow:hidden;
+}
+
+.details_1{
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+    margin: 70px 0;
+}
+
+.col-1{
+    flex-basis: 40%;
+    position: relative;
+    margin-left: 50px;
+}
+
+.col-1 h1{
+    font-size:70px;
+}
+
+.col-1 h3{
+    font-size:28px;
+    color:#707070;
+    font-weight: 100;
+    margin: 0px 0 20px
+}
+
+button{
+    width:140px;
+    border:0;
+    padding:12px 10px;
+    outline:none;
+    background-color: #64D43C;
+    border-radius: 40px;
+    cursor: pointer;
+
+}
+
+.col-2{
+    position: relative;
+    flex-basis: 60%;
+    display:flex;
+    align-items:center;
+}
+
+.col-2 .location{
+    width: 55%;
+    transform:translateX(250px);
+}
+
+.second{
+    width: 100%;
+    min-height: 80vh;
+    padding-left: 6%;
+    padding-right: 6%;
+    box-sizing: border-box;
+    overflow:hidden;
+}
+
+.details_2{
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+    margin: 100px 0;
+}
+
+.col1_1{
+    position: relative;
+    flex-basis: 60%;
+    display:flex;
+    align-items:center;
+}
+
+.col1_1 .map{
+    width: 80%;
+}
+
+.col1_2{
+    flex-basis: 40%;
+    position: relative;
+    margin-left: 50px;
+}
+
+.third{
+    width: 100%;
+    min-height: 80vh;
+    padding-left: 6%;
+    padding-right: 6%;
+    box-sizing: border-box;
+    overflow:hidden;
+}
+
+.details_3{
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+    margin: 70px 0;
+}
+
+.col3_1{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.col3_1 h1{
+    display: block;
+    margin-bottom: 25px;
+    width: 100%;
+    text-align: center;
+    
+}
+
+.col3_1 input{
+    display: block;
+    margin: 0 auto;
+    width: 50%;
+    height:30px;
+    border-radius: 40px;
+    text-align: center;
+    
+}
+
+
+.col3_1 .globe{
+    /* text-align: center; */
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 90px;
+    width: 60%;
+}
