@@ -247,13 +247,13 @@ function PortalPageTrial() {
 
                                             <div>
                                                 <Typography id="discrete-slider-small-steps" gutterBottom>
-                                                    Restaurant
+                                                    Park
                                             </Typography>
                                                 <ThemeProvider theme={muiTheme}>
                                                     <Slider
                                                         defaultValue={0}
-                                                        value={restaurantScore}
-                                                        onChange={restaurantScoreFunction}
+                                                        value={parkScore}
+                                                        onChange={parkScoreFunction}
                                                         aria-labelledby="discrete-slider-small-steps"
                                                         step={1}
                                                         marks={marks}
@@ -282,7 +282,9 @@ function PortalPageTrial() {
                                                     />
                                                 </ThemeProvider>
                                             </div>
-
+                                            <div>
+                                                <h5 class='text-center'>Please Login to Adjust Below </h5>
+                                            </div>
                                             <div>
                                                 <Typography id="discrete-slider-small-steps" gutterBottom>
                                                     Bus Station
@@ -342,16 +344,15 @@ function PortalPageTrial() {
                                                     />
                                                 </ThemeProvider>
                                             </div>
-
                                             <div>
                                                 <Typography id="discrete-slider-small-steps" gutterBottom>
-                                                    Park
+                                                    Restaurant
                                             </Typography>
                                                 <ThemeProvider theme={muiTheme}>
                                                     <Slider
                                                         defaultValue={0}
-                                                        value={parkScore}
-                                                        onChange={parkScoreFunction}
+                                                        value={restaurantScore}
+                                                        onChange={restaurantScoreFunction}
                                                         aria-labelledby="discrete-slider-small-steps"
                                                         step={1}
                                                         marks={marks}
@@ -362,6 +363,7 @@ function PortalPageTrial() {
                                                     />
                                                 </ThemeProvider>
                                             </div>
+
 
                                             <div>
                                                 <Typography id="discrete-slider-small-steps" gutterBottom>

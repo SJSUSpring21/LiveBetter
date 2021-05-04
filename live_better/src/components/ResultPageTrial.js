@@ -229,12 +229,12 @@ function ResultPageTrial() {
         // If User Doesn't Input Weights, set them all to 10
         if (totalScore === 0) {
             safetyScore = 10;
-            restaurantScore = 10;
+            restaurantScore = 0;
             schoolScore = 10;
             busstationScore = 0;
             atmScore = 0;
             supermarketScore = 0;
-            parkScore = 0;
+            parkScore = 10;
             gymScore = 0;
             hospitalScore = 0;
             hikeTrailScore = 0;
@@ -343,7 +343,9 @@ function ResultPageTrial() {
         setLoading(false);
         console.log('Recalculated Location Score.');
     }, [userSafety, userRestaurant, userSchool, userBus, userAtm, userSupermarket,
-        userPark, userGym, userHospital, userHike, userBike,
+        userPark, userGym, userHospital, userHike, userBike, atmCount, bikeCount, busCount,
+        gymCount, hikeCount, hospitalCount, parkCount,
+        restaurantCount, safetyCount, schoolCount, supermarketCount
     ]);
 
 
@@ -387,7 +389,7 @@ function ResultPageTrial() {
                             <p><FaBiking class='result-icon' />  <span id='blur'>{bikeCount}</span> Bike Trails</p>
                         </div>
                         <div class='row mt-3 justify-content-center'>
-                            <p><FaUtensils class='result-icon' />  {restaurantCount} Restaurants</p>
+                            <p><FaUtensils class='result-icon' />  <span id='blur'>{restaurantCount}</span> Restaurants</p>
                         </div>
                         <div class='row mt-3 justify-content-center'>
                             <p><FaGraduationCap class='result-icon' />  {schoolCount} Schools</p>
@@ -408,7 +410,7 @@ function ResultPageTrial() {
 
                     <div class="col-3">
                         <div class='row mt-3 justify-content-center'>
-                            <p><FaCloudSun class='result-icon' />  <span id='blur'>{parkCount}</span> Parks</p>
+                            <p><FaCloudSun class='result-icon' />  {parkCount} Parks</p>
                         </div>
                         <div class='row mt-3 justify-content-center'>
                             <p><FaDumbbell class='result-icon' />  <span id='blur'>{gymCount}</span> Gyms</p>
@@ -441,19 +443,6 @@ function ResultPageTrial() {
                     <div class='col-4'>
                         <ThemeProvider theme={muiTheme}>
                             <Typography id="discrete-slider">
-                                Restaurants
-                            </Typography>
-                            <Slider
-                                defaultValue={userRestaurant}
-                                aria-labelledby="discrete-slider-small-steps"
-                                marks={marks}
-                                min={0}
-                                max={10}
-                                valueLabelDisplay="auto"
-                                onChange={restaurantScoreFunction}
-                                disabled={true}
-                            />
-                            <Typography id="discrete-slider">
                                 Schools
                             </Typography>
                             <Slider
@@ -464,6 +453,19 @@ function ResultPageTrial() {
                                 max={10}
                                 valueLabelDisplay="auto"
                                 onChange={schoolScoreFunction}
+                                disabled={true}
+                            />
+                            <Typography id="discrete-slider">
+                                Restaurants
+                            </Typography>
+                            <Slider
+                                defaultValue={userRestaurant}
+                                aria-labelledby="discrete-slider-small-steps"
+                                marks={marks}
+                                min={0}
+                                max={10}
+                                valueLabelDisplay="auto"
+                                onChange={restaurantScoreFunction}
                                 disabled={true}
                             />
                             <Typography id="discrete-slider">
@@ -510,20 +512,6 @@ function ResultPageTrial() {
                     <div class='col-1'></div>
                     <div class='col-4'>
                         <ThemeProvider theme={muiTheme}>
-
-                            <Typography id="discrete-slider">
-                                Supermarkets
-                            </Typography>
-                            <Slider
-                                defaultValue={userSupermarket}
-                                aria-labelledby="discrete-slider-small-steps"
-                                marks={marks}
-                                min={0}
-                                max={10}
-                                valueLabelDisplay="auto"
-                                onChange={supermarketScoreFunction}
-                                disabled={true}
-                            />
                             <Typography id="discrete-slider">
                                 Parks
                             </Typography>
@@ -537,6 +525,20 @@ function ResultPageTrial() {
                                 onChange={parkScoreFunction}
                                 disabled={true}
                             />
+                            <Typography id="discrete-slider">
+                                Supermarkets
+                            </Typography>
+                            <Slider
+                                defaultValue={userSupermarket}
+                                aria-labelledby="discrete-slider-small-steps"
+                                marks={marks}
+                                min={0}
+                                max={10}
+                                valueLabelDisplay="auto"
+                                onChange={supermarketScoreFunction}
+                                disabled={true}
+                            />
+
                             <Typography id="discrete-slider">
                                 Gyms
                             </Typography>
