@@ -1,0 +1,11 @@
+backend/.env
+Dataset/.DS_Store
+Project_Code/.DS_Store
+live_better/public/.DS_Store
+live_better/src/.DS_Store
+live-better-react/
+backend/node_modules
+live_better/node_modules
+.DS_Store
+live_better/.DS_Store
+Project_Code
