@@ -8,15 +8,16 @@ const port = 3001;
 // npm install --save cors
 // npm install ibm_db
 // npm install mongoose
+// npm install dotenv
 
 // The command below runs server
 // node index.js
 
 const mongoose = require('mongoose');
 const axios = require('axios');
-
 const bodyParser = require('body-parser');
 const cors = require('cors');
+require('dotenv').config();
 
 app.use(bodyParser.urlencoded({
     extended: false
@@ -205,12 +206,10 @@ app.get('/google-search', (req, res) => {
         console.log(error);
         res.send(error);
     });
-
-
 });
 
 function get_google_query(input_lat, input_lng, placeName, radius) {
-    var API_KEY = ''
+    var API_KEY = `${process.env.GOOGLE_API_KEY}`;
     var url = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?';
 
     var meter_in_miles = 1609;
