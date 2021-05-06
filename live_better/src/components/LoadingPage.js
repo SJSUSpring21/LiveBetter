@@ -1,6 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { Navbar, Nav,  NavDropdown } from 'react-bootstrap';
+import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import axios from 'axios';
 import { useEffect } from 'react';
 import Spinner from 'react-bootstrap/Spinner';
@@ -25,12 +25,16 @@ function LoadingPage() {
     var hikeTrailScore = history.location.state.hikeTrailScore;
     var bikeTrailScore = history.location.state.bikeTrailScore;
 
+    // Input Address
+    var formattedAddress = history.location.state.formattedAddress;
+
     useEffect(() => {
         // Query Database For Parks and Schools
         axios.get(`/queries?lat=${lat}&lng=${lng}&radius=2`)
             .then(res => {
 
                 console.log("Park and Schools Data");
+                console.log(`/queries?lat=${lat}&lng=${lng}&radius=2`);
                 console.log(res.data);
 
                 // Query Chicago Database
@@ -62,7 +66,8 @@ function LoadingPage() {
                                             hikeTrailScore: hikeTrailScore,
                                             bikeTrailScore: bikeTrailScore,
                                             query: res3.data,
-                                            park_school: res.data
+                                            park_school: res.data,
+                                            formattedAddress: formattedAddress
                                         }
                                     });
                                 })
@@ -94,7 +99,8 @@ function LoadingPage() {
                                     hikeTrailScore: hikeTrailScore,
                                     bikeTrailScore: bikeTrailScore,
                                     query: res2.data,
-                                    park_school: res.data
+                                    park_school: res.data,
+                                    formattedAddress: formattedAddress
                                 }
                             });
                             console.log("Chicago Data");
@@ -121,7 +127,10 @@ function LoadingPage() {
             });
 
 
-    }, []); // <-- Empty array makes sure this block of code runs exactly once
+    }, [atmScore, bikeTrailScore, busstationScore, formattedAddress,
+        gymScore, hikeTrailScore, history, hospitalScore, lat,
+        lng, parkScore, restaurantScore, safetyScore, schoolScore, supermarketScore]);
+
 
     return (
         <div class='main-section'>
