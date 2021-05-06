@@ -38,6 +38,7 @@ Realtor API, ATTOM Property API, Zillow API
 **Build Project**
 
 In backend/.env.dist include your own Google API Key by setting your API to the variable GOOGLE_API_KEY.
+
 Then, change the file name of .env.dist to .env
 > docker-compose up --build
 
