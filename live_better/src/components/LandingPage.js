@@ -13,9 +13,52 @@ import HistoryPage from './HistoryPage';
 import '../index.css';
 import livebetterlogo from '../components/images/new.svg';
 import aboutphoto from './images/second.svg';
-
+import { useState, useEffect } from 'react';
 
 function LandingPage() {
+    const [navBarHTML, setNavBar] = useState("");
+
+    // ****** Logout Function *******
+    const handleLogout = () => {
+        localStorage.clear();
+    }
+
+    //is Loading
+    const [isLoading, setLoading] = useState(true);
+
+    useEffect(() => {
+        //Check for user credentials
+        const userEmail = localStorage.email || -1;
+        const userID = localStorage.userid || -1;
+        const username = localStorage.Name || -1;
+
+        console.log(`Email: ${userEmail} userID: ${userID} username: ${username}`);
+        // User is Logged In
+        if (userEmail !== -1 && userID !== -1 && username !== -1) {
+            console.log("User is logged in");
+            setNavBar(<div><Nav className="ml-auto" variant="light" >
+                <Nav.Link href="/portal">Get Score</Nav.Link>
+                <Nav.Link href="/history">My Search</Nav.Link>
+                <NavDropdown title={localStorage.getItem('Name')} id="nav-dropdown">
+                    <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
+                </NavDropdown>
+            </Nav></div>);
+        } else {
+            console.log("User is not logged in");
+            setNavBar(<div><Nav className="ml-auto">
+                <NavDropdown title={"Login"} id="nav-dropdown">
+                    <NavDropdown.Item href="/login">Login</NavDropdown.Item>
+                    <NavDropdown.Item href='/signup'>Signup</NavDropdown.Item>
+                </NavDropdown></Nav></div>);
+        }
+
+        setLoading(false);
+    }, []);
+
+    if (isLoading) {
+        return (<div>Loading...</div>)
+    }
+
     //landing page function
     return (
         <div>
@@ -28,17 +71,7 @@ function LandingPage() {
                                     Live<span class='text-success'>B</span>etter
                                         </Navbar.Brand>
                                 <Nav className="mr-auto"></Nav>
-
-                                <Nav className="ml-auto">
-                                    <NavDropdown title={"Login"} id="nav-dropdown">
-                                        <NavDropdown.Item href="/login">
-                                            Login
-                                        </NavDropdown.Item>
-                                        <NavDropdown.Item href='/signup'>
-                                            Signup
-                                        </NavDropdown.Item>
-                                    </NavDropdown>
-                                </Nav>
+                                {navBarHTML}
                             </Navbar>
 
                             <div id='content-wrap' class='cointainer-fluid'>
@@ -100,7 +133,7 @@ function LandingPage() {
                     <Route exact path="/signup">
                         <SignupPage />
                     </Route>
-
+                    
                     <Route exact path="/login">
                         <LoginPage />
                     </Route>

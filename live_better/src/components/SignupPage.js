@@ -27,7 +27,6 @@ function SignupPage() {
                 localStorage.setItem('email', response.data.user.email);
                 localStorage.setItem('userid', response.data.user._id);
                 history.push('/portal');
-
             })
     }
 

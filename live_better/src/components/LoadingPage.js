@@ -28,6 +28,14 @@ function LoadingPage() {
     // Input Address
     var formattedAddress = history.location.state.formattedAddress;
 
+    // ****** Logout Function *******
+    const handleLogout = () => {
+        localStorage.clear();
+        history.push({
+            pathname: "/"
+        })
+    }
+
     useEffect(() => {
         // Query Database For Parks and Schools
         axios.get(`/queries?lat=${lat}&lng=${lng}&radius=2`)
@@ -125,12 +133,9 @@ function LoadingPage() {
                     pathname: '/portal'
                 });
             });
-
-
     }, [atmScore, bikeTrailScore, busstationScore, formattedAddress,
         gymScore, hikeTrailScore, history, hospitalScore, lat,
         lng, parkScore, restaurantScore, safetyScore, schoolScore, supermarketScore]);
-
 
     return (
         <div class='main-section'>
@@ -142,7 +147,7 @@ function LoadingPage() {
 
                 <Nav className="ml-auto">
                     <NavDropdown title={localStorage.getItem('Name')} id="nav-dropdown">
-                        <NavDropdown.Item href="/">Logout</NavDropdown.Item>
+                        <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
                     </NavDropdown>
                 </Nav>
             </Navbar>
@@ -164,8 +169,6 @@ function LoadingPage() {
             </footer>
         </div>
     )
-
-
 }
 
 export default LoadingPage

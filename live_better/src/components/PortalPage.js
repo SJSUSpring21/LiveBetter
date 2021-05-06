@@ -2,7 +2,7 @@ import React from 'react';
 import { Navbar, Nav, Button, Row, Col, Image, NavDropdown, Form, Modal } from 'react-bootstrap/esm';
 import globephoto from './images/third.svg'
 import '../index.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
@@ -102,6 +102,14 @@ function PortalPage() {
         changeBikeTrailScore(newValue);
     }
 
+    // ****** Logout Function *******
+    const handleLogout = () => {
+        localStorage.clear();
+        history.push({
+            pathname: "/"
+        })
+    }
+
     // state sends all user input values to result page
     const getResults = () => {
 
@@ -171,6 +179,22 @@ function PortalPage() {
         }
     });
 
+    useEffect(() => {
+        //Check for user credentials
+        const userEmail = localStorage.email || -1;
+        const userID = localStorage.userid || -1;
+        const username = localStorage.Name || -1;
+        
+        // User is not logged in
+        // Redirect to trial page
+        if (userEmail === -1 || userID === -1 ||  username === -1) {
+            console.log("Not logged in.. redirecting to portal-trial");
+            history.push({
+                pathname: "/portal-trial"
+            })
+
+        }
+    }, [history])
 
     return (
         <div class='main-section'>
@@ -186,7 +210,7 @@ function PortalPage() {
                     </Nav.Link>
                     <Nav.Link href="/history">My Search</Nav.Link>
                     <NavDropdown title={localStorage.getItem('Name')} id="nav-dropdown">
-                        <NavDropdown.Item href="/">Logout</NavDropdown.Item>
+                        <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
                     </NavDropdown>
                 </Nav>
             </Navbar>

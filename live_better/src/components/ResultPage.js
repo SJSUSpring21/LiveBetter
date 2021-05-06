@@ -16,22 +16,21 @@ import axios from 'axios';
 function ResultPage() {
 
     var history = useHistory();
-
     // Input Address
-    const formattedAddress = history.location.state.formattedAddress;
+    const formattedAddress = history?.location?.state?.formattedAddress;
 
     //******************* User weights *******************
-    const [userSafety, setUserSafety] = useState(history.location.state.safetyScore);
-    const [userRestaurant, setUserRestaurant] = useState(history.location.state.restaurantScore);
-    const [userSchool, setUserSchool] = useState(history.location.state.schoolScore);
-    const [userBus, setUserBus] = useState(history.location.state.busstationScore);
-    const [userAtm, setUserAtm] = useState(history.location.state.atmScore);
-    const [userSupermarket, setUserSupermarket] = useState(history.location.state.supermarketScore);
-    const [userPark, setUserPark] = useState(history.location.state.parkScore);
-    const [userGym, setUserGym] = useState(history.location.state.gymScore);
-    const [userHospital, setUserHospital] = useState(history.location.state.hospitalScore);
-    const [userHike, setUserHike] = useState(history.location.state.hikeTrailScore);
-    const [userBike, setUserBike] = useState(history.location.state.bikeTrailScore);
+    const [userSafety, setUserSafety] = useState(history?.location?.state?.safetyScore);
+    const [userRestaurant, setUserRestaurant] = useState(history?.location?.state?.restaurantScore);
+    const [userSchool, setUserSchool] = useState(history?.location?.state?.schoolScore);
+    const [userBus, setUserBus] = useState(history?.location?.state?.busstationScore);
+    const [userAtm, setUserAtm] = useState(history?.location?.state?.atmScore);
+    const [userSupermarket, setUserSupermarket] = useState(history?.location?.state?.supermarketScore);
+    const [userPark, setUserPark] = useState(history?.location?.state?.parkScore);
+    const [userGym, setUserGym] = useState(history?.location?.state?.gymScore);
+    const [userHospital, setUserHospital] = useState(history?.location?.state?.hospitalScore);
+    const [userHike, setUserHike] = useState(history?.location?.state?.hikeTrailScore);
+    const [userBike, setUserBike] = useState(history?.location?.state?.bikeTrailScore);
 
 
     const safetyScoreFunction = (event, newValue) => {
@@ -81,17 +80,17 @@ function ResultPage() {
     // **************** End ofUser Weights *****************************
 
     // Counts from Database or Google
-    var safetyCount = history.location.state.query.Arrest_Count;
-    var atmCount = history.location.state.query.atm;
-    var bikeCount = history.location.state.query.bike_trail;
-    var busCount = history.location.state.query.bus_station;
-    var gymCount = history.location.state.query.gym;
-    var hikeCount = history.location.state.query.hike_trail;
-    var hospitalCount = history.location.state.query.hospital;
-    var restaurantCount = history.location.state.query.restaurant;
-    var supermarketCount = history.location.state.query.supermarket;
-    var schoolCount = history.location.state.park_school[0].School_Count;
-    var parkCount = history.location.state.park_school[0].Park_Count;
+    var safetyCount = history?.location?.state?.query.Arrest_Count;
+    var atmCount = history?.location?.state?.query.atm;
+    var bikeCount = history?.location?.state?.query.bike_trail;
+    var busCount = history?.location?.state?.query.bus_station;
+    var gymCount = history?.location?.state?.query.gym;
+    var hikeCount = history?.location?.state?.query.hike_trail;
+    var hospitalCount = history?.location?.state?.query.hospital;
+    var restaurantCount = history?.location?.state?.query.restaurant;
+    var supermarketCount = history?.location?.state?.query.supermarket;
+    var schoolCount = history?.location?.state?.park_school[0].School_Count;
+    var parkCount = history?.location?.state?.park_school[0].Park_Count;
 
     // Changed if arrest data is available
     var arrestHTML = <div></div>
@@ -108,6 +107,14 @@ function ResultPage() {
 
     // Final Score
     const [livabilityScore, setScore] = useState(0);
+
+    // ****** Logout Function *******
+    const handleLogout = () => {
+        localStorage.clear();
+        history.push({
+            pathname: "/"
+        })
+    }
 
     // **** Theme For Slider *****
     const marks = [
@@ -195,150 +202,169 @@ function ResultPage() {
     }
 
     useEffect(() => {
+        //Check for user credentials
+        const userEmail = localStorage.email || -1;
+        const userID = localStorage.userid || -1;
+        const username = localStorage.Name || -1;
 
-        // User weights
-        var safetyScore = userSafety;
-        var restaurantScore = userRestaurant
-        var schoolScore = userSchool;
-        var busstationScore = userBus;
-        var atmScore = userAtm;
-        var supermarketScore = userSupermarket;
-        var parkScore = userPark;
-        var gymScore = userGym;
-        var hospitalScore = userHospital;
-        var hikeTrailScore = userHike;
-        var bikeTrailScore = userBike;
+        // User is not logged in
+        // Redirect to trial page
+        if (userEmail === -1 || userID === -1 || username === -1) {
+            console.log("Not logged in.. redirecting to home");
+            history.push({
+                pathname: "/"
+            })
 
-        // Calculate Total Weights User Inputs
-        var totalScore = restaurantScore + schoolScore + busstationScore + atmScore + safetyScore +
-            supermarketScore + parkScore + gymScore + hospitalScore + hikeTrailScore + bikeTrailScore;
-
-        // If User Doesn't Input Weights, set them all to 10
-        if (totalScore === 0) {
-            safetyScore = 10;
-            restaurantScore = 10;
-            schoolScore = 10;
-            busstationScore = 10;
-            atmScore = 10;
-            supermarketScore = 10;
-            parkScore = 10;
-            gymScore = 10;
-            hospitalScore = 10;
-            hikeTrailScore = 10;
-            bikeTrailScore = 10;
-
-            totalScore = 110;
+        } else if(!formattedAddress){
+            console.log("Address not defined... redirecting to portal");
+            history.push({
+                pathname: "/portal"
+            })
         }
+        else {
+            // User weights
+            var safetyScore = userSafety;
+            var restaurantScore = userRestaurant
+            var schoolScore = userSchool;
+            var busstationScore = userBus;
+            var atmScore = userAtm;
+            var supermarketScore = userSupermarket;
+            var parkScore = userPark;
+            var gymScore = userGym;
+            var hospitalScore = userHospital;
+            var hikeTrailScore = userHike;
+            var bikeTrailScore = userBike;
 
-        var arrestCount = safetyCount;
+            // Calculate Total Weights User Inputs
+            var totalScore = restaurantScore + schoolScore + busstationScore + atmScore + safetyScore +
+                supermarketScore + parkScore + gymScore + hospitalScore + hikeTrailScore + bikeTrailScore;
 
-        // Don't take into consideration the safety score
-        if (!arrestCount) {
-            totalScore -= safetyScore;
-            safetyScore = 0;
-            arrestCount = 0;
-
-            // This line prevents a division by 0
+            // If User Doesn't Input Weights, set them all to 10
             if (totalScore === 0) {
-                totalScore = 1;
+                safetyScore = 10;
+                restaurantScore = 10;
+                schoolScore = 10;
+                busstationScore = 10;
+                atmScore = 10;
+                supermarketScore = 10;
+                parkScore = 10;
+                gymScore = 10;
+                hospitalScore = 10;
+                hikeTrailScore = 10;
+                bikeTrailScore = 10;
+
+                totalScore = 110;
             }
-        }
 
-        // ******* Set Weights ******************
-        // Changing the number you divide by changes the max value
-        // for the particular feature
-        // e.g bikeWeight = bikeCount / 5.0
-        // The above means 5 or more bike trails will give a max score
-        // for that feature
-        var safeWeight = arrestCount / 100.0;
-        if (safeWeight >= 1) { safeWeight = 1.0; }
+            var arrestCount = safetyCount;
 
-        //invert arrest count since more arrest is negative
-        safeWeight = (1 - safeWeight);
+            // Don't take into consideration the safety score
+            if (!arrestCount) {
+                totalScore -= safetyScore;
+                safetyScore = 0;
+                arrestCount = 0;
 
-        var atmWeight = atmCount / 20.0;
-        if (atmWeight >= 1) { atmWeight = 1; }
+                // This line prevents a division by 0
+                if (totalScore === 0) {
+                    totalScore = 1;
+                }
+            }
 
-        var bikeWeight = bikeCount / 5.0;
-        if (bikeWeight >= 1) { bikeWeight = 1; }
+            // ******* Set Weights ******************
+            // Changing the number you divide by changes the max value
+            // for the particular feature
+            // e.g bikeWeight = bikeCount / 5.0
+            // The above means 5 or more bike trails will give a max score
+            // for that feature
+            var safeWeight = arrestCount / 100.0;
+            if (safeWeight >= 1) { safeWeight = 1.0; }
 
-        var busWeight = busCount / 10.0;
-        if (busWeight >= 1) { busWeight = 1; }
+            //invert arrest count since more arrest is negative
+            safeWeight = (1 - safeWeight);
 
-        var gymWeight = gymCount / 10.0;
-        if (gymWeight >= 1) { gymWeight = 1; }
+            var atmWeight = atmCount / 20.0;
+            if (atmWeight >= 1) { atmWeight = 1; }
 
-        var hikeWeight = hikeCount / 5.0;
-        if (hikeWeight >= 1) { hikeWeight = 1; }
+            var bikeWeight = bikeCount / 5.0;
+            if (bikeWeight >= 1) { bikeWeight = 1; }
 
-        var hospitalWeight = hospitalCount / 3.0;
-        if (hospitalWeight >= 1) { hospitalWeight = 1; }
+            var busWeight = busCount / 10.0;
+            if (busWeight >= 1) { busWeight = 1; }
 
-        var restaurantWeight = restaurantCount / 20.0;
-        if (restaurantWeight >= 1) { restaurantWeight = 1; }
+            var gymWeight = gymCount / 10.0;
+            if (gymWeight >= 1) { gymWeight = 1; }
 
-        var supermarketWeight = supermarketCount / 10.0;
-        if (supermarketWeight >= 1) { supermarketWeight = 1; }
+            var hikeWeight = hikeCount / 5.0;
+            if (hikeWeight >= 1) { hikeWeight = 1; }
 
-        var schoolWeight = schoolCount / 20.0;
-        if (schoolWeight >= 1) { schoolWeight = 1; }
+            var hospitalWeight = hospitalCount / 3.0;
+            if (hospitalWeight >= 1) { hospitalWeight = 1; }
 
-        var parkWeight = parkCount / 5.0;
-        if (parkWeight >= 1) { parkWeight = 1; }
+            var restaurantWeight = restaurantCount / 20.0;
+            if (restaurantWeight >= 1) { restaurantWeight = 1; }
+
+            var supermarketWeight = supermarketCount / 10.0;
+            if (supermarketWeight >= 1) { supermarketWeight = 1; }
+
+            var schoolWeight = schoolCount / 20.0;
+            if (schoolWeight >= 1) { schoolWeight = 1; }
+
+            var parkWeight = parkCount / 5.0;
+            if (parkWeight >= 1) { parkWeight = 1; }
 
 
-        // ******************** Calculate Score ******************
-        // Take Weighted average of all scores
-        var score = restaurantScore / totalScore * restaurantWeight +
-            schoolScore / totalScore * schoolWeight +
-            busstationScore / totalScore * busWeight +
-            atmScore / totalScore * atmWeight +
-            supermarketScore / totalScore * supermarketWeight +
-            parkScore / totalScore * parkWeight +
-            gymScore / totalScore * gymWeight +
-            hospitalScore / totalScore * hospitalWeight +
-            hikeTrailScore / totalScore * hikeWeight +
-            bikeTrailScore / totalScore * bikeWeight +
-            safetyScore / totalScore * safeWeight;
+            // ******************** Calculate Score ******************
+            // Take Weighted average of all scores
+            var score = restaurantScore / totalScore * restaurantWeight +
+                schoolScore / totalScore * schoolWeight +
+                busstationScore / totalScore * busWeight +
+                atmScore / totalScore * atmWeight +
+                supermarketScore / totalScore * supermarketWeight +
+                parkScore / totalScore * parkWeight +
+                gymScore / totalScore * gymWeight +
+                hospitalScore / totalScore * hospitalWeight +
+                hikeTrailScore / totalScore * hikeWeight +
+                bikeTrailScore / totalScore * bikeWeight +
+                safetyScore / totalScore * safeWeight;
 
-        score = score * 10;
-        setScore(score.toFixed(1));
+            score = score * 10;
+            setScore(score.toFixed(1));
 
-        // Changes color of progress bar
-        if (score <= 5) {
-            setColor("danger");
-        } else if (score <= 7.5) {
-            setColor("warning");
-        } else {
-            setColor("success");
-        }
+            // Changes color of progress bar
+            if (score <= 5) {
+                setColor("danger");
+            } else if (score <= 7.5) {
+                setColor("warning");
+            } else {
+                setColor("success");
+            }
 
-        setLoading(false);
-        console.log('Recalculated Location Score.');
-
-        // ***** Save Results to DB *********
-        const results = {
-            address: formattedAddress,
-            score: score,
-            email: localStorage.getItem('email')
-        }
-        axios.post('/savescore', results)
-            .then(response => {
-                console.log(response);
-                console.log(response.data.message);
-
-            })
-            .catch((error) => {
-                console.log(error);
-            })
-        setTimeout(() => {
             setLoading(false);
-        }, 1000);
+            console.log('Recalculated Location Score.');
 
-    }, [userSafety, userRestaurant, userSchool, userBus, userAtm, userSupermarket,
+            // ***** Save Results to DB *********
+            const results = {
+                address: formattedAddress,
+                score: score,
+                email: localStorage.getItem('email')
+            }
+            axios.post('/savescore', results)
+                .then(response => {
+                    console.log(response);
+                    console.log(response.data.message);
+
+                })
+                .catch((error) => {
+                    console.log(error);
+                })
+            setTimeout(() => {
+                setLoading(false);
+            }, 1000);
+        }
+    }, [history, userSafety, userRestaurant, userSchool, userBus, userAtm, userSupermarket,
         userPark, userGym, userHospital, userHike, userBike, atmCount, bikeCount, busCount,
-        gymCount, hikeCount, hospitalCount, parkCount,
-        restaurantCount, safetyCount, schoolCount, supermarketCount, formattedAddress
+        gymCount, hikeCount, hospitalCount, parkCount, restaurantCount, safetyCount, 
+        schoolCount, supermarketCount, formattedAddress
     ]);
 
     if (isLoading) {
@@ -356,7 +382,7 @@ function ResultPage() {
                 <Nav className="ml-auto" variant="light" >
                     <Nav.Link href="/history">My Search</Nav.Link>
                     <NavDropdown title={localStorage.getItem('Name')} id="nav-dropdown">
-                        <NavDropdown.Item href="/">Logout</NavDropdown.Item>
+                        <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
                     </NavDropdown>
                 </Nav>
             </Navbar>

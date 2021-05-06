@@ -104,3 +104,15 @@ body, html {
   color: transparent;
   text-shadow: 0 0 8px #000;
 }
+
+.history-page{
+  height: 100vh;
+}
+
+.history-row{
+  height: 10vh;
+}
+
+.active{
+  color: palevioletred;
+}

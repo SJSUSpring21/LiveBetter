@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form, Button, Navbar } from 'react-bootstrap';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useHistory, Link } from 'react-router-dom';
 
@@ -42,6 +42,23 @@ function LoginPage() {
     if (wrongPassword) {
         displayWrongPassword = <span class="badge badge-pill badge-danger">Wrong Email or Password</span>
     }
+
+    useEffect(() => {
+        //Check for user credentials
+        const userEmail = localStorage.email || -1;
+        const userID = localStorage.userid || -1;
+        const username = localStorage.Name || -1;
+        
+        // User is not logged in
+        // Redirect to trial page
+        if (userEmail !== -1 && userID !== -1 &&  username !== -1) {
+            console.log("Already Logged In.. Redirecting to Portal");
+            history.push({
+                pathname: "/portal"
+            })
+
+        }
+    }, [history])
 
     return (
         <div class='main-section'>

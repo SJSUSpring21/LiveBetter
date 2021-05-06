@@ -1,13 +1,15 @@
 import React, { useEffect } from 'react'
-import { Navbar, Nav,  NavDropdown} from 'react-bootstrap/esm';
+import { Navbar, Nav, NavDropdown } from 'react-bootstrap/esm';
 import axios from 'axios';
 import { useState } from 'react';
 import CardColumns from 'react-bootstrap/CardColumns'
 import Card from 'react-bootstrap/Card'
+import { useHistory } from 'react-router-dom';
 
 function HistoryPage() {
 
     const [scores, setScores] = useState([]);
+    var history = useHistory();
 
     // Change Border Color Based on Score
     const variants = [
@@ -24,19 +26,45 @@ function HistoryPage() {
         'success',
     ]
     useEffect(() => {
-        const data = {
-            email: localStorage.getItem('email')
+
+        //Check for user credentials
+        const userEmail = localStorage.email || -1;
+        const userID = localStorage.userid || -1;
+        const username = localStorage.Name || -1;
+
+        // User is not logged in
+        // Redirect to trial page
+        if (userEmail === -1 || userID === -1 || username === -1) {
+            console.log("Not logged in.. redirecting to home");
+            history.push({
+                pathname: "/"
+            })
+
         }
-        axios.post('/getscores', data)
-            .then(response => {
-                console.log(response);
-                console.log(response.data.scores);
-                setScores(response.data.scores);
-            })
-            .catch((error) => {
-                console.log(error);
-            })
-    }, [])
+        else {
+            const data = {
+                email: localStorage.getItem('email') || -1
+            };
+            axios.post('/getscores', data)
+                .then(response => {
+                    console.log(response);
+                    console.log(response.data.scores);
+                    setScores(response.data.scores.reverse());
+                })
+                .catch((error) => {
+                    console.log(error);
+                })
+        }
+    }, [history])
+
+    // ****** Logout Function *******
+    const handleLogout = () => {
+        console.log("Logging out...");
+        localStorage.clear();
+        history.push({
+            pathname: "/"
+        });
+    }
 
     return (
         <div class="main-section">
@@ -51,7 +79,7 @@ function HistoryPage() {
                         <Nav.Link href="/portal">Get Score</Nav.Link>
                         <Nav.Link ><span class="active">My Search</span></Nav.Link>
                         <NavDropdown title={localStorage.getItem('Name')} id="nav-dropdown">
-                            <NavDropdown.Item href="/">Logout</NavDropdown.Item>
+                            <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
                 </Navbar>
@@ -73,10 +101,10 @@ function HistoryPage() {
                                 {
                                     scores.map(score => (
                                         <div class="m-4">
-                                            <Card border={variants[Math.round(Math.min(score.score,10))]} className="mb-3">
+                                            <Card border={variants[Math.round(Math.min(score.score, 10))]} className="mb-3">
                                                 <Card.Body>
                                                     <Card.Title className="text-center">
-                                                        <h2>{Math.min(score.score.toFixed(1),10)}</h2>
+                                                        <h2>{Math.min(score.score.toFixed(1), 10)}</h2>
                                                     </Card.Title>
                                                     <Card.Text className="text-muted">
                                                         {score.address || "Unknown Address"}
