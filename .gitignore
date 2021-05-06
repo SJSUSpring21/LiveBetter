@@ -8,4 +8,6 @@ backend/node_modules
 live_better/node_modules
 .DS_Store
 live_better/.DS_Store
+backend/.DS_Store
 Project_Code
+live_better/build/

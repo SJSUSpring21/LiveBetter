@@ -16,10 +16,8 @@ function ResultPageTrial() {
 
     var history = useHistory();
 
-    // Input latitude and longitude
-    var lat = history.location.state.lat;
-    var lng = history.location.state.lng;
-
+    // Input Address
+    const formattedAddress = history.location.state.formattedAddress;
     //******************* User weights *******************
     const [userSafety, setUserSafety] = useState(history.location.state.safetyScore);
     const [userRestaurant, setUserRestaurant] = useState(history.location.state.restaurantScore);
@@ -102,18 +100,6 @@ function ResultPageTrial() {
     // change to false at the end of useEffect()
     const [isLoading, setLoading] = useState(true);
 
-    // point values for each individual feature
-    const [safety, setSafety] = useState(0);
-    const [atm, setAtm] = useState(0);
-    const [bike, setBike] = useState(0);
-    const [bus, setBus] = useState(0);
-    const [gym, setGym] = useState(0);
-    const [hike, setHike] = useState(0);
-    const [hospital, setHospital] = useState(0);
-    const [restaurant, setRestaurant] = useState(0);
-    const [supermarket, setSupermarket] = useState(0);
-    const [school, setSchool] = useState(0);
-    const [park, setPark] = useState(0);
 
     // Color of progress bar
     const [barColor, setColor] = useState("success");
@@ -136,7 +122,6 @@ function ResultPageTrial() {
         { value: 10, label: '10' },
 
     ]
-
     const muiTheme = createMuiTheme({
         overrides: {
             MuiSlider: {
@@ -165,7 +150,6 @@ function ResultPageTrial() {
             }
         }
     });
-
     // **** End Theme For Slider *****
 
     // Only shows Arrest count for Chicago Database
@@ -208,7 +192,6 @@ function ResultPageTrial() {
     }
 
     useEffect(() => {
-
         // User weights
         var safetyScore = userSafety;
         var restaurantScore = userRestaurant
@@ -239,7 +222,6 @@ function ResultPageTrial() {
             hospitalScore = 0;
             hikeTrailScore = 0;
             bikeTrailScore = 0;
-
             totalScore = 30;
         }
 
@@ -326,20 +308,6 @@ function ResultPageTrial() {
             setColor("success");
         }
 
-        // ************** Individual Scores for each Feautre
-        // Sets the point value for each individual variable
-        // Might be able to do a breakdown of score?
-        setSafety(Math.round(safetyScore / totalScore * safeWeight * 10));
-        setAtm(Math.round(atmScore / totalScore * atmWeight * 10));
-        setBike(Math.round(bikeTrailScore / totalScore * bikeWeight * 10));
-        setBus(Math.round(busstationScore / totalScore * busWeight * 10));
-        setGym(Math.round(gymScore / totalScore * gymWeight * 10));
-        setHike(Math.round(hikeTrailScore / totalScore * hikeWeight * 10));
-        setHospital(Math.round(hospitalScore / totalScore * hospitalWeight * 10));
-        setRestaurant(Math.round(restaurantScore / totalScore * restaurantWeight * 10));
-        setSupermarket(Math.round(supermarketScore / totalScore * supermarketWeight * 10));
-        setSchool(Math.round(schoolScore / totalScore * schoolWeight * 10));
-        setPark(Math.round(parkScore / totalScore * parkWeight * 10));
         setLoading(false);
         console.log('Recalculated Location Score.');
     }, [userSafety, userRestaurant, userSchool, userBus, userAtm, userSupermarket,
@@ -347,8 +315,6 @@ function ResultPageTrial() {
         gymCount, hikeCount, hospitalCount, parkCount,
         restaurantCount, safetyCount, schoolCount, supermarketCount
     ]);
-
-
 
     if (isLoading) {
         return (<div>Loading...</div>)
@@ -364,8 +330,12 @@ function ResultPageTrial() {
 
                 <Nav className="ml-auto">
                     <NavDropdown title={"Login"} id="nav-dropdown">
-                        <NavDropdown.Item href="/login">Login</NavDropdown.Item>
-                        <NavDropdown.Item href="/signup">Signup</NavDropdown.Item>
+                        <NavDropdown.Item href="/login">
+                            Login
+                        </NavDropdown.Item>
+                        <NavDropdown.Item href="/signup">
+                            Signup
+                        </NavDropdown.Item>
                     </NavDropdown>
                 </Nav>
             </Navbar>
@@ -373,6 +343,9 @@ function ResultPageTrial() {
             <div id="content-wrap" class='container'>
                 <div class='row mt-5 justify-content-center'>
                     <h1>Location Score - Trial</h1>
+                </div>
+                <div class="row justify-content-center">
+                    <h5>{formattedAddress}</h5>
                 </div>
                 <div class='row justify-content-center'><h1 className="heading">{livabilityScore}</h1></div>
                 <div class='row justify-content-center'>
@@ -605,7 +578,7 @@ function ResultPageTrial() {
             <footer id="footer" class='py-3 bg-dark text-white text-center'>
                 <div>
                     Group 12 - Live<span class='text-success'>B</span>etter
-                                </div>
+                </div>
             </footer>
         </div>
     )

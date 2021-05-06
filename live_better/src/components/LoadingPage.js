@@ -69,9 +69,9 @@ function LoadingPage() {
                                 .catch(error => {
                                     console.log(error);
                                     console.log("Error with Google Query")
-                                    // Error go back to home page
+                                    // Error go back to portal page
                                     history.push({
-                                        pathname: '/'
+                                        pathname: '/portal'
                                     });
                                 })
                         }
@@ -104,9 +104,9 @@ function LoadingPage() {
                     .catch(error => {
                         console.log(error);
                         console.log("Error While Querying Chicago DB");
-                        // Error go back to home page
+                        // Error go back to portal page
                         history.push({
-                            pathname: '/'
+                            pathname: '/portal'
                         });
                     });
             })
@@ -114,9 +114,9 @@ function LoadingPage() {
                 console.log(error);
                 console.log("Error While Querying Schools and Parks");
 
-                // Error go back to home page
+                // Error go back to portal page
                 history.push({
-                    pathname: '/'
+                    pathname: '/portal'
                 });
             });
 

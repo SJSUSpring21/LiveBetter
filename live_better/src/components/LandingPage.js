@@ -9,6 +9,7 @@ import LoadingPage from './LoadingPage';
 import PortalPageTrial from './PortalPageTrial';
 import ResultPageTrial from './ResultPageTrial';
 import LoadingPageTrial from './LoadingPageTrial';
+import HistoryPage from './HistoryPage';
 import '../index.css';
 import livebetterlogo from '../components/images/new.svg';
 import aboutphoto from './images/second.svg';
@@ -30,8 +31,12 @@ function LandingPage() {
 
                                 <Nav className="ml-auto">
                                     <NavDropdown title={"Login"} id="nav-dropdown">
-                                        <NavDropdown.Item href="/login">Login</NavDropdown.Item>
-                                        <NavDropdown.Item href="/signup">Signup</NavDropdown.Item>
+                                        <NavDropdown.Item href="/login">
+                                            Login
+                                        </NavDropdown.Item>
+                                        <NavDropdown.Item href='/signup'>
+                                            Signup
+                                        </NavDropdown.Item>
                                     </NavDropdown>
                                 </Nav>
                             </Navbar>
@@ -124,6 +129,9 @@ function LandingPage() {
                         <LoadingPageTrial />
                     </Route>
 
+                    <Route exact path="/history">
+                        <HistoryPage />
+                    </Route>
                 </Switch>
             </Router>
         </div>

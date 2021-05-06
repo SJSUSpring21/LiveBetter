@@ -40,7 +40,7 @@ function SignupPage() {
                 <Nav className="mr-auto"></Nav>
 
                 <Nav className="ml-auto">
-                    <Nav.Link><Link to="/login">Login</Link></Nav.Link>
+                    <Nav.Link href="/login">Login</Nav.Link>
                 </Nav>
             </Navbar>
             <div id="content-wrap" class='container-fluid'>

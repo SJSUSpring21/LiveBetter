@@ -16,6 +16,7 @@ import { ThemeProvider } from '@material-ui/styles';
 function PortalPage() {
     const history = useHistory();
     const [address, setAdderess] = useState("");
+    const [formattedAddress, setFormattedAddress] = useState("");
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -28,6 +29,9 @@ function PortalPage() {
         console.log(latLng);
         setAdderess(value);
         setCoordinates(latLng);
+
+        console.log(results[0].formatted_address);
+        setFormattedAddress(results[0].formatted_address);
         handleShow();
 
     }
@@ -116,7 +120,8 @@ function PortalPage() {
                 gymScore: gymScore,
                 hospitalScore: hospitalScore,
                 hikeTrailScore: hikeTrailScore,
-                bikeTrailScore: bikeTrailScore
+                bikeTrailScore: bikeTrailScore,
+                formattedAddress: formattedAddress
             }
         });
 
@@ -175,13 +180,17 @@ function PortalPage() {
                     </Navbar.Brand>
                 <Nav className="mr-auto"></Nav>
 
-                <Nav className="ml-auto">
+                <Nav className="ml-auto" variant="light" >
+                    <Nav.Link>
+                        <span class="active">Get Score</span>
+                    </Nav.Link>
+                    <Nav.Link href="/history">My Search</Nav.Link>
                     <NavDropdown title={localStorage.getItem('Name')} id="nav-dropdown">
                         <NavDropdown.Item href="/">Logout</NavDropdown.Item>
                     </NavDropdown>
                 </Nav>
             </Navbar>
-            <div id="content-wrap" className="portal-main">
+            <div id="content-wrap" class="container-fluid">
                 <div class="row m-3 justify-content-center">
                     <h1 className="heading">Live<span class='text-success'>B</span>etter</h1>
                 </div>
@@ -451,7 +460,7 @@ function PortalPage() {
                         </Row>
                     </Col>
                 </Row>
-                <div class='row mt-5 justify-content-center'>
+                <div class='row my-5 justify-content-center'>
                     <div class="col-6">
                         <Image class='img-responsive'
                             src={globephoto} />
@@ -460,7 +469,6 @@ function PortalPage() {
 
 
             </div>
-
             <footer id="footer" class='py-3 bg-dark text-white text-center'>
                 <div>
                     Group 12 - Live<span class='text-success'>B</span>etter

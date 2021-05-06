@@ -20,16 +20,13 @@ function LoginPage() {
         event.preventDefault();
         axios.post('/login', data)
             .then((response) => {
-                console.log(response.status);
                 if (response.status === 200) {
-                    console.log(response.data);
                     localStorage.setItem('Name', response.data.user.username);
                     localStorage.setItem('email', response.data.user.email);
                     localStorage.setItem('userid', response.data.user._id);
                     history.push('/portal');
                 }
                 if (response.status === 400) {
-                    console.log(response.data);
                     changeWrongPassword(true);
                 }
 
@@ -106,7 +103,7 @@ function LoginPage() {
             <footer id="footer" class='py-3 bg-dark text-white text-center'>
                 <div>
                     Group 12 - Live<span class='text-success'>B</span>etter
-                                </div>
+                </div>
             </footer>
 
 

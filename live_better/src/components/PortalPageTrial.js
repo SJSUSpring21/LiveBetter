@@ -3,7 +3,6 @@ import { Navbar, Nav, Button, Row, Col, Image, Form, Modal } from 'react-bootstr
 import globephoto from './images/third.svg'
 import '../index.css';
 import { useState } from 'react';
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
@@ -17,6 +16,7 @@ import { ThemeProvider } from '@material-ui/styles';
 function PortalPageTrial() {
     const history = useHistory();
     const [address, setAdderess] = useState("");
+    const [formattedAddress, setFormattedAddress] = useState("");
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -29,6 +29,7 @@ function PortalPageTrial() {
         console.log(latLng);
         setAdderess(value);
         setCoordinates(latLng);
+        setFormattedAddress(results[0].formatted_address);
         handleShow();
 
     }
@@ -117,7 +118,8 @@ function PortalPageTrial() {
                 gymScore: gymScore,
                 hospitalScore: hospitalScore,
                 hikeTrailScore: hikeTrailScore,
-                bikeTrailScore: bikeTrailScore
+                bikeTrailScore: bikeTrailScore,
+                formattedAddress: formattedAddress
             }
         });
 
@@ -169,7 +171,7 @@ function PortalPageTrial() {
 
 
     return (
-        <div class='main-section'>
+        <div class="main-section">
             <Navbar bg="light" variant="light sticky-top">
                 <Navbar.Brand className="logo" href="/">
                     Live<span class='text-success'>B</span>etter
@@ -177,10 +179,10 @@ function PortalPageTrial() {
                 <Nav className="mr-auto"></Nav>
 
                 <Nav className="ml-auto">
-                    <Nav.Link><Link to="/login">Login</Link></Nav.Link>
+                    <Nav.Link href="/login">Login</Nav.Link>
                 </Nav>
             </Navbar>
-            <div id="content-wrap" className="portal-main">
+            <div id="content-wrap" class="container-fluid">
                 <div class="row m-3 justify-content-center">
                     <h1 className="heading">Live<span class='text-success'>B</span>etter</h1>
                 </div>
@@ -460,13 +462,12 @@ function PortalPageTrial() {
                         </Row>
                     </Col>
                 </Row>
-                <div class='row mt-5 justify-content-center'>
+                <div class='row my-5 justify-content-center'>
                     <div class="col-6">
                         <Image class='img-responsive'
                             src={globephoto} />
                     </div>
                 </div>
-
 
             </div>
 
@@ -475,6 +476,7 @@ function PortalPageTrial() {
                     Group 12 - Live<span class='text-success'>B</span>etter
                                 </div>
             </footer>
+
         </div>
     )
 }

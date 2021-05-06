@@ -11,14 +11,14 @@ import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import Slider from '@material-ui/core/Slider';
 import Typography from '@material-ui/core/Typography';
+import axios from 'axios';
 
 function ResultPage() {
 
     var history = useHistory();
 
-    // Input latitude and longitude
-    var lat = history.location.state.lat;
-    var lng = history.location.state.lng;
+    // Input Address
+    const formattedAddress = history.location.state.formattedAddress;
 
     //******************* User weights *******************
     const [userSafety, setUserSafety] = useState(history.location.state.safetyScore);
@@ -32,6 +32,7 @@ function ResultPage() {
     const [userHospital, setUserHospital] = useState(history.location.state.hospitalScore);
     const [userHike, setUserHike] = useState(history.location.state.hikeTrailScore);
     const [userBike, setUserBike] = useState(history.location.state.bikeTrailScore);
+
 
     const safetyScoreFunction = (event, newValue) => {
         console.log("Setting score to", newValue);
@@ -101,19 +102,6 @@ function ResultPage() {
 
     // change to false at the end of useEffect()
     const [isLoading, setLoading] = useState(true);
-
-    // point values for each individual feature
-    const [safety, setSafety] = useState(0);
-    const [atm, setAtm] = useState(0);
-    const [bike, setBike] = useState(0);
-    const [bus, setBus] = useState(0);
-    const [gym, setGym] = useState(0);
-    const [hike, setHike] = useState(0);
-    const [hospital, setHospital] = useState(0);
-    const [restaurant, setRestaurant] = useState(0);
-    const [supermarket, setSupermarket] = useState(0);
-    const [school, setSchool] = useState(0);
-    const [park, setPark] = useState(0);
 
     // Color of progress bar
     const [barColor, setColor] = useState("success");
@@ -325,29 +313,33 @@ function ResultPage() {
             setColor("success");
         }
 
-        // ************** Individual Scores for each Feautre
-        // Sets the point value for each individual variable
-        // Might be able to do a breakdown of score?
-        setSafety(Math.round(safetyScore / totalScore * safeWeight * 10));
-        setAtm(Math.round(atmScore / totalScore * atmWeight * 10));
-        setBike(Math.round(bikeTrailScore / totalScore * bikeWeight * 10));
-        setBus(Math.round(busstationScore / totalScore * busWeight * 10));
-        setGym(Math.round(gymScore / totalScore * gymWeight * 10));
-        setHike(Math.round(hikeTrailScore / totalScore * hikeWeight * 10));
-        setHospital(Math.round(hospitalScore / totalScore * hospitalWeight * 10));
-        setRestaurant(Math.round(restaurantScore / totalScore * restaurantWeight * 10));
-        setSupermarket(Math.round(supermarketScore / totalScore * supermarketWeight * 10));
-        setSchool(Math.round(schoolScore / totalScore * schoolWeight * 10));
-        setPark(Math.round(parkScore / totalScore * parkWeight * 10));
         setLoading(false);
         console.log('Recalculated Location Score.');
+
+        // ***** Save Results to DB *********
+        const results = {
+            address: formattedAddress,
+            score: score,
+            email: localStorage.getItem('email')
+        }
+        axios.post('/savescore', results)
+            .then(response => {
+                console.log(response);
+                console.log(response.data.message);
+
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+        setTimeout(() => {
+            setLoading(false);
+        }, 1000);
+
     }, [userSafety, userRestaurant, userSchool, userBus, userAtm, userSupermarket,
-        userPark, userGym, userHospital, userHike, userBike, atmCount, bikeCount, busCount, 
-        gymCount, hikeCount, hospitalCount, parkCount, 
-        restaurantCount, safetyCount, schoolCount, supermarketCount
+        userPark, userGym, userHospital, userHike, userBike, atmCount, bikeCount, busCount,
+        gymCount, hikeCount, hospitalCount, parkCount,
+        restaurantCount, safetyCount, schoolCount, supermarketCount, formattedAddress
     ]);
-
-
 
     if (isLoading) {
         return (<div>Loading...</div>)
@@ -361,7 +353,8 @@ function ResultPage() {
                 </Navbar.Brand>
                 <Nav className="mr-auto"></Nav>
 
-                <Nav className="ml-auto">
+                <Nav className="ml-auto" variant="light" >
+                    <Nav.Link href="/history">My Search</Nav.Link>
                     <NavDropdown title={localStorage.getItem('Name')} id="nav-dropdown">
                         <NavDropdown.Item href="/">Logout</NavDropdown.Item>
                     </NavDropdown>
@@ -371,6 +364,9 @@ function ResultPage() {
             <div id="content-wrap" class='container'>
                 <div class='row mt-5 justify-content-center'>
                     <h1>Location Score</h1>
+                </div>
+                <div class="row justify-content-center">
+                    <h5>{formattedAddress}</h5>
                 </div>
                 <div class='row justify-content-center'><h1 className="heading">{livabilityScore}</h1></div>
                 <div class='row justify-content-center'>
