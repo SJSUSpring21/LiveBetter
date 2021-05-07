@@ -19,32 +19,38 @@ Input: What information are we going to get from the user?
 
 **Process:**
 > The various factors taken into consideration to analyze livability includes natural environments, economic prosperity, social stability and equity, educational opportunity, cultural, entertainment and recreation possibilities.
+
 > Examples : Schools, gyms, hospitals, supermarkets, outdoor recreation centers,etc
 
-Output: What will the output be for our users?
+**Output: What will the output be for our users?**
 > Livability score within the range of 1 - 10 
+
 > A brief description of services nearby: "This location has 3 schools within 2 miles. 1 gym within 1 mile."
 
 ## Persona
 
 Our target audience will be individuals looking to buy or rent a home/apartment. This will help users make an informed decision.
 
+## Architecture Diagram
+![Diagram](/Live_Better_Architecture_Diagram.jpg)
+
 ## Dataset Links
 
 >[Public Schools](https://hifld-geoplatform.opendata.arcgis.com/datasets/public-schools?geometry=16.974%2C-0.854%2C101.700%2C76.482&orderBy=STATE)
+
 >[Private Schools](https://hifld-geoplatform.opendata.arcgis.com/datasets/private-schools?geometry=22.650%2C-6.081%2C107.377%2C75.201)
+
 >[Colleges and Universities](https://hifld-geoplatform.opendata.arcgis.com/datasets/colleges-and-universities?geometry=137.954%2C-16.798%2C-137.319%2C72.130)
+
 >[Chicago Crime Data](https://data.cityofchicago.org/Public-Safety/Crimes-2001-to-Present/ijzp-q8t2/data)
+
 >[Park Data](https://www.tpl.org/parkserve/downloads)
+
 >[Frontend Design Link](https://www.figma.com/file/60RDE2DISTm6t0wSn5nVCZ/LiveBetter?node-id=0%3A1)
 
 ## Build Project
 
->In backend/.env.dist include your own Google API Key by setting your API to the variable GOOGLE_API_KEY.
->Then, change the file name of `.env.dist` to `.env`
-> `docker-compose up --build`
-
-Go to `localhost:3000` to see project
-
-## Architecture Diagram
-![Diagram](/Live_Better_Architecture_Diagram.jpg)
+1. In backend/.env.dist include your own Google API Key by setting your API to the variable GOOGLE_API_KEY.
+2. Change the file name of `.env.dist` to `.env`
+3. `docker-compose up --build`
+4. Go to `localhost:3000` to see project
