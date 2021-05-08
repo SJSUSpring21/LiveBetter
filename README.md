@@ -41,6 +41,8 @@ Our target audience will be individuals looking to buy or rent a home/apartment.
 
 - **Database:** MongoDB, IBM DB2
 
+- **Preprocess Data:** Python
+
 - **APIs:** Google Autocomplete, Google Places API
 
 ## Dataset Links
