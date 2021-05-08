@@ -59,7 +59,7 @@ Our target audience will be individuals looking to buy or rent a home/apartment.
 
 ## Build Project
 
-1. In backend/.env.dist include your own Google API Key by setting the variable `GOOGLE_API_KEY` to your own key.
-2. Change the file name of `.env.dist` to `.env`
+1. In `backend/.env.dist` include your own Google API Key by setting the variable `GOOGLE_API_KEY` to your own key.
+2. Change the file name of `backend/.env.dist` to `backend/.env`
 3. In the root directory, run the command `docker-compose up --build`
 4. Go to `http://localhost:3000` to see project
