@@ -35,13 +35,13 @@ Our target audience will be individuals looking to buy or rent a home/apartment.
 ![Diagram](/Live_Better_Architecture_Diagram.jpg)
 
 ## Tech Stack ##
-> **Frontend:** React, HTML, CSS, Bootsrap
+- **Frontend:** React, HTML, CSS, Bootsrap
 
-> **Backend:** Node.js, Express
+- **Backend:** Node.js, Express
 
-> **Database:** MongoDB, IBM DB2
+- **Database:** MongoDB, IBM DB2
 
-> **APIs:** Google Autocomplete, Google Places API
+- **APIs:** Google Autocomplete, Google Places API
 
 ## Dataset Links
 
@@ -59,7 +59,7 @@ Our target audience will be individuals looking to buy or rent a home/apartment.
 
 ## Build Project
 
-1. In backend/.env.dist include your own Google API Key by setting your API to the variable GOOGLE_API_KEY.
+1. In backend/.env.dist include your own Google API Key by setting the variable `GOOGLE_API_KEY` to your own key.
 2. Change the file name of `.env.dist` to `.env`
-3. `docker-compose up --build`
-4. Go to `localhost:3000` to see project
+3. In the root directory, run the command `docker-compose up --build`
+4. Go to `http://localhost:3000` to see project
